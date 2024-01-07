@@ -3,7 +3,7 @@ import {
     createWebHistory
 } from "vue-router";
 const routes = [
-    {
+      {
         path: "/dashboard",
         component: () => import("../components/Admin/Dashboard/index.vue"),
       }, {
@@ -33,31 +33,6 @@ const routes = [
         },
       },
     
-      //+++++++++++++++++++++++++++++++++++++++++++
-      // ADMIN 
-      //+++++++++++++++++++++++++++++++++++++++++++
-    
-      {
-        path: "/admin/chuc-nang",
-        component: () => import("../components/Admin/ChucNang/index.vue"),
-        meta: {
-          layout: "default"
-        },
-      },
-      // {
-      //   path: "/admin/danh-gia-phim",
-      //   component: () => import("../components/Admin/DanhGiaPhim/index.vue"),
-      //   meta: {
-      //     layout: "default"
-      //   },
-      // },
-      // {
-      //   path: "/admin/hinh-anh",
-      //   component: () => import("../components/Admin/HinhAnh/index.vue"),
-      //   meta: {
-      //     layout: "default"
-      //   },
-      // },
       {
         path: "/admin/phim",
         component: () => import("../components/Admin/Movies/index.vue"),
@@ -65,13 +40,7 @@ const routes = [
           layout: "default"
         },
       },
-      // {
-      //   path: "/admin/tac-gia",
-      //   component: () => import("../components/Admin/TacGia/index.vue"),
-      //   meta: {
-      //     layout: "default"
-      //   },
-      // },
+   
       {
         path: "/admin/quyen",
         component: () => import("../components/Admin/Quyen/index.vue"),
@@ -140,6 +109,22 @@ const routes = [
         component: () => import("../components/Admin/Type/index.vue"),
         meta: {
           layout: "default"
+        },
+      },
+
+      // login
+      {
+        path: "/client/auth",
+        component: () => import("../components/Auth/AuthClient/index.vue"),
+        meta: {
+          layout: "auth"
+        },
+      },
+      {
+        path: "/admin/auth",
+        component: () => import("../components/Auth/AuthAdmin/index.vue"),
+        meta: {
+          layout: "auth"
         },
       },
 ]

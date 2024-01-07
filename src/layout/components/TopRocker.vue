@@ -22,8 +22,8 @@
                         <img src="../../assets/assets_rocker/images/avatars/avatar-2.png" class="user-img"
                             alt="user avatar">
                         <div class="user-info ps-3">
-                            <p class="user-name mb-0">{{ ten_hien_thi }}</p>
-                            <p class="designattion mb-0">Web Designer</p>
+                            <p class="user-name mb-0">{{ username}}</p>
+                            <p class="designattion mb-0"></p>
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -43,7 +43,7 @@
                         <li>
                             <div class="dropdown-divider mb-0"></div>
                         </li>
-                        <li><a class="dropdown-item" href="javascript:;"><i
+                        <li><a class="dropdown-item" @:click="logOut()" href="javascript:;"><i
                                     class='bx bx-log-out-circle'></i><span>Logout</span></a>
                         </li>
                     </ul>
@@ -57,11 +57,26 @@ export default {
     data() {
         return {
             ten_hien_thi: 'Chưa đăng nhập',
+            username : localStorage.getItem("username"),
+            getToken: localStorage.getItem("token"),
         }
     },
     mounted() {
-        this.ten_hien_thi = localStorage.getItem('ho_ten');
+        this.checkLogin();
     },
+    methods:{
+        logOut(){
+            localStorage.removeItem("token");
+            this.$router.push('/admin/auth');
+        },
+        checkLogin() {
+            if (this.getToken != null) {
+                this.$router.push('/admin/phim');
+            } else {
+                this.$router.push('/admin/auth');
+            }
+        },
+    }
 }
 </script>
 <style></style>
