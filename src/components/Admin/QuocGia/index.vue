@@ -9,10 +9,10 @@
                 </div>
                 <div class="card-body">
                     <label class="text-secondary">Tên Quốc Gia</label>
-                    <input type="text" placeholder="Nhập Vào Tên Quốc Gia" class="form-control">
+                    <input v-model="create_quoc_gia.name" type="text" placeholder="Nhập Vào Tên Quốc Gia" class="form-control">
                 </div>
                 <div class="card-footer text-end">
-                    <button class="btn btn-primary">
+                    <button v-on:click="createQuocGia()" class="btn btn-primary">
                         Thêm Mới Quốc Gia
                     </button>
                 </div>
@@ -40,12 +40,12 @@
                                 {{ k + 1 }}
                             </td>
                             <td class="text-center align-middle text-nowrap">
-                                {{ v.ten_quoc_gia }}
+                                {{ v.name }}
                             </td>
                             <td class="text-center text-nowrap align-middle">
-                                <i data-bs-toggle="modal" data-bs-target="#capnhat"
+                                <i data-bs-toggle="modal" v-on:click="update_quoc_gia = v" data-bs-target="#capnhat"
                                     class=" me-2 fa-2x text-info fa-solid fa-pen-to-square"></i>
-                                <i data-bs-toggle="modal" data-bs-target="#Xoa"
+                                <i data-bs-toggle="modal" v-on:click="delete_quoc_gia = v" data-bs-target="#Xoa"
                                     class="fa-2x text-danger fa-solid fa-trash"></i>
                             </td>
                         </tr>
@@ -61,11 +61,11 @@
                         </div>
                         <div class="modal-body">
                             <label class="text-secondary">Tên Quốc Gia</label>
-                            <input type="text" placeholder="Nhập Vào Tên Quốc Gia" class="form-control">
+                            <input v-model="update_quoc_gia.name" type="text" placeholder="Nhập Vào Tên Quốc Gia Cần Sửa" class="form-control">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Thay Đổi</button>
+                            <button type="button" v-on:click="updatedQuocGia()" class="btn btn-primary" data-bs-dismiss="modal">Thay Đổi</button>
                         </div>
                     </div>
                 </div>
@@ -79,12 +79,12 @@
                         </div>
                         <div class="modal-body text-center">
                             <div class="alert alert-danger" role="alert">
-                                Bạn Có Chắc Muốn Xóa <b><!-- {{ delete_quoc_gia.ten_quoc_gia }} --></b> Này
+                                Bạn Có Chắc Muốn Xóa <b>{{ delete_quoc_gia.name }}</b> Này
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Xác Nhận</button>
+                            <button v-on:click="deleteQuocGia()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Xác Nhận</button>
                         </div>
                     </div>
                 </div>
@@ -93,41 +93,69 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
     data() {
         return {
-            list_quoc_gia: [
-                {
-                    "ten_quoc_gia": "American",
-                },
-                {
-                    "ten_quoc_gia": "Hàn Quốc",
-                },
-                {
-                    "ten_quoc_gia": "Trung Quốc",
-                },
-                {
-                    "ten_quoc_gia": "Nhật Bản",
-                },
-                {
-                    "ten_quoc_gia": "Ấn Độ",
-                },
-                {
-                    "ten_quoc_gia": "Việt Nam",
-                },
-                {
-                    "ten_quoc_gia": "Đông Phương",
-                },
-            ],
+            list_quoc_gia:   [],
             create_quoc_gia: {},
             delete_quoc_gia: {},
             update_quoc_gia: {},
         }
     },
     mounted() {
-
+        this.loadDataQuocGia();
     },
     methods: {
+        createQuocGia() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/country/create', this.create_quoc_gia)
+                .then((res) => {
+                    if (res.data.status == true) {
+                        alert(res.data.message);
+                        this.loadDataQuocGia();
+                    }
+                });
+        },
+
+        loadDataQuocGia() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/country/get-data')
+                .then((res) => {
+                    this.list_quoc_gia = res.data.data;
+                });
+        },
+
+        deleteQuocGia() {
+            axios
+            .post('http://127.0.0.1:8000/api/admin/country/delete', this.delete_quoc_gia)
+            .then((res)=> {
+                if (res.data.status == true ) {
+                    alert(res.data.message);
+                    this.loadDataQuocGia();
+                }
+                else {
+                    alert(res.data.message);
+                }
+            });
+        },
+
+        updatedQuocGia() {
+            axios
+            .post('http://127.0.0.1:8000/api/admin/country/update', this.update_quoc_gia)
+            .then((res) =>  {
+                if(res.data.status == true) {
+                    alert(res.data.message);
+                    this.loadDataQuocGia();
+                }
+                else{
+                    alert(res.data.message);
+                }
+            });
+        },
+
+        
 
     },
 
