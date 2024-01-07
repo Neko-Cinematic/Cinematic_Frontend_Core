@@ -1,45 +1,59 @@
 <template>
     <div class="row">
         <div class="col-lg-4">
-            <div class="card">
-                <div class="card-header text-secondary">
+            <div class="card border-0">
+                <div class="card-header" style="background-color: #AB826B; color:white;">
                     <h4 class="text-start text-secondary">
-                        <div class="mt-3">
-
-                            <b>Quản lý đơn hàng</b>
-
+                        <div class="mb-0">
+                            <b style="color:white">Thêm Diễn Viên </b>
                         </div>
                     </h4>
                 </div>
                 <div class="card-body">
-                    <label class="text-secondary">Tên Diễn Viên</label>
-                    <input type="text" placeholder="Nhập Vào Tên Diễn Viên" class="form-control">
+                   <div class="row">
+                    <div class="col-md-12">
+                        <label class="text-secondary">Tên Diễn Viên</label>
+                    <input type="text" placeholder="Nhập Vào Tên Diễn Viên" class="form-control"
+                        v-model="create_dien_vien.name">
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        <label class="text-secondary">Ảnh Diễn Viên</label>
+                    <input type="text" placeholder="Nhập Vào Ảnh Diễn Viên" class="form-control"
+                        v-model="create_dien_vien.url">
+                    </div>
+                   </div>
+                   
+                   
                 </div>
                 <div class="card-footer text-end">
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" v-on:click="createActor()">
                         Thêm Mới
                     </button>
                 </div>
             </div>
         </div>
         <div class="col-lg-8">
-            <div class="table-responsive">
-                <table class="table table-bordered bg-white">
+               <div class="card">
+                <div class="card-header text-start" style="background-color: #AB826B; color:white;">
+                    <h3 class="text-light fw-bold text-start">Danh Sách Diễn Viên </h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered bg-white">
                     <thead>
                         <tr>
-                            <th class="text-center align-middle text-nowrap">
+                            <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
                                 STT
                             </th>
-                            <th class="text-center align-middle text-nowrap">
+                            <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
                                 Hình Ảnh
                             </th>
-                            <th class="text-center align-middle text-nowrap">
+                            <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
                                 Tên Diễn Viên
                             </th>
-                            <th class="text-center align-middle text-nowrap">
+                            <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
                                 Phim Đã Đóng
                             </th>
-                            <th class="text-center align-middle text-nowrap">
+                            <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
                                 Action
                             </th>
                         </tr>
@@ -51,28 +65,33 @@
                                     {{ k + 1 }}
                                 </td>
                                 <td class="text-center align-middle text-nowrap">
-                                    <img v-bind:src="v.hinh_anh" style="width: 120px;" class="circle p-2 border">
+                                    <img v-bind:src="v.url" style="width: 120px; height: 120px; object-fit: cover;"
+                                        class="circle p-2 border">
                                 </td>
                                 <td class="text-center align-middle text-nowrap">
                                     <b>
-                                        {{ v.ten_dien_vien }}
+                                        {{ v.name }}
                                     </b>
                                 </td>
-                                <td class="text-center align-middle text-nowrap">
+                                <td class="text-center align-middle ">
                                     <b>
-                                        {{ v.phim_da_dong }}
+                                        {{ v.list_phim }}
                                     </b>
                                 </td>
                                 <td class="text-center text-nowrap align-middle">
                                     <i data-bs-toggle="modal" data-bs-target="#SuaPhim"
-                                        class=" me-2 fa-2x text-info fa-solid fa-pen-to-square"></i>
+                                        class=" me-2 fs-4 text-light fa-solid fa-pen-to-square btn btn-primary"
+                                        v-on:click="Object.assign(update_dien_vien, v)"></i>
                                     <i data-bs-toggle="modal" data-bs-target="#XoaPhim"
-                                        class="fa-2x text-danger fa-solid fa-trash"></i>
+                                        class="fs-4 text-light fa-solid fa-trash btn btn-danger"
+                                        v-on:click="Object.assign(delete_dien_vien, v)"></i>
                                 </td>
                             </tr>
                         </template>
                     </tbody>
                 </table>
+                </div>
+               </div>
                 <div class="modal fade" id="SuaPhim" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog bg-white">
                         <div class="modal-content">
@@ -83,11 +102,16 @@
                             </div>
                             <div class="modal-body">
                                 <label class="text-secondary">Tên Diễn Viên</label>
-                                <input type="text" placeholder="Nhập Vào Tên Diễn Viên" class="form-control">
+                                <input type="text" placeholder="Nhập Vào Tên Diễn Viên" class="form-control"
+                                    v-model="update_dien_vien.actor_name">
+                                <label class="text-secondary">Ảnh Diễn Viên</label>
+                                <input type="text" placeholder="Nhập Vào Ảnh Diễn Viên" class="form-control"
+                                    v-model="update_dien_vien.url">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Xác Nhận</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                    v-on:click="updateActor()">Xác Nhận</button>
                             </div>
                         </div>
                     </div>
@@ -96,23 +120,23 @@
                     <div class="modal-dialog bg-white">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">Thêm Ngôn Ngữ
+                                <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">Xóa diễn viên
                                 </h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body text-center text-secondary">
                                 <div class="alert alert-danger" role="alert">
-                                    Bạn Có Chắc Muốn Xóa <b><!-- {{ delete_dien_vien.ten_dien_vien }} --></b> Này Chứ
+                                    Bạn Có Chắc Muốn Xóa <b>{{ delete_dien_vien.actor_name }}</b> Này Chứ
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Xóa</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                    v-on:click="deleteActor()">Xóa</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </template>
@@ -123,34 +147,68 @@ const toaster = createToaster({ position: "top-right" });
 export default {
     data() {
         return {
-            list_dien_vien: [
-                {
-                    'hinh_anh': 'https://th.bing.com/th/id/R.1a2336b68ed6f18a28aea8937467e412?rik=v043%2b4fPQZArQg&riu=http%3a%2f%2fcinemahok.com%2fwp-content%2fuploads%2f2021%2f03%2fphim-2021-chieu-rap-1037x1536.jpg&ehk=9l1IdhDNnZRrQDWlaLTopyNGet2U8YV6xELBsiGZu%2bQ%3d&risl=&pid=ImgRaw&r=0',
-                    'ten_dien_vien': 'Trấn Thành',
-                    'phim_da_dong': 'Tết Nhà Bà Nữ, Vợ Chồng Thằng Đậu',
-                },
-                {
-                    'hinh_anh': 'https://th.bing.com/th/id/R.89ae29c6c4475f86b75d5309ee73127a?rik=Dz1RPieCCLf7kQ&riu=http%3a%2f%2fnguoi-noi-tieng.com%2fphoto%2ftruong-giang-sam-vai-chinh-ten-dong-trong-bo-phim-hai-49-ngay-2353.jpg&ehk=XVuvLg4qSgpb12q3P5Nd563AL4SH3FcnkCeuyzRKyxI%3d&risl=&pid=ImgRaw&r=0',
-                    'ten_dien_vien': 'Trường Giang',
-                    'phim_da_dong': 'Tết Nhà Bà Nữ, Vợ Chồng Thằng Đậu',
-                },
-                {
-                    'hinh_anh': 'https://th.bing.com/th/id/R.6605b3e3c2d95dc99984f0cb66080e3b?rik=G1BZ0lSMOwxx8A&pid=ImgRaw&r=0',
-                    'ten_dien_vien': 'Minh Tuấn',
-                    'phim_da_dong': 'Tết Nhà Bà Nữ, Vợ Chồng Thằng Đậu',
-                },
-                {
-                    'hinh_anh': 'https://th.bing.com/th/id/OIP.RstCRmTo3MuzD0kGO9koAAHaKn?rs=1&pid=ImgDetMain',
-                    'ten_dien_vien': 'Mười Khó',
-                    'phim_da_dong': 'Tết Nhà Bà Nữ, Vợ Chồng Thằng Đậu',
-                },
-            ],
+            list_dien_vien: [],
+            create_dien_vien: {},
+            delete_dien_vien: {},
+            update_dien_vien: {
+            },
         }
     },
     mounted() {
-
+        this.loadDataActor();
     },
     methods: {
+        loadDataActor() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/actor/get-data')
+                .then((res) => {
+                    this.list_dien_vien = res.data;
+                    console.log(res);
+                });
+        },
+
+        createActor() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/actor/create', this.create_dien_vien)
+                .then((res) => {
+                    if (res.data.status === true) {
+                        toaster.success('Thông báo<br>' + res.data.message);
+                        this.loadDataActor();
+                    } else {
+                        toaster.error('Thông báo<br>' + res.data.message);
+                    }
+                });
+        },
+
+
+        deleteActor() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/actor/delete', this.delete_dien_vien)
+                .then((res) => {
+                    if (res.data.status == true) {
+                        toaster.success('Thông báo<br>' + res.data.message);
+                        this.loadDataActor();
+                    }
+                    else {
+                        // console.log(this.delete_khach_hang.id);
+                        toaster.error('Thông báo<br>' + res.data.message);
+                    }
+                });
+        },
+
+        updateActor() {
+            // console.log(this.update_dien_vien);
+            axios
+                .post('http://127.0.0.1:8000/api/admin/actor/update', this.update_dien_vien)
+                .then((res) => {
+                    if (res.data.status == true) {
+                        toaster.success('Thông báo<br>' + res.data.message);
+                        this.loadDataActor();
+                    } else {
+                        toaster.error('Thông báo<br>' + res.data.message);
+                    }
+                });
+        },
 
     },
 }

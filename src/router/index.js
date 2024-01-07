@@ -24,7 +24,8 @@ const routes = [
         meta: {
           layout: "client"
         },
-      }, {
+      },
+       {
         path: "/all-movie",
         component: () => import("../components/Client/AllMovie/index.vue"),
         meta: {
@@ -130,6 +131,13 @@ const routes = [
       {
         path: "/admin/tap",
         component: () => import("../components/Admin/Tap/index.vue"),
+        meta: {
+          layout: "default"
+        },
+      },
+      {
+        path: "/admin/the-loai",
+        component: () => import("../components/Admin/Type/index.vue"),
         meta: {
           layout: "default"
         },

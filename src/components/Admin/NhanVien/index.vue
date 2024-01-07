@@ -32,8 +32,7 @@
                     <div class="row">
                         <div class="d-flex justify-content-between">
                             <h2 class="text-start">
-                                <div class="mt-3">
-
+                                <div class="">
                                     <b class="text-start text-secondary">
                                         Quản Lý Nhân Viên
                                     </b>
@@ -48,19 +47,19 @@
                     <table class="table table-bordered bg-white">
                         <thead class="table-light">
                             <tr>
-                                <th class="text-center align-middle">
+                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
                                     STT
                                 </th>
-                                <th class="text-center align-middle">
+                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
                                     Tên Nhân Viên
                                 </th>
-                                <th class="text-center align-middle">
+                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
                                     Email
                                 </th>
-                                <th class="text-center align-middle">
+                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
                                     Mật Khẩu
                                 </th>
-                                <th class="text-center align-middle">
+                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
                                     Action
                                 </th>
                             </tr>

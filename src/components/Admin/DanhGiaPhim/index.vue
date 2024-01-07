@@ -3,11 +3,9 @@
         <div class="card mt-3">
             <h2 class="text-start">
                 <div class="mt-3">
-
                     <b class="text-start text-secondary">
                         Quản Lý Đánh Giá
                     </b>
-
                 </div>
             </h2>
             <div class="card-body bg-white">
