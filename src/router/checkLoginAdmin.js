@@ -9,7 +9,7 @@ export default function (to, from, next) {
       {},
       {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"), //the token is a variable which holds the token
+          Authorization: "Bearer " + localStorage.getItem("tokenAdmin"), //the token is a variable which holds the token
         },
       }
     )

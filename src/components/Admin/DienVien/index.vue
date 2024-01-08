@@ -162,7 +162,7 @@ export default {
             axios
                 .post('http://127.0.0.1:8000/api/admin/actor/get-data')
                 .then((res) => {
-                    this.list_dien_vien = res.data;
+                    this.list_dien_vien = res.data.data;
                     console.log(res);
                 });
         },

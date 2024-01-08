@@ -155,7 +155,7 @@ export default {
             axios
                 .post('http://127.0.0.1:8000/api/admin/type/get-data')
                 .then((res) => {
-                    this.list_type = res.data;
+                    this.list_type = res.data.data;
                     console.log(res);
                 });
         },

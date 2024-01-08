@@ -57,7 +57,7 @@ export default {
     data() {
         return {
             username : localStorage.getItem("username"),
-            getToken: localStorage.getItem("token"),
+            getToken: localStorage.getItem("tokenAdmin"),
         }
     },
     mounted() {
@@ -65,7 +65,7 @@ export default {
     },
     methods:{
         logOut(){
-            localStorage.removeItem("token");
+            localStorage.removeItem("tokenAdmin");
             this.$router.push('/admin/auth');
         },
         checkLogin() {
