@@ -19,8 +19,6 @@
                                         <th class="text-center align-middle text-nowrap"
                                             style="background-color: #AB826B; color:white;">Email</th>
                                         <th class="text-center align-middle text-nowrap"
-                                            style="background-color: #AB826B; color:white;">Password</th>
-                                        <th class="text-center align-middle text-nowrap"
                                             style="background-color: #AB826B; color:white;">Hành Động</th>
                                     </tr>
                                 </thead>
@@ -30,7 +28,6 @@
                                             <td class="text-center align-middle text-nowrap">{{ k + 1 }}</td>
                                             <td class="text-center align-middle text-nowrap">{{ v.name }}</td>
                                             <td class="text-center align-middle text-nowrap">{{ v.email }}</td>
-                                            <td class="text-center align-middle text-nowrap">{{ v.password }}</td>
                                             <td class="text-center text-nowrap align-middle">
                                                 <i class="fa-solid fa-circle-info fa-2x text-info me-2"
                                                     data-bs-toggle="modal" data-bs-target="#ThongTinKhach"
@@ -86,7 +83,6 @@
                                             <b class="text-dark">Đây Là Thông Tin Khách Hàng</b>
                                             <div class="text-dark">{{ delete_khach_hang.name }}</div>
                                             <div class="text-dark">{{ delete_khach_hang.email }}</div>
-                                            <div class="text-dark">{{ delete_khach_hang.password }}</div>
                                             <div class="text-center text-nowrap align-middle">
                                                 <i class="fa-solid fa-circle-info" data-bs-toggle="modal"
                                                     data-bs-target="#ThongTinKhach"></i>
@@ -129,7 +125,7 @@ export default {
             axios
                 .post('http://127.0.0.1:8000/api/admin/client/get-data')
                 .then((res) => {
-                    this.list_khach_hang = res.data.create_clients_table;
+                    this.list_khach_hang = res.data.data;
                 });
         },
 

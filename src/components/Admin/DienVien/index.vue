@@ -103,7 +103,7 @@
                             <div class="modal-body">
                                 <label class="text-secondary">Tên Diễn Viên</label>
                                 <input type="text" placeholder="Nhập Vào Tên Diễn Viên" class="form-control"
-                                    v-model="update_dien_vien.actor_name">
+                                    v-model="update_dien_vien.name">
                                 <label class="text-secondary">Ảnh Diễn Viên</label>
                                 <input type="text" placeholder="Nhập Vào Ảnh Diễn Viên" class="form-control"
                                     v-model="update_dien_vien.url">
@@ -162,7 +162,7 @@ export default {
             axios
                 .post('http://127.0.0.1:8000/api/admin/actor/get-data')
                 .then((res) => {
-                    this.list_dien_vien = res.data.data;
+                    this.list_dien_vien = res.data;
                     console.log(res);
                 });
         },

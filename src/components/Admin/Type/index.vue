@@ -51,8 +51,8 @@
                                 <td class="align-middle">
                                     {{ v.description }}
                                 </td>
-                                <td class="text-center align-middle ">
-                                    <div class="d-flex align-items-center">
+                                <td class="text-center align-middle">
+                                    <div class="d-flex align-items-center justify-content-center">
                                         <button v-on:click="Object.assign(update_type, v)" class="btn btn-info me-1"
                                             style="width: 100px;" data-bs-toggle="modal" data-bs-target="#capNhatModal">Cập
                                             Nhật</button>
@@ -155,7 +155,7 @@ export default {
             axios
                 .post('http://127.0.0.1:8000/api/admin/type/get-data')
                 .then((res) => {
-                    this.list_type = res.data.data;
+                    this.list_type = res.data;
                     console.log(res);
                 });
         },
