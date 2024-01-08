@@ -84,8 +84,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Đóng</button>
-                                        <button data-bs-dismiss="modal" type="button" class="btn btn-primary">Chỉnh
-                                            Sửa</button>
+                                        <button data-bs-dismiss="modal" type="button" class="btn btn-danger" v-on:click="deleteAuthor()">Xóa</button>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +133,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Đóng</button>
-                                        <button type="button" class="btn btn-primary" v-on:click="updateAuthor()">Cập nhật</button>
+                                        <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" v-on:click="updateAuthor()">Cập nhật</button>
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +181,7 @@ export default {
         },
         deleteAuthor() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/author/delete', this.delete_dien_vien)
+                .post('http://127.0.0.1:8000/api/admin/author/delete', this.delete_tac_gia)
                 .then((res) => {
                     if (res.data.status == true) {
                         toaster.success('Thông báo<br>' + res.data.message);
@@ -196,7 +195,7 @@ export default {
 
         updateAuthor() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/author/update', this.update_dien_vien)
+                .post('http://127.0.0.1:8000/api/admin/author/update', this.update_tac_gia)
                 .then((res) => {
                     if (res.data.status == true) {
                         toaster.success('Thông báo<br>' + res.data.message);

@@ -14,15 +14,15 @@
                         </div>
                         <div class="modal-body text-start">
                             <label class="text-secondary">Tên Nhân Viên</label>
-                            <input class="form-control" type="text" placeholder="Nhập Vào Tên Nhân Viên">
+                            <input v-model="create_nhan_vien.name" class="form-control" type="text" placeholder="Nhập Vào Tên Nhân Viên">
                             <label class="text-secondary">Email</label>
-                            <input class="form-control" type="mail" placeholder="Nhập Email">
+                            <input v-model="create_nhan_vien.email" class="form-control" type="mail" placeholder="Nhập Email">
                             <label class="text-secondary">Mật Khẩu</label>
-                            <input class="form-control" type="password" placeholder="Nhập Vào Mật Khẩu">
+                            <input v-model="create_nhan_vien.password" class="form-control" type="password" placeholder="Nhập Vào Mật Khẩu">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Xác Nhận</button>
+                            <button type="button" v-on:click="createNhanVien()" class="btn btn-primary" data-bs-dismiss="modal">Xác Nhận</button>
                         </div>
                     </div>
                 </div>
@@ -32,13 +32,14 @@
                     <div class="row">
                         <div class="d-flex justify-content-between">
                             <h2 class="text-start">
-                                <div class="">
+                                <div class="mt-3">
+
                                     <b class="text-start text-secondary">
                                         Quản Lý Nhân Viên
                                     </b>
 
                                 </div>
-                            </h2><button type="button text-end" data-bs-toggle="modal" data-bs-target="#addModal"
+                            </h2><button type="button text-end" v-on:click="" data-bs-toggle="modal" data-bs-target="#addModal"
                                 class="btn btn-outline-primary">Thêm Mới Nhân Viên</button>
                         </div>
                     </div>
@@ -47,19 +48,22 @@
                     <table class="table table-bordered bg-white">
                         <thead class="table-light">
                             <tr>
-                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
+                                <th class="text-center align-middle">
                                     STT
                                 </th>
-                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
+                                <th class="text-center align-middle">
                                     Tên Nhân Viên
                                 </th>
-                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
+                                <th class="text-center align-middle">
                                     Email
                                 </th>
-                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
+                                <th class="text-center align-middle">
                                     Mật Khẩu
                                 </th>
-                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
+                                <th class="text-center align-middle">
+                                    Tình Trạng
+                                </th>
+                                <th class="text-center align-middle">
                                     Action
                                 </th>
                             </tr>
@@ -71,7 +75,7 @@
                                         {{ k + 1 }}
                                     </td>
                                     <td class="text-center align-middle">
-                                        {{ v.ten_nhan_vien }}
+                                        {{ v.name }}
                                     </td>
                                     <td class="text-center align-middle">
                                         {{ v.email }}
@@ -79,10 +83,13 @@
                                     <td class="text-center align-middle">
                                         {{ v.password }}
                                     </td>
+                                    <td class="text-center align-middle">
+                                        {{ v.tinh_trang }}
+                                    </td>
                                     <td class="text-center text-nowrap align-middle">
-                                        <i data-bs-toggle="modal" data-bs-target="#SuaNhanVien"
+                                        <i data-bs-toggle="modal" v-on:click="update_nhan_vien = v" data-bs-target="#SuaNhanVien"
                                             class=" me-2 fa-2x text-info fa-solid fa-pen-to-square"></i>
-                                        <i data-bs-toggle="modal" data-bs-target="#XoaNhanVien"
+                                        <i data-bs-toggle="modal" v-on:click="delete_nhan_vien = v" data-bs-target="#XoaNhanVien"
                                             class="fa-2x text-danger fa-solid fa-trash"></i>
                                     </td>
                                 </tr>
@@ -100,16 +107,16 @@
                                     </div>
                                     <div class="modal-body">
                                         <label class="text-secondary">Tên Nhân Viên</label>
-                                        <input class="form-control" type="text" placeholder="Nhập Vào Tên Nhân Viên">
+                                        <input v-model="update_nhan_vien.name" class="form-control" type="text" placeholder="Nhập Vào Tên Nhân Viên">
                                         <label class="text-secondary">Email</label>
-                                        <input class="form-control" type="mail" placeholder="Nhập Email">
+                                        <input v-model="update_nhan_vien.email" class="form-control" type="mail" placeholder="Nhập Email">
                                         <label class="text-secondary">Mật Khẩu</label>
-                                        <input class="form-control" type="password" placeholder="Nhập Vào Mật Khẩu">
+                                        <input v-model="update_nhan_vien.password" class="form-control" type="password" placeholder="Nhập Vào Mật Khẩu">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Thay Đổi</button>
+                                        <button v-on:click="updatedNhanVien()" type="button" class="btn btn-primary">Thay Đổi</button>
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +134,9 @@
                                     <div class="modal-body">
                                         <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show">
                                             <div class="text-white">Bạn có muốn xóa
-                                                <!-- {{ delete_nhan_vien.ten_nhan_vien }} -->
+                                                <b>
+                                                {{ delete_nhan_vien.name }}
+                                                </b>
                                                 Này Không!!
                                             </div>
                                         </div>
@@ -135,7 +144,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Xóa</button>
+                                        <button v-on:click="deleteNhanVien()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Xóa</button>
                                     </div>
                                 </div>
                             </div>
@@ -153,43 +162,64 @@ const toaster = createToaster({ position: "top-right" });
 export default {
     data() {
         return {
-            list_nhan_vien: [
-                {
-                    'ten_nhan_vien': "Võ Quốc Triệu",
-                    'email': "quoctrieuzxc@gmail.com",
-                    'password': "123123"
-                },
-                {
-                    'ten_nhan_vien': "Khánh Trần",
-                    'email': "khanhtran@gmail.com",
-                    'password': "01283321221"
-                },
-                {
-                    'ten_nhan_vien': "Văn Trọng",
-                    'email': "vantrongtk@gmail.com",
-                    'password': "0988009115"
-                },
-                {
-                    'ten_nhan_vien': "Quang Huy",
-                    'email': "quanghuy@gmail.com",
-                    'password': "0911991223"
-                },
-                {
-                    'ten_nhan_vien': "Minh Tuấn",
-                    'email': "minhtuan@gmail.com",
-                    'password': "0911134542"
-                },
-            ],
+            list_nhan_vien: [],
             delete_nhan_vien: {},
             create_nhan_vien: {},
             update_nhan_vien: {},
         }
     },
     mounted() {
-
+        this.loadDataNhanVien();
     },
     methods: {
+        createNhanVien() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/employee/create', this.create_nhan_vien)
+                .then((res) => {
+                    if (res.data.status == true) {
+                        alert(res.data.message);
+                        this.loadDataNhanVien();
+                    }
+                });
+        },
 
+        loadDataNhanVien() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/employee/get-data')
+                .then((res) => {
+                    this.list_nhan_vien = res.data.data;
+                });
+        },
+
+        deleteNhanVien() {
+            axios
+            .post('http://127.0.0.1:8000/api/admin/employee/delete', this.delete_nhan_vien)
+            .then((res)=> {
+                if (res.data.status == true ) {
+                    alert(res.data.message);
+                    this.loadDataNhanVien();
+                }
+                else {
+                    alert(res.data.message);
+                }
+            });
+        },
+
+        updatedNhanVien() {
+            axios
+                    .post('http://127.0.0.1:8000/api/admin/employee/update', this.update_nhan_vien)
+                    .then((res) =>  {
+                        if(res.data.status == true) {
+                            alert(res.data.message);
+                            this.loadDataNhanVien();
+                        }
+                        else{
+                            alert(res.data.message);
+                        }
+                    });
+        },
+
+        
 
     },
 }
