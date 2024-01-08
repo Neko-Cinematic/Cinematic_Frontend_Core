@@ -8,7 +8,6 @@
 
                     <div class="col mb-15">
                         <!-- Logo Start -->
-
                         <router-link to="/">
                             <div class="header-logo">
                                 <a href="index.html">
@@ -21,16 +20,33 @@
 
                     <div class="col order-2 order-lg-3" style="transform: translateY(-10px);">
                         <!-- Header Advance Search Start -->
-                        <div class="header-shop-links">
+                        <div class="header-shop-links d-flex align-items-center">
 
                             <router-link to="/search">
                                 <button class="search-toggle btn align-middle"><i class="fa-solid fa-magnifying-glass ms-1">
                                     </i>
                                     <b>Tìm Kiếm</b></button>
                             </router-link>
-                            <router-link to="/auth">
+                            <router-link to="/client/auth" v-if="isLogin === false">
                                 <button class="btn btn-danger ms-2 me-2"><b>Đăng Nhập</b></button>
                             </router-link>
+
+                            <div class="dropdown border-0" v-if="isLogin === true">
+                                <button class="btn border-0 dropdown-toggle text-light fs-4  d-flex align-items-center down" style="outline: none;"
+                                    type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/JPEG_example_flower.jpg/300px-JPEG_example_flower.jpg"
+                                        alt="" width="35" class="rounded-circle">
+                                        <span class=" ms-1 fs-6 text-capitalize down"><b>{{ username }}</b></span>
+                                </button>
+                    
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item text-capitalize" href="#">Thông tin cá nhân</a></li>
+                                    <li><a class="dropdown-item text-capitalize" href="#">Nạp tiền</a></li>
+                                    <li><a class="dropdown-item text-capitalize" href="#"  v-on:click="logOut()">Đăng xuất</a></li>
+                                </ul>
+                            </div>
+
+
                         </div><!-- Header Advance Search End -->
                     </div>
 
@@ -113,7 +129,31 @@
 </template>
 <script>
 export default {
+    data() {
+        return {
+            isLogin : true,
+            getToken: localStorage.getItem("token"),
+            username : localStorage.getItem("username")
 
+        }
+    },
+    mounted() {
+        this.checkLogin();
+    },
+    methods: {
+        checkLogin() {
+            console.log(this.getToken);
+            if (this.getToken != null) {
+                this.isLogin = true;
+            } else {
+                this.isLogin = false;
+            }
+        },
+        logOut(){
+            localStorage.removeItem("token");
+            location.reload();
+        }
+    }
 }
 </script>
 <style></style>

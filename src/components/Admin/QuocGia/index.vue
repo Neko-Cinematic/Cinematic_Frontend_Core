@@ -1,9 +1,9 @@
 <template>
     <div class="row">
         <div class="col-lg-4">
-            <div class="card">
-                <div class="card-header">
-                    <p class="text-secondary" style="font-size: large;">
+            <div class="card border-0">
+                <div class="card-header" style="background-color: #AB826B; color:white;">
+                    <p class="text-light" style="font-size: large;">
                         Thêm Quốc Gia
                     </p>
                 </div>
@@ -19,16 +19,21 @@
             </div>
         </div>
         <div class="col-lg-8">
-            <table class="table table-bordered bg-white">
+            <div class="card">
+                <div class="card-header" style="background-color: #AB826B; color:white;">
+                 <h3 class="text-start fw-bold">Danh Sách Quốc Gia</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered bg-white">
                 <thead>
                     <tr>
-                        <th class="text-center align-middle text-nowrap">
+                        <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
                             STT
                         </th>
-                        <th class="text-center align-middle text-nowrap">
+                        <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
                             Tên Quốc Gia
                         </th>
-                        <th class="text-center align-middle text-nowrap">
+                        <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
                             Action
                         </th>
                     </tr>
@@ -52,6 +57,8 @@
                     </template>
                 </tbody>
             </table>
+                </div>
+            </div>
             <div class="modal fade" id="capnhat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">

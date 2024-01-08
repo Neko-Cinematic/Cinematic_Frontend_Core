@@ -6,12 +6,10 @@
                     <div class="row">
                         <div class="d-flex justify-content-between">
                             <h2 class="text-start">
-                                <div class="mt-3">
-
+                                <div class="">
                                     <b class="text-start text-secondary">
                                         Quản Lý Đánh Giá
                                     </b>
-
                                 </div>
                             </h2><button type="button text-end" data-bs-toggle="modal" data-bs-target="#addngonNgu"
                                 class="btn btn-outline-primary">Thêm Mới Ngôn Ngữ</button>
@@ -22,13 +20,13 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="text-center align-middle">
+                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;"> 
                                     STT
                                 </th>
-                                <th class="text-center align-middle">
+                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;"> 
                                     Ngôn Ngữ
                                 </th>
-                                <th class="text-center align-middle">
+                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;"> 
                                     Action
                                 </th>
                             </tr>
