@@ -1,14 +1,13 @@
 <template>
     <div class="row">
         <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header">
+            <div class="card" >
+                <div class="card-header" >
                     <div class="row">
                         <div class="d-flex justify-content-between">
                             <div class="align-middle mt-2 text-secondary">
                                 <h2 class="text-start">
-                                    <div class="mt-3">
-
+                                    <div class="">
                                         <b class="text-start text-secondary">
                                             Quản Lý Tác Giả
                                         </b>
@@ -24,16 +23,16 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="text-center align-middle text-nowrap">
+                                <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
                                     STT
                                 </th>
-                                <th class="text-center align-middle text-nowrap">
+                                <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
                                     Tên Tác Giả
                                 </th>
-                                <th class="text-center align-middle text-nowrap">
+                                <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
                                     Phim Đã Làm
                                 </th>
-                                <th class="text-center align-middle text-nowrap">
+                                <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
                                     Action
                                 </th>
                             </tr>
@@ -45,10 +44,10 @@
                                         {{ k + 1 }}
                                     </td>
                                     <td class="text-center align-middle">
-                                        {{ v.ten_tac_gia }}
+                                        {{ v.name }}
                                     </td>
                                     <td class="text-center align-middle">
-                                        {{ v.phim_da_lam }}
+                                        {{ v.original_name }}
                                     </td>
                                     <td class="text-center text-nowrap align-middle">
                                         <i data-bs-toggle="modal" data-bs-target="#SuaTacGia"
@@ -95,14 +94,16 @@
                                     </div>
                                     <div class="modal-body">
                                         <label>Tên Tác Giả</label>
-                                        <input class="form-control" type="text" placeholder="Nhập Vào Tên Tác Giả">
-                                        <label>Phim Đã Làm</label>
-                                        <input class="form-control" type="text" placeholder="Nhập Vào Phim Đã Làm">
+                                        <input class="form-control" type="text" placeholder="Nhập Vào Tên Tác Giả"
+                                            v-model="create_tac_gia.name">
+                                        <label>Ảnh tác giả</label>
+                                        <input class="form-control" type="text" placeholder="Nhập Vào Ảnh tác giả"
+                                            v-model="create_tac_gia.id_image">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary" v-on:click="createActor()">Save changes</button>
                                     </div>
                                 </div>
                             </div>
@@ -142,41 +143,80 @@ const toaster = createToaster({ position: "top-right" });
 export default {
     data() {
         return {
-            list_tac_gia: [
-                {
-                    'ten_tac_gia': 'Võ Quốc Triệu',
-                    'phim_da_lam': 'Mười Khó, Nhà Bà Nữ, Tèo Anh, Tèo Em'
-                },
-                {
-                    'ten_tac_gia': 'Võ Quốc Triệu',
-                    'phim_da_lam': 'Mười Khó, Nhà Bà Nữ, Tèo Anh, Tèo Em'
-                },
-                {
-                    'ten_tac_gia': 'Võ Quốc Triệu',
-                    'phim_da_lam': 'Mười Khó, Nhà Bà Nữ, Tèo Anh, Tèo Em'
-                },
-                {
-                    'ten_tac_gia': 'Võ Quốc Triệu',
-                    'phim_da_lam': 'Mười Khó, Nhà Bà Nữ, Tèo Anh, Tèo Em'
-                },
-                {
-                    'ten_tac_gia': 'Võ Quốc Triệu',
-                    'phim_da_lam': 'Mười Khó, Nhà Bà Nữ, Tèo Anh, Tèo Em'
-                }, {
-                    'ten_tac_gia': 'Võ Quốc Triệu',
-                    'phim_da_lam': 'Mười Khó, Nhà Bà Nữ, Tèo Anh, Tèo Em'
-                },
-            ],
+            list_tac_gia: [],
             create_tac_gia: {},
             delete_tac_gia: {},
             update_tac_gia: {},
         }
     },
     mounted() {
-
+        this.loadDataActor();
     },
     methods: {
+        loadDataActor() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/actor-rel/get-data')
+                .then((res) => {
+                    this.list_tac_gia = res.data;
+                });
+        },
 
+
+        // searchBan() {
+        //     axios
+        //         .post('http://127.0.0.1:8000/api/admin/ban/tim-ban', this.key_search)
+        //         .then((res) => {
+        //             this.list_ban = res.data.ban;
+        //         });
+        // },
+
+        createActor() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/actor/create', this.create_tac_gia)
+                .then((res) => {
+                    if (res.data.status == true) {
+                        toaster.success('Thông báo<br>' + res.data.message);
+                        
+                    }
+                });
+        },
+        // deleteBan() {
+        //     axios
+        //         .delete('http://127.0.0.1:8000/api/admin/ban/xoa-ban/' + this.delete_ban.id)
+        //         .then((res) => {
+        //             if (res.data.status == true) {
+        //                 toaster.success('Thông báo<br>' + res.data.message);
+        //                 this.loadDataBan();
+        //             }
+        //             else {
+        //                 toaster.danger('Thông báo<br>' + res.data.message);
+        //             }
+        //         });
+        // },
+        // updateBan() {
+        //     axios
+        //         .put('http://127.0.0.1:8000/api/admin/ban/cap-nhat-ban', this.edit_ban)
+        //         .then((res) => {
+        //             if (res.data.status == true) {
+        //                 toaster.success('Thông báo<br>' + res.data.message);
+        //                 this.loadDataBan();
+        //             } else {
+        //                 toaster.danger('Thông báo<br>' + res.data.message);
+        //             }
+        //         });
+        // },
+        // doiTrangThai(xyz) {
+        //     axios
+        //         .put('http://127.0.0.1:8000/api/admin/ban/doi-trang-thai', xyz)
+        //         .then((res) => {
+        //             if (res.data.status == true) {
+        //                 toaster.success('Thông báo<br>' + res.data.message);
+        //                 this.loadDataBan();
+        //             } else {
+        //                 toaster.error(res.data.message);
+        //             }
+        //         });
+        // }
     },
 }
 </script>

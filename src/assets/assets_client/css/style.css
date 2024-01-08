@@ -162,6 +162,10 @@ ul {
   padding: 0;
 }
 
+.down:hover{
+  color:#D38B99 !important;
+}
+
 /*-- 
     - Common Classes
 -----------------------------------------*/
