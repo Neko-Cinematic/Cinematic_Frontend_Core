@@ -11,8 +11,8 @@
                 <div class="mobile-toggle-menu"><i class='bx bx-menu'></i></div>
                 <div class="search-bar flex-grow-1 text-center">
                     <h2>
-                        <p style="font-size: larger; font-style: oblique; color: burlywood;">
-                            TRANG QUẢN LÝ NEKOCINEMATIC
+                        <p style="font-size: larger; color: burlywood;">
+                           <b> TRANG QUẢN LÝ NEKOCINEMATIC</b>
                         </p>
                     </h2>
                 </div>
