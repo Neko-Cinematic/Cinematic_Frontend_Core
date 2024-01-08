@@ -9,7 +9,7 @@
                         Dùng</h2>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table mb-0">
+                            <table class="table mb-0 table-bordered">
                                 <thead class="table-light">
                                     <tr>
                                         <th class="text-center align-middle text-nowrap"

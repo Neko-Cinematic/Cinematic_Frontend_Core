@@ -13,7 +13,7 @@
              <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
            </div>
            <input v-model="login_user.email" type="email" placeholder="Email" />
-           <input v-model="login_user.password" type="password" placeholder="Mật Khẩu" />
+           <input v-model="login_user.password" type="password" placeholder="Mật Khẩu"  v-on:keyup.enter="login()"/>
            <a href="#">Quên Mật Khẩu?</a>
            <div class="btn btn-danger text-nowrap" style="width: 100%; font-size: 12px;
      padding: 13px 45px;
@@ -23,7 +23,7 @@
      letter-spacing: 0.5px;
      text-transform: uppercase;
      margin-top: 10px;
-     cursor: pointer;" @:click="login()">Đăng nhập Nhân Viên</div>
+     cursor: pointer;" @:click="login()" >Đăng nhập Nhân Viên</div>
          </form>
        </div>
        
@@ -79,6 +79,8 @@
          })
          .then((res) => {
            if (res.data.status === true) {
+            localStorage.setItem("username",res.data.name)
+            console.log(localStorage.getItem("username"));
              this.$router.push('/admin/phim');
            } else {
              // console.log(res.data.err);
