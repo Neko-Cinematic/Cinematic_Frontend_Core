@@ -31,8 +31,15 @@ export default {
         TopRocker
     }, mounted() {
         checkLoginAdmin();
+    },
+    methods: {
+        hideModal(id) {
+            $('#' + id).removeClass('show');
+            $('.modal-backdrop.show').remove();
+            $('body').removeClass('modal-open');
+            $('body').css('overflow', '');
+        },
     }
-
 }
 </script>
 <style>

@@ -8,7 +8,7 @@
                             <h2 class="text-start">
                                 <div class="">
                                     <b class="text-start text-secondary">
-                                        Quản Lý Đánh Giá
+                                        Quản Lý Ngôn Ngữ
                                     </b>
                                 </div>
                             </h2><button type="button text-end" data-bs-toggle="modal" data-bs-target="#addngonNgu"
@@ -117,8 +117,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button v-on:click="createNgonNgu()" type="button" data-bs-dismiss="modal"
-                                            class="btn btn-primary">Xác Nhận</button>
+                                        <button v-on:click="createNgonNgu()" type="button" class="btn btn-primary">Thêm
+                                            Mới</button>
                                     </div>
                                 </div>
                                 <!-- m,m -->
@@ -133,6 +133,7 @@
 <script>
 import axios from 'axios';
 import { createToaster } from "@meforma/vue-toaster";
+import MasterRocker from "../../../layout/wrapper/MasterRocker.vue";
 const toaster = createToaster({ position: "top-right" });
 export default {
     data() {
@@ -151,10 +152,12 @@ export default {
             axios
                 .post('http://127.0.0.1:8000/api/admin/language/create', this.create_ngon_ngu)
                 .then((res) => {
-                    if (res.data.status == true) {
-                        alert(res.data.message);
+                    if (res.data.status) {
+                        toaster.success('SUCCESS<br>' + res.data.message);
+                        MasterRocker.methods.hideModal('addngonNgu');
                         this.loadDataNgonNgu();
                     }
+                    else toaster.error('ERROR<br>' + res.data.message);
                 });
         },
 
@@ -170,13 +173,12 @@ export default {
             axios
                 .post('http://127.0.0.1:8000/api/admin/language/delete', this.delete_ngon_ngu)
                 .then((res) => {
-                    if (res.data.status == true) {
-                        alert(res.data.message);
+                    if (res.data.status) {
+                        toaster.success('SUCCESS<br>' + res.data.message);
+                        MasterRocker.methods.hideModal('XoaTacGia');
                         this.loadDataNgonNgu();
                     }
-                    else {
-                        alert(res.data.message);
-                    }
+                    else toaster.error('ERROR<br>' + res.data.message);
                 });
         },
 
@@ -184,13 +186,12 @@ export default {
             axios
                 .post('http://127.0.0.1:8000/api/admin/language/update', this.update_ngon_ngu)
                 .then((res) => {
-                    if (res.data.status == true) {
-                        alert(res.data.message);
+                    if (res.data.status) {
+                        toaster.success('SUCCESS<br>' + res.data.message);
+                        MasterRocker.methods.hideModal('SuaTacGia');
                         this.loadDataNgonNgu();
                     }
-                    else {
-                        alert(res.data.message);
-                    }
+                    else toaster.error('ERROR<br>' + res.data.message);
                 });
         },
 

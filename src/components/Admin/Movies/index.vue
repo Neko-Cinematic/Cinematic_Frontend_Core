@@ -6,7 +6,8 @@
           <b>QUẢN LÝ PHIM</b>
         </div>
       </h2>
-      <button class="btn btn-outline-secondary mb-3" data-bs-toggle="modal" data-bs-target="#createModal">
+      <button @click="loadLanguage(); loadAuthor(); loadCountry(); loadEmployee()" class="btn btn-outline-secondary mb-3"
+        data-bs-toggle="modal" data-bs-target="#createModal">
         Thêm Mới Phim
       </button>
       <div class="table-responsive">
@@ -485,6 +486,7 @@
 <script>
 import axios from "axios";
 import { createToaster } from "@meforma/vue-toaster";
+import MasterRocker from "../../../layout/wrapper/MasterRocker.vue";
 const toaster = createToaster({ position: "top-right" });
 export default {
   data() {
@@ -522,10 +524,6 @@ export default {
   },
   mounted() {
     this.loadMovie();
-    this.loadAuthor();
-    this.loadCountry();
-    this.loadEmployee();
-    this.loadLanguage();
   },
   methods: {
     deleteMovie() {
@@ -601,7 +599,6 @@ export default {
         .then((res) => {
           if (res.data.status) {
             toaster.success('SUCCESS<br>' + res.data.message);
-            this.$refs.image_actor.files[0] = null;
             this.create_actor = {};
             this.search('actor');
           }
@@ -649,8 +646,8 @@ export default {
           .then((res) => {
             if (res.data.status) {
               toaster.success('SUCCESS<br>' + res.data.message);
-              this.$refs.video.files[0] = null;
-              this.loadEpisode(this.create_episode.id_movie);
+              this.loadEpisode();
+              MasterRocker.methods.hideModal('episodeModal');
             }
             else toaster.error('ERROR<br>' + res.data.message);
           });
@@ -667,6 +664,7 @@ export default {
               toaster.success('SUCCESS<br>' + res.data.message);
               this.create_information = {};
               this.loadMovie();
+              MasterRocker.methods.hideModal('createModal');
             }
             else toaster.error('ERROR<br>' + res.data.message);
           })
