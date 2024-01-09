@@ -1,15 +1,16 @@
 <template>
-<body class="bg-login">
-	<div class="wrapper">
-		<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
-			<div class="container-fluid">
-				<RouterView></RouterView>
+	<body class="bg-login">
+		<div class="wrapper">
+			<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
+				<div class="container-fluid">
+					<RouterView></RouterView>
+				</div>
 			</div>
 		</div>
-	</div>
-</body>
+	</body>
 </template>
 <script>
+import checkLoginAdmin from '../../router/checkLoginAdmin';
 import '../../assets/assets_rocker/js/bootstrap.bundle.min.js';
 import '../../assets/assets_rocker/js/jquery.min.js';
 import '../../assets/assets_rocker/plugins/simplebar/js/simplebar.min.js';
@@ -18,9 +19,10 @@ import '../../assets/assets_rocker/plugins/perfect-scrollbar/js/perfect-scrollba
 import '../../assets/assets_rocker/js/index.js';
 import '../../assets/assets_rocker/js/app.js';
 export default {
-    name        :   'app',
-    components  :   {
-    },
+	name: 'app',
+	components: {
+	},
+
 }
 </script>
 <style>

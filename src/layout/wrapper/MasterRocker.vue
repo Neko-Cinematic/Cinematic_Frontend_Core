@@ -14,6 +14,7 @@
     <FooterRocker></FooterRocker>
 </template>
 <script>
+import checkLoginAdmin from '../../router/checkLoginAdmin';
 import MenuRocker from '../components/MenuRocker.vue';
 import TopRocker from '../components/TopRocker.vue';
 import '../../assets/assets_rocker/js/bootstrap.bundle.min.js';
@@ -28,7 +29,10 @@ export default {
     components: {
         MenuRocker,
         TopRocker
-    },
+    }, mounted() {
+        checkLoginAdmin();
+    }
+
 }
 </script>
 <style>
