@@ -1,4 +1,3 @@
-//Sau này đổi tên lại thành Middleware nhé
 import axios from "axios";
 import {
   createToaster
@@ -7,7 +6,6 @@ const toaster = createToaster({
   position: "top-right"
 });
 export default function (to, from, next) {
-  console.log('dsdsdsds');
   axios
     .post(
       "http://127.0.0.1:8000/api/admin/client/check-token", {}, {
@@ -26,5 +24,4 @@ export default function (to, from, next) {
     .catch((err) => {
       next('/admin/auth');
     });
-
 }
