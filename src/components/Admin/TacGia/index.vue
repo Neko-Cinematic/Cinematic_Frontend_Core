@@ -6,14 +6,14 @@
                     <div class="row">
                         <div class="d-flex justify-content-between">
                             <div class="align-middle mt-2 text-secondary">
-                                <h2 class="text-start">
+                                <h3 class="text-start">
                                     <div class="">
                                         <b class="text-start text-secondary">
                                             Quản Lý Tác Giả
                                         </b>
 
                                     </div>
-                                </h2>
+                                </h3>
                             </div> <button type="button text-end" data-bs-toggle="modal" data-bs-target="#addModal"
                                 class="btn btn-outline-primary">Thêm Tác Giả</button>
                         </div>
@@ -25,6 +25,9 @@
                             <tr>
                                 <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
                                     STT
+                                </th>
+                                <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
+                                    Ảnh Tác Giả
                                 </th>
                                 <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
                                     Tên Tác Giả
@@ -43,6 +46,9 @@
                                     <td class="text-center align-middle">
                                         {{ k + 1 }}
                                     </td>
+                                    <td class="text-center align-middle" style="width: 100px;">
+                                        <img v-bind:src="v.url" alt="" style="width: 100%; height: 100%;">
+                                    </td>
                                     <td class="text-center align-middle">
                                         {{ v.name }}
                                     </td>
@@ -51,9 +57,9 @@
                                     </td>
                                     <td class="text-center text-nowrap align-middle">
                                         <i data-bs-toggle="modal" data-bs-target="#SuaTacGia"
-                                            class=" me-2 fa-2x text-info fa-solid fa-pen-to-square"></i>
+                                            class=" me-2 fa-2x text-info fa-solid fa-pen-to-square" v-on:click="Object.assign(update_tac_gia,v)"></i>
                                         <i data-bs-toggle="modal" data-bs-target="#XoaTacGia"
-                                            class="fa-2x text-danger fa-solid fa-trash"></i>
+                                            class="fa-2x text-danger fa-solid fa-trash" v-on:click="Object.assign(delete_tac_gia, v); console.log(delete_tac_gia)" ></i>
                                     </td>
                                 </tr>
                             </template>
@@ -69,16 +75,16 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show">
-                                            <div class="text-white">Bạn có Muốn Xóa
-                                                <!-- {{ delete_tac_gia.ten_tac_gia }} --> Này Không!!!!
+                                            <div class="text-white">Bạn Có Muốn Xóa Tác Giả 
+                                               <b class="text-capitalize"> {{ delete_tac_gia.name }} </b>
+                                                Này Không!!!!
                                             </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Đóng</button>
-                                        <button data-bs-dismiss="modal" type="button" class="btn btn-primary">Chỉnh
-                                            Sửa</button>
+                                        <button data-bs-dismiss="modal" type="button" class="btn btn-danger" v-on:click="deleteAuthor()">Xóa</button>
                                     </div>
                                 </div>
                             </div>
@@ -98,12 +104,12 @@
                                             v-model="create_tac_gia.name">
                                         <label>Ảnh tác giả</label>
                                         <input class="form-control" type="text" placeholder="Nhập Vào Ảnh tác giả"
-                                            v-model="create_tac_gia.id_image">
+                                            v-model="create_tac_gia.url">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary" v-on:click="createActor()">Save changes</button>
+                                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary" v-on:click="createAuthor()">Thêm mới</button>
                                     </div>
                                 </div>
                             </div>
@@ -120,12 +126,14 @@
                                     </div>
                                     <div class="modal-body">
                                         <label>Tên Tác Giả</label>
-                                        <input class="form-control" type="text" placeholder="Nhập Vào Tên Tác Giả">
+                                        <input class="form-control" type="text" placeholder="Nhập Vào Tên Tác Giả" v-model="update_tac_gia.name">
+                                        <label>Ảnh Tác Giả</label>
+                                        <input class="form-control" type="text" placeholder="Nhập Vào Ảnh Tác Giả" v-model="update_tac_gia.url">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                            data-bs-dismiss="modal">Đóng</button>
+                                        <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" v-on:click="updateAuthor()">Cập nhật</button>
                                     </div>
                                 </div>
                             </div>
@@ -150,73 +158,53 @@ export default {
         }
     },
     mounted() {
-        this.loadDataActor();
+        this.loadDataAuthor();
     },
     methods: {
-        loadDataActor() {
+        loadDataAuthor() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/actor-rel/get-data')
+                .post('http://127.0.0.1:8000/api/admin/author/get-data')
                 .then((res) => {
-                    this.list_tac_gia = res.data;
+                    this.list_tac_gia = res.data.data;
+                    console.log(res.data);
                 });
         },
-
-
-        // searchBan() {
-        //     axios
-        //         .post('http://127.0.0.1:8000/api/admin/ban/tim-ban', this.key_search)
-        //         .then((res) => {
-        //             this.list_ban = res.data.ban;
-        //         });
-        // },
-
-        createActor() {
+        
+        createAuthor() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/actor/create', this.create_tac_gia)
+                .post('http://127.0.0.1:8000/api/admin/author/create', this.create_tac_gia)
                 .then((res) => {
                     if (res.data.status == true) {
                         toaster.success('Thông báo<br>' + res.data.message);
-                        
                     }
                 });
         },
-        // deleteBan() {
-        //     axios
-        //         .delete('http://127.0.0.1:8000/api/admin/ban/xoa-ban/' + this.delete_ban.id)
-        //         .then((res) => {
-        //             if (res.data.status == true) {
-        //                 toaster.success('Thông báo<br>' + res.data.message);
-        //                 this.loadDataBan();
-        //             }
-        //             else {
-        //                 toaster.danger('Thông báo<br>' + res.data.message);
-        //             }
-        //         });
-        // },
-        // updateBan() {
-        //     axios
-        //         .put('http://127.0.0.1:8000/api/admin/ban/cap-nhat-ban', this.edit_ban)
-        //         .then((res) => {
-        //             if (res.data.status == true) {
-        //                 toaster.success('Thông báo<br>' + res.data.message);
-        //                 this.loadDataBan();
-        //             } else {
-        //                 toaster.danger('Thông báo<br>' + res.data.message);
-        //             }
-        //         });
-        // },
-        // doiTrangThai(xyz) {
-        //     axios
-        //         .put('http://127.0.0.1:8000/api/admin/ban/doi-trang-thai', xyz)
-        //         .then((res) => {
-        //             if (res.data.status == true) {
-        //                 toaster.success('Thông báo<br>' + res.data.message);
-        //                 this.loadDataBan();
-        //             } else {
-        //                 toaster.error(res.data.message);
-        //             }
-        //         });
-        // }
+        deleteAuthor() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/author/delete', this.delete_tac_gia)
+                .then((res) => {
+                    if (res.data.status == true) {
+                        toaster.success('Thông báo<br>' + res.data.message);
+                        this.loadDataAuthor();
+                    }
+                    else {
+                        toaster.error('Thông báo<br>' + res.data.message);
+                    }
+                });
+        },
+
+        updateAuthor() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/author/update', this.update_tac_gia)
+                .then((res) => {
+                    if (res.data.status == true) {
+                        toaster.success('Thông báo<br>' + res.data.message);
+                        this.loadDataAuthor();
+                    } else {
+                        toaster.error('Thông báo<br>' + res.data.message);
+                    }
+                });
+        },
     },
 }
 </script>

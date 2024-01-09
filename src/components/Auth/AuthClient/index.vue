@@ -123,8 +123,8 @@ export default {
           if (res.data.status === true) {
             toaster.success('Thông báo<br>' + res.data.message);
             var x = res.data.token.split("|");
-            localStorage.setItem("token", x[1]);
-            console.log(localStorage.getItem("token"));
+            localStorage.setItem("tokenClient", x[1]);
+            console.log(localStorage.getItem("tokenClient"));
             this.checkLogin();
           } else {
             toaster.error('Thông báo<br>' + res.data.message);
@@ -136,7 +136,7 @@ export default {
       axios
         .post('http://127.0.0.1:8000/api/admin/client/check-token', {}, {
           headers: {
-            Authorization: 'Bearer ' + localStorage.getItem("token") //the token is a variable which holds the token
+            Authorization: 'Bearer ' + localStorage.getItem("tokenClient") //the token is a variable which holds the token
           }
         })
         .then((res) => {

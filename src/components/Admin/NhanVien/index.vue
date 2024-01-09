@@ -32,7 +32,8 @@
                     <div class="row">
                         <div class="d-flex justify-content-between">
                             <h2 class="text-start">
-                                <div class="">
+                                <div class="mt-3">
+
                                     <b class="text-start text-secondary">
                                         Quản Lý Nhân Viên
                                     </b>
@@ -47,19 +48,22 @@
                     <table class="table table-bordered bg-white">
                         <thead class="table-light">
                             <tr>
-                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
+                                <th class="text-center align-middle">
                                     STT
                                 </th>
-                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
+                                <th class="text-center align-middle">
                                     Tên Nhân Viên
                                 </th>
-                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
+                                <th class="text-center align-middle">
                                     Email
                                 </th>
-                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
+                                <th class="text-center align-middle">
                                     Mật Khẩu
                                 </th>
-                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
+                                <th class="text-center align-middle">
+                                    Tình Trạng
+                                </th>
+                                <th class="text-center align-middle">
                                     Action
                                 </th>
                             </tr>
@@ -78,6 +82,9 @@
                                     </td>
                                     <td class="text-center align-middle">
                                         {{ v.password }}
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        {{ v.tinh_trang }}
                                     </td>
                                     <td class="text-center text-nowrap align-middle">
                                         <i data-bs-toggle="modal" v-on:click="update_nhan_vien = v" data-bs-target="#SuaNhanVien"

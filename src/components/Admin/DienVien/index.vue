@@ -103,7 +103,7 @@
                             <div class="modal-body">
                                 <label class="text-secondary">Tên Diễn Viên</label>
                                 <input type="text" placeholder="Nhập Vào Tên Diễn Viên" class="form-control"
-                                    v-model="update_dien_vien.actor_name">
+                                    v-model="update_dien_vien.name">
                                 <label class="text-secondary">Ảnh Diễn Viên</label>
                                 <input type="text" placeholder="Nhập Vào Ảnh Diễn Viên" class="form-control"
                                     v-model="update_dien_vien.url">

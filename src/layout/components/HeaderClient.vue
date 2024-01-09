@@ -132,7 +132,7 @@ export default {
     data() {
         return {
             isLogin : true,
-            getToken: localStorage.getItem("token"),
+            getToken: localStorage.getItem("tokenClient"),
             username : localStorage.getItem("username")
 
         }
@@ -150,7 +150,7 @@ export default {
             }
         },
         logOut(){
-            localStorage.removeItem("token");
+            localStorage.removeItem("tokenClient");
             location.reload();
         }
     }

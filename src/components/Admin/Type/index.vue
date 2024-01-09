@@ -51,8 +51,8 @@
                                 <td class="align-middle">
                                     {{ v.description }}
                                 </td>
-                                <td class="text-center align-middle ">
-                                    <div class="d-flex align-items-center">
+                                <td class="text-center align-middle">
+                                    <div class="d-flex align-items-center justify-content-center">
                                         <button v-on:click="Object.assign(update_type, v)" class="btn btn-info me-1"
                                             style="width: 100px;" data-bs-toggle="modal" data-bs-target="#capNhatModal">Cập
                                             Nhật</button>
