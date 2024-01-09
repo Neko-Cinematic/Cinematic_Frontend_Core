@@ -646,8 +646,7 @@ export default {
           .then((res) => {
             if (res.data.status) {
               toaster.success('SUCCESS<br>' + res.data.message);
-              this.loadEpisode();
-              MasterRocker.methods.hideModal('episodeModal');
+              this.loadEpisode(this.create_episode.id_movie);
             }
             else toaster.error('ERROR<br>' + res.data.message);
           });
@@ -688,7 +687,7 @@ export default {
           if (res.data.status) value.filename = res.data.filename;
           else toaster.error('ERROR<br>' + res.data.message);
         });
-      }
+      } else toaster.error('ERROR<br>' + 'File chưa được nhập');
     },
 
     loadType() {
