@@ -140,6 +140,7 @@ export default {
                     else {
                         // console.log(this.delete_khach_hang.id);
                         toaster.error('Thông báo<br>' + res.data.message);
+                        //
                     }
                 });
         },
