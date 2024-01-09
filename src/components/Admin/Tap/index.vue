@@ -27,8 +27,8 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
                                 <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-half-o"></i>
                             </div>
 
                         </div>
@@ -85,6 +85,9 @@
                         </th>
                         <th>
                             STT
+                        </th>
+                        <th>
+                            Tình Trạng
                         </th>
                     </tr>
                 </thead>

@@ -3,13 +3,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title text-warning fs-5" id="exampleModalLabel"><b>Xóa Quyền!?</b></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="alert alert-danger" role="alert">
-
-                        Bạn Có Muốn Xóa <!-- {{ delete_quyen.ten_quyen }} --> Này Không!!
+                    <div class="alert alert-danger " role="alert">
+                        <h3 class="text-danger"><b>Bạn Có Muốn Xóa {{ delete_quyen.ten_quyen }} Này Không?!</b></h3>
+                        <h5 class="text-danger"><b>Điều Này Không Thể Khôi Phục Lại Như Ban Đầu!!</b></h5>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -23,7 +23,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title text-secondary fs-5" id="exampleModalLabel"><b>Chỉnh Sửa Quyền</b></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -69,10 +69,10 @@
                         <div class="d-flex justify-content-between">
                             <div class="align-middle mt-2 ">
                                 <h4 class="text-secondary">
-                                    Danh Sách Quyền
+                                    <b>Danh Sách Quyền</b>
                                 </h4>
                             </div> <button type="button text-end" data-bs-toggle="modal" data-bs-target="#ThemMoi"
-                                class="btn btn-outline-primary">Thêm mới
+                                class="btn btn-outline-danger">Thêm mới
                                 quyền</button>
                         </div>
                     </div>
@@ -91,6 +91,9 @@
                                     Mô Tả
                                 </th>
                                 <th class="text-center align-middle text-nowrap">
+                                    Tình Trạng
+                                </th>
+                                <th class="text-center align-middle text-nowrap">
                                     Action
                                 </th>
                             </tr>
@@ -107,7 +110,10 @@
                                     <td class="text-center align-middle">
                                         {{ v.mo_ta }}
                                     </td>
-                                    <td class="text-center text-nowrap align-middle">
+                                    <td class="text-center align-middle">
+                                        {{ v.tinh_trang }}
+                                    </td>
+                                    <td class="text-center text-nowrap align-middle">   
                                         <i data-bs-toggle="modal" data-bs-target="#capnhat"
                                             class=" me-2 fa-2x text-info fa-solid fa-pen-to-square"></i>
                                         <i data-bs-toggle="modal" data-bs-target="#Xoa"
@@ -120,7 +126,7 @@
 
                 </div>
                 <div class="card-footer text-end">
-                    <button class="btn btn-primary">
+                    <button class="btn btn-danger">
                         Thêm Mới
                     </button>
                 </div>

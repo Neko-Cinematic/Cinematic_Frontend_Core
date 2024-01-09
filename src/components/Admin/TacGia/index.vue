@@ -34,6 +34,9 @@
                                     Phim Đã Làm
                                 </th>
                                 <th class="text-center align-middle text-nowrap">
+                                    Tình Trạng
+                                </th>
+                                <th class="text-center align-middle text-nowrap">
                                     Action
                                 </th>
                             </tr>
@@ -49,6 +52,9 @@
                                     </td>
                                     <td class="text-center align-middle">
                                         {{ v.phim_da_lam }}
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        {{ v.tinh_trang }}
                                     </td>
                                     <td class="text-center text-nowrap align-middle">
                                         <i data-bs-toggle="modal" data-bs-target="#SuaTacGia"

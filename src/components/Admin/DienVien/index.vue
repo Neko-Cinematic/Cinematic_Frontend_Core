@@ -40,6 +40,9 @@
                                 Phim Đã Đóng
                             </th>
                             <th class="text-center align-middle text-nowrap">
+                                Tình Trạng
+                            </th>
+                            <th class="text-center align-middle text-nowrap">
                                 Action
                             </th>
                         </tr>
@@ -61,6 +64,11 @@
                                 <td class="text-center align-middle text-nowrap">
                                     <b>
                                         {{ v.phim_da_dong }}
+                                    </b>
+                                </td>
+                                <td class="text-center align-middle text-nowrap">
+                                    <b>
+                                        {{ v.tinh_trang }}
                                     </b>
                                 </td>
                                 <td class="text-center text-nowrap align-middle">

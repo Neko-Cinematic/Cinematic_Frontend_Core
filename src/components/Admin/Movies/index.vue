@@ -1,31 +1,39 @@
 <template>
     <div class="card">
         <div class="card-body text-end">
-            <h2 class="text-start text-secondary">
-                <div class="mt-3">
-                    <b>QUẢN LÝ PHIM</b>
+            <div class="row mb-4">
+                <div class="col-6">
+                    <h2 class="text-start text-secondary">
+                        <div class="m">
+                            <b>QUẢN Ý PHIM</b>
+                        </div>
+                    </h2>
                 </div>
-            </h2>
-            <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#themmoiModal">Thêm Mới
-                Phim</button>
+                <div class="col-6">
+                    <button class="btn btn-danger text-end" data-bs-toggle="modal" data-bs-target="#themmoiModal">Thêm Mới
+                        Phim</button>
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table">
                     <thead class="table-light">
                         <tr>
-                            <th class="text-center text-nowrap">STT</th>
-                            <th class="text-center text-nowrap">Tên Phim</th>
-                            <th class="text-center text-nowrap">Hình Ảnh</th>
-                            <th class="text-center text-nowrap">Ngày</th>
-                            <th class="text-center text-nowrap">Ngôn Ngữ Gốc</th>
-                            <th class="text-center text-nowrap">Quốc Gia</th>
-                            <th class="text-center text-nowrap">Tác Giả</th>
-                            <th class="text-center text-nowrap">Sở Thích</th>
-                            <th class="text-center text-nowrap">Người Tải Lên</th>
-                            <th class="text-center text-nowrap">Diễn Viên</th>
-                            <th class="text-center text-nowrap">Mô Tả</th>
-                            <th class="text-center text-nowrap">Lượt Xem</th>
-                            <th class="text-center text-nowrap">Đánh Giá</th>
-                            <th class="text-center text-nowrap">Action</th>
+                            <th class="text-center text-nowrap" style="background-color: #AB826B; color:white;">STT</th>
+                            <th class="text-center text-nowrap" style="background-color: #AB826B; color:white;">Tên Phim
+                            </th>
+                            <th class="text-center text-nowrap" style="background-color: #AB826B; color:white;">Hình Ảnh
+                            </th>
+                            <th class="text-center text-nowrap" style="background-color: #AB826B; color:white;">Quốc Gia
+                            </th>
+                            <th class="text-center text-nowrap" style="background-color: #AB826B; color:white;">Tác Giả</th>
+                            <th class="text-center text-nowrap" style="background-color: #AB826B; color:white;">Sở Thích
+                            </th>
+                            <th class="text-center text-nowrap" style="background-color: #AB826B; color:white;">Người Tải
+                                Lên</th>
+                            <th class="text-center text-nowrap" style="background-color: #AB826B; color:white;">Diễn Viên
+                            </th>
+                            <th class="text-center text-nowrap" style="background-color: #AB826B; color:white;">Mô Tả</th>
+                            <th class="text-center text-nowrap" style="background-color: #AB826B; color:white;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,12 +48,8 @@
                                 <td class="text-center align-middle">
                                     <img v-bind:src="v.hinh_anh" style="width: 150px;">
                                 </td>
-                                <td class="text-center align-middle">
-                                    {{ v.ngay }}
-                                </td>
-                                <td class="text-center align-middle">
-                                    {{ v.ngon_ngu_goc }}
-                                </td>
+
+
                                 <td class="text-center align-middle">
                                     <!-- {{ v.quoc_gia }} -->
                                 </td>
@@ -66,22 +70,7 @@
                                     <i data-bs-toggle="modal" data-bs-target="#motaPhim"
                                         class="fa-solid fa-circle-info fa-2x text-info"></i>
                                 </td>
-                                <td class="text-center align-middle">
-                                    {{ v.luot_xem }}
-                                </td>
-                                <td class="text-center align-middle">
-                                    <div class="ratting">
-                                        <div class="col-md-12 text-center">
-                                            <i class="text-warning fa fa-star"></i>
-                                            <i class="text-warning fa fa-star"></i>
-                                            <i class="text-warning fa fa-star"></i>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <i class="text-warning fa fa-star-half-o"></i>
-                                            <i class="text-warning fa fa-star-o"></i>
-                                        </div>
-                                    </div>
-                                </td>
+
                                 <td class="text-center text-nowrap align-middle">
                                     <i data-bs-toggle="modal" data-bs-target="#SuaPhim"
                                         class=" me-2 fa-2x text-info fa-solid fa-pen-to-square"></i>
@@ -516,6 +505,7 @@
                     </div>
                 </div>
 
+
                 <div class="modal fade" id="XoaPhim" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" style="background-color: white;">
                         <div class="modal-content">
@@ -550,11 +540,56 @@
                                 </h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body text-center">
+                            <div class="modal-body text-start text-dark ">
+
+                                <textarea disabled name="" id="" cols="100" rows="5">Mô tả: "Trapped in a dystopian future, a lone hero must navigate a world plagued by
+                                    corruption and chaos. Faced with moral dilemmas and unexpected allies, they embark on a
+                                    thrilling journey to uncover the truth and bring about change. Packed with suspense and
+                                    unexpected twists, this film explores the resilience of the human spirit in the face of
+                                    adversity."</textarea>
+                                <hr>
                                 <!-- {{ update_phim.mo_ta }} -->
+                                <div class="row">
+                                    <div class="col-3">
+                                        <b>
+                                            <p> <i class="fa-solid fa-calendar-days"></i> Ngày Phát Hành: </p>
+                                        </b>
+                                        <hr>
+                                        <b>
+                                            <p> <i class="fa-solid fa-language"></i> Ngôn Ngữ Gốc: </p>
+                                        </b>
+                                        <hr>
+                                        <b>
+                                            <p> <i class="fa-solid fa-circle-half-stroke"></i> Tình trạng </p>
+                                        </b>
+                                        <hr>
+                                    </div>
+                                    <div class="col-6">
+                                        <b>
+                                            a
+                                            <!-- <p> {{ v.ngay }} </p> -->
+                                        </b>
+                                        <hr>
+                                        <b>
+                                            z
+                                            <!-- <p> {{v.ngon_ngu_goc}} </p> -->
+                                        </b>
+                                        <hr>
+                                        <b>
+                                            <div class="col-6 mb-2">
+                                                <template v-for="(v, k) in list_tai_len">
+                                                    <button v-on:click="doiTrangThai(v)" v-if="v.tinh_trang == 1" class="btn btn-success">Hoạt Động</button>
+                                                    <button v-on:click="doiTrangThai(v)" v-else class="btn btn-warning">Tạm Dừng</button>
+                                                </template>
+                                            </div>
+                                        </b>
+                                        <hr>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                             </div>
                         </div>
                     </div>
@@ -572,9 +607,11 @@ export default {
     data() {
         return {
             temp: 0, // Nếu bằng 0 là đang thêm mới thông tin phim, 1 là diễn viên va 2 là thể loại
-            list_tai_len: {},
-            list_tac_gia: {},
-            list_ngon_ngu: {},
+            list_tai_len     :   {},
+            list_tac_gia     :   {},
+            list_ngon_ngu    :   {},
+            edit_movie       :   {},
+
             list_movies: [
                 {
                     "ten_phim": "alo alo",
@@ -598,7 +635,19 @@ export default {
     mounted() {
 
     }, methods: {
+        doiTrangThai(v) {
+            axios
+                    .post('http://127.0.0.1:8000/api/admin/nhan-vie/doi-trang-thai-nhan-vien', v)
+                    .then((res) =>  {
+                        if(res.data.status == true) {
+                            this.loadDataNhanVien();
+                        }
+                        else{
+                            toaster.error(res.data.message);
 
+                        }
+                    });
+        }
     },
 }
 </script>

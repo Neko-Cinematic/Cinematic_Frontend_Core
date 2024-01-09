@@ -29,6 +29,9 @@
                             Tên Quốc Gia
                         </th>
                         <th class="text-center align-middle text-nowrap">
+                            Tình Trạng
+                        </th>
+                        <th class="text-center align-middle text-nowrap">
                             Action
                         </th>
                     </tr>
@@ -41,6 +44,9 @@
                             </td>
                             <td class="text-center align-middle text-nowrap">
                                 {{ v.name }}
+                            </td>
+                            <td class="text-center align-middle text-nowrap">
+                                {{ v.tinh_trang }}
                             </td>
                             <td class="text-center text-nowrap align-middle">
                                 <i data-bs-toggle="modal" v-on:click="update_quoc_gia = v" data-bs-target="#capnhat"
@@ -98,7 +104,13 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            list_quoc_gia:   [],
+            list_quoc_gia:   [
+            {
+                    'stt': "Nguyễn Quốc Long",
+                    'name': "quoclongdng@gmail.com",
+                    'tinh_trang': "123456"
+                },
+            ],
             create_quoc_gia: {},
             delete_quoc_gia: {},
             update_quoc_gia: {},

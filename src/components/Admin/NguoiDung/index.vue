@@ -29,6 +29,7 @@
                                         <th class="text-center align-middle text-nowrap">Tên Khách</th>
                                         <th class="text-center align-middle text-nowrap">Email</th>
                                         <th class="text-center align-middle text-nowrap">Password</th>
+                                        <th class="text-center align-middle text-nowrap">Tình Trạng</th>
                                         <th class="text-center align-middle text-nowrap">Hành Động</th>
                                     </tr>
                                 </thead>
@@ -39,6 +40,7 @@
                                             <td class="text-center align-middle text-nowrap">{{ v.ten_khach_hang }}</td>
                                             <td class="text-center align-middle text-nowrap">{{ v.email }}</td>
                                             <td class="text-center align-middle text-nowrap">{{ v.password }}</td>
+                                            <td class="text-center align-middle text-nowrap">{{ v.tinh_trang }}</td>
                                             <td class="text-center text-nowrap align-middle">
                                                 <i class="fa-solid fa-circle-info fa-2x text-info me-2"
                                                     data-bs-toggle="modal" data-bs-target="#ThongTinKhach"></i>

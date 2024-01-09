@@ -71,6 +71,7 @@ const routes = [
       //     layout: "default"
       //   },
       // },
+      
       {
         path: "/admin/quyen",
         component: () => import("../components/Admin/Quyen/index.vue"),
