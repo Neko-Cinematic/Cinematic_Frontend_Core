@@ -53,12 +53,11 @@
                                 </td>
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <button v-on:click="Object.assign(update_type, v)" class="btn btn-info me-1"
-                                            style="width: 100px;" data-bs-toggle="modal" data-bs-target="#capNhatModal">Cập
-                                            Nhật</button>
-                                        <button class="btn btn-danger" style="width: 100px;" data-bs-toggle="modal"
-                                            data-bs-target="#xoaModal"
-                                            v-on:click="Object.assign(delete_type, v)">Xóa</button>
+                                        <i data-bs-toggle="modal" v-on:click="Object.assign(update_type, v)"
+                                            data-bs-target="#capNhatModal"
+                                            class=" me-2 fa-2x text-info fa-solid fa-pen-to-square"></i>
+                                        <i data-bs-toggle="modal" v-on:click="Object.assign(delete_type, v)"
+                                            data-bs-target="#xoaModal" class="fa-2x text-danger fa-solid fa-trash"></i>
                                     </div>
                                 </td>
                             </tr>
@@ -88,8 +87,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button v-on:click="updateType()" type="button" data-bs-dismiss="modal"
-                                        class="btn btn-primary">Cập Nhật</button>
+                                    <button v-on:click="updateType()" type="button" class="btn btn-primary">Cập
+                                        Nhật</button>
                                 </div>
                             </div>
                         </div>
@@ -122,8 +121,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                                        v-on:click="deleteType()">Xóa</button>
+                                    <button type="button" class="btn btn-danger" v-on:click="deleteType()">Xóa</button>
                                 </div>
                             </div>
                         </div>
@@ -136,6 +134,7 @@
 <script>
 import axios from 'axios';
 import { createToaster } from "@meforma/vue-toaster";
+import MasterRocker from "../../../layout/wrapper/MasterRocker.vue";
 const toaster = createToaster({ position: "top-right" });
 export default {
     data() {
@@ -155,8 +154,7 @@ export default {
             axios
                 .post('http://127.0.0.1:8000/api/admin/type/get-data')
                 .then((res) => {
-                    this.list_type = res.data;
-                    console.log(res);
+                    this.list_type = res.data.data;
                 });
         },
 
@@ -166,6 +164,7 @@ export default {
                 .then((res) => {
                     if (res.data.status === true) {
                         toaster.success('Thông báo<br>' + res.data.message);
+                        this.create_type = {};
                         this.loadDataType();
                     } else {
                         toaster.error('Thông báo<br>' + res.data.message);
@@ -173,30 +172,29 @@ export default {
                 });
         },
 
-
         deleteType() {
             axios
                 .post('http://127.0.0.1:8000/api/admin/type/delete', this.delete_type)
                 .then((res) => {
                     if (res.data.status == true) {
-                        toaster.success('Thông báo<br>' + res.data.message);
+                        toaster.success('SUCCESS<br>' + res.data.message);
                         this.loadDataType();
+                        MasterRocker.methods.hideModal('xoaModal')
                     }
                     else {
-                        // console.log(this.delete_khach_hang.id);
-                        toaster.error('Thông báo<br>' + res.data.message);
+                        toaster.error('ERROR<br>' + res.data.message);
                     }
                 });
         },
 
         updateType() {
-            // console.log(this.update_type);
             axios
                 .post('http://127.0.0.1:8000/api/admin/type/update', this.update_type)
                 .then((res) => {
                     if (res.data.status == true) {
                         toaster.success('Thông báo<br>' + res.data.message);
                         this.loadDataType();
+                        MasterRocker.methods.hideModal('capNhatModal')
                     } else {
                         toaster.error('Thông báo<br>' + res.data.message);
                     }

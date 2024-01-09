@@ -13,13 +13,13 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th class="text-center align-middle text-nowrap"
-                                            style="background-color: #AB826B; color:white;">ID</th>
+                                            style="background-color: #AB826B; color:white;">STT</th>
                                         <th class="text-center align-middle text-nowrap"
                                             style="background-color: #AB826B; color:white;">Tên Khách</th>
                                         <th class="text-center align-middle text-nowrap"
                                             style="background-color: #AB826B; color:white;">Email</th>
                                         <th class="text-center align-middle text-nowrap"
-                                            style="background-color: #AB826B; color:white;">Hành Động</th>
+                                            style="background-color: #AB826B; color:white;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -29,9 +29,6 @@
                                             <td class="text-center align-middle text-nowrap">{{ v.name }}</td>
                                             <td class="text-center align-middle text-nowrap">{{ v.email }}</td>
                                             <td class="text-center text-nowrap align-middle">
-                                                <i class="fa-solid fa-circle-info fa-2x text-info me-2"
-                                                    data-bs-toggle="modal" data-bs-target="#ThongTinKhach"
-                                                    v-on:click="Object.assign(delete_khach_hang, v)"></i>
                                                 <i data-bs-toggle="modal" data-bs-target="#xoaKhachHang"
                                                     class="fa-2x text-danger fa-solid fa-trash" style="cursor: pointer;"
                                                     v-on:click="Object.assign(delete_khach_hang, v)"></i>
@@ -61,36 +58,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Đóng</button>
-                                            <button data-bs-dismiss="modal" type="button" class="btn btn-danger"
+                                            <button type="button" class="btn btn-danger"
                                                 v-on:click="deleteClient();">Xóa</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal fade" id="ThongTinKhach" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header text-secondary">
-                                            <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">
-                                                <p> Thông Tin
-                                                    Khách Hàng</p>
-                                            </h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <b class="text-dark">Đây Là Thông Tin Khách Hàng</b>
-                                            <div class="text-dark">{{ delete_khach_hang.name }}</div>
-                                            <div class="text-dark">{{ delete_khach_hang.email }}</div>
-                                            <div class="text-center text-nowrap align-middle">
-                                                <i class="fa-solid fa-circle-info" data-bs-toggle="modal"
-                                                    data-bs-target="#ThongTinKhach"></i>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Đóng</button>
                                         </div>
                                     </div>
                                 </div>
@@ -107,6 +76,7 @@
 <script>
 import axios from 'axios';
 import { createToaster } from "@meforma/vue-toaster";
+import MasterRocker from "../../../layout/wrapper/MasterRocker.vue";
 const toaster = createToaster({ position: "top-right" });
 export default {
     data() {
@@ -134,18 +104,15 @@ export default {
                 .post('http://127.0.0.1:8000/api/admin/client/delete', this.delete_khach_hang)
                 .then((res) => {
                     if (res.data.status == true) {
-                        toaster.success('Thông báo<br>' + res.data.message);
+                        toaster.success('SUCCESS<br>' + res.data.message);
                         this.loadDataClient();
+                        MasterRocker.methods.hideModal('xoaKhachHang');
                     }
                     else {
-                        // console.log(this.delete_khach_hang.id);
-                        toaster.error('Thông báo<br>' + res.data.message);
-                        //
+                        toaster.error('ERROR<br>' + res.data.message);
                     }
                 });
         },
-
-
     },
 }
 </script>

@@ -184,36 +184,19 @@ export default {
         },
 
         async createAuthor() {
-            await this.upFile(this.create_tac_gia, this.create_tac_gia.name);
-            axios
-                .post('http://127.0.0.1:8000/api/admin/author/create', this.create_tac_gia)
-                .then((res) => {
-                    if (res.data.status == true) {
-                        toaster.success('SUCCESS<br>' + res.data.message);
-                        this.loadDataAuthor();
-                        MasterRocker.methods.hideModal('addModal');
-                    } else toaster.error('ERROR<br>' + res.data.message);
-                });
-        },
-
-        async upFile(value, name) {
-            if (value.file) {
-                var formData = new FormData();
-                if (value.id_movie) formData.append("id_movie", value.id_movie);
-                formData.append("name", name);
-                formData.append("file", value.file);
-                await axios({
-                    method: "post",
-                    url: "http://127.0.0.1:8000/api/admin/up-file",
-                    data: formData,
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                }).then((res) => {
-                    if (res.data.status) value.filename = res.data.filename;
-                    else toaster.error('ERROR<br>' + res.data.message);
-                });
-            }
+            if (this.create_tac_gia.file) {
+                await this.upFile(this.create_tac_gia, this.create_tac_gia.name);
+                console.log(1);
+                axios
+                    .post('http://127.0.0.1:8000/api/admin/author/create', this.create_tac_gia)
+                    .then((res) => {
+                        if (res.data.status == true) {
+                            toaster.success('SUCCESS<br>' + res.data.message);
+                            this.loadDataAuthor();
+                            MasterRocker.methods.hideModal('addModal');
+                        } else toaster.error('ERROR<br>' + res.data.message);
+                    });
+            } else toaster.error('ERROR<br>' + 'File chưa được nhập');
         },
 
         deleteAuthor() {
@@ -228,8 +211,8 @@ export default {
                 });
         },
 
-        updateAuthor() {
-            axios
+        async updateAuthor() {
+            await axios
                 .post('http://127.0.0.1:8000/api/admin/author/update', this.update_tac_gia)
                 .then((res) => {
                     if (res.data.status == true) {
@@ -238,6 +221,24 @@ export default {
                         MasterRocker.methods.hideModal('SuaTacGia');
                     } else toaster.error('ERROR<br>' + res.data.message);
                 });
+            if (this.update_tac_gia.file) await this.upFile(this.create_tac_gia, this.create_tac_gia.name);
+        },
+
+        async upFile(value, name) {
+            var formData = new FormData();
+            formData.append("name", name);
+            formData.append("file", value.file);
+            await axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/admin/up-file",
+                data: formData,
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            }).then((res) => {
+                if (res.data.status) value.filename = res.data.filename;
+                else toaster.error('ERROR<br>' + res.data.message);
+            });
         },
 
         handleFileUploaded(type) {
