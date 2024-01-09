@@ -1,4 +1,7 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHistory
+} from "vue-router";
 import checkLoginAdmin from "./checkLoginAdmin";
 const routes = [
   // client
