@@ -680,6 +680,7 @@ export default {
 
     async upFile(value, name) {
       var formData = new FormData();
+      if (value.id_movie) formData.append("id_movie", value.id_movie);
       formData.append("name", name);
       formData.append("file", value.file);
       await axios({
