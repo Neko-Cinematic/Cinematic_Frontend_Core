@@ -39,7 +39,7 @@ const routes = [
     meta: {
       layout: "default",
     },
-    beforeEnter: checkLoginAdmin,
+    // beforeEnter: checkLoginAdmin,
   },
   {
     path: "/admin/phim",
@@ -47,7 +47,7 @@ const routes = [
     meta: {
       layout: "default",
     },
-    beforeEnter: checkLoginAdmin,
+    // beforeEnter: checkLoginAdmin,
   },
 
   {
@@ -56,7 +56,7 @@ const routes = [
     meta: {
       layout: "default",
     },
-    beforeEnter: checkLoginAdmin,
+    // beforeEnter: checkLoginAdmin,
   },
   {
     path: "/admin/nhan-vien",
@@ -64,7 +64,7 @@ const routes = [
     meta: {
       layout: "default",
     },
-    beforeEnter: checkLoginAdmin,
+    // beforeEnter: checkLoginAdmin,
   },
   {
     path: "/admin/dien-vien",
@@ -72,7 +72,7 @@ const routes = [
     meta: {
       layout: "default",
     },
-    beforeEnter: checkLoginAdmin,
+    // beforeEnter: checkLoginAdmin,
   },
   {
     path: "/admin/quoc-gia",
@@ -80,7 +80,7 @@ const routes = [
     meta: {
       layout: "default",
     },
-    beforeEnter: checkLoginAdmin,
+    // beforeEnter: checkLoginAdmin,
   },
   {
     path: "/admin/nhan-vien",
@@ -88,7 +88,7 @@ const routes = [
     meta: {
       layout: "default",
     },
-    beforeEnter: checkLoginAdmin,
+    // beforeEnter: checkLoginAdmin,
   },
   {
     path: "/admin/ngon-ngu",
@@ -96,7 +96,7 @@ const routes = [
     meta: {
       layout: "default",
     },
-    beforeEnter: checkLoginAdmin,
+    // beforeEnter: checkLoginAdmin,
   },
   {
     path: "/admin/tac-gia",
@@ -104,7 +104,7 @@ const routes = [
     meta: {
       layout: "default",
     },
-    beforeEnter: checkLoginAdmin,
+    // beforeEnter: checkLoginAdmin,
   },
   {
     path: "/admin/nguoi-dung",
@@ -112,7 +112,7 @@ const routes = [
     meta: {
       layout: "default",
     },
-    beforeEnter: checkLoginAdmin,
+    // beforeEnter: checkLoginAdmin,
   },
   {
     path: "/admin/tap",
@@ -120,7 +120,7 @@ const routes = [
     meta: {
       layout: "default",
     },
-    beforeEnter: checkLoginAdmin,
+    // beforeEnter: checkLoginAdmin,
   },
   {
     path: "/admin/the-loai",
@@ -128,7 +128,7 @@ const routes = [
     meta: {
       layout: "default",
     },
-    beforeEnter: checkLoginAdmin,
+    // beforeEnter: checkLoginAdmin,
   },
 
   // login
