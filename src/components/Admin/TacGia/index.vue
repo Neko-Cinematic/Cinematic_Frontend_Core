@@ -1,8 +1,8 @@
 <template>
     <div class="row">
         <div class="col-lg-12">
-            <div class="card" >
-                <div class="card-header" >
+            <div class="card">
+                <div class="card-header">
                     <div class="row">
                         <div class="d-flex justify-content-between">
                             <div class="align-middle mt-2 text-secondary">
@@ -23,19 +23,24 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
+                                <th class="text-center align-middle text-nowrap"
+                                    style="background-color: #AB826B; color:white;">
                                     STT
                                 </th>
-                                <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
+                                <th class="text-center align-middle text-nowrap"
+                                    style="background-color: #AB826B; color:white;">
                                     Ảnh Tác Giả
                                 </th>
-                                <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
+                                <th class="text-center align-middle text-nowrap"
+                                    style="background-color: #AB826B; color:white;">
                                     Tên Tác Giả
                                 </th>
-                                <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
+                                <th class="text-center align-middle text-nowrap"
+                                    style="background-color: #AB826B; color:white;">
                                     Phim Đã Làm
                                 </th>
-                                <th class="text-center align-middle text-nowrap" style="background-color: #AB826B; color:white;">
+                                <th class="text-center align-middle text-nowrap"
+                                    style="background-color: #AB826B; color:white;">
                                     Action
                                 </th>
                             </tr>
@@ -57,9 +62,11 @@
                                     </td>
                                     <td class="text-center text-nowrap align-middle">
                                         <i data-bs-toggle="modal" data-bs-target="#SuaTacGia"
-                                            class=" me-2 fa-2x text-info fa-solid fa-pen-to-square" v-on:click="Object.assign(update_tac_gia,v)"></i>
+                                            class=" me-2 fa-2x text-info fa-solid fa-pen-to-square"
+                                            v-on:click="Object.assign(update_tac_gia, v)"></i>
                                         <i data-bs-toggle="modal" data-bs-target="#XoaTacGia"
-                                            class="fa-2x text-danger fa-solid fa-trash" v-on:click="Object.assign(delete_tac_gia, v); console.log(delete_tac_gia)" ></i>
+                                            class="fa-2x text-danger fa-solid fa-trash"
+                                            v-on:click="Object.assign(delete_tac_gia, v); console.log(delete_tac_gia)"></i>
                                     </td>
                                 </tr>
                             </template>
@@ -75,8 +82,8 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show">
-                                            <div class="text-white">Bạn Có Muốn Xóa Tác Giả 
-                                               <b class="text-capitalize"> {{ delete_tac_gia.name }} </b>
+                                            <div class="text-white">Bạn Có Muốn Xóa Tác Giả
+                                                <b class="text-capitalize"> {{ delete_tac_gia.name }} </b>
                                                 Này Không!!!!
                                             </div>
                                         </div>
@@ -84,7 +91,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Đóng</button>
-                                        <button data-bs-dismiss="modal" type="button" class="btn btn-danger" v-on:click="deleteAuthor()">Xóa</button>
+                                        <button data-bs-dismiss="modal" type="button" class="btn btn-danger"
+                                            v-on:click="deleteAuthor()">Xóa</button>
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +117,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary" v-on:click="createAuthor()">Thêm mới</button>
+                                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary"
+                                            v-on:click="createAuthor()">Thêm mới</button>
                                     </div>
                                 </div>
                             </div>
@@ -126,14 +135,17 @@
                                     </div>
                                     <div class="modal-body">
                                         <label>Tên Tác Giả</label>
-                                        <input class="form-control" type="text" placeholder="Nhập Vào Tên Tác Giả" v-model="update_tac_gia.name">
+                                        <input class="form-control" type="text" placeholder="Nhập Vào Tên Tác Giả"
+                                            v-model="update_tac_gia.name">
                                         <label>Ảnh Tác Giả</label>
-                                        <input class="form-control" type="text" placeholder="Nhập Vào Ảnh Tác Giả" v-model="update_tac_gia.url">
+                                        <input class="form-control" type="text" placeholder="Nhập Vào Ảnh Tác Giả"
+                                            v-model="update_tac_gia.url">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Đóng</button>
-                                        <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" v-on:click="updateAuthor()">Cập nhật</button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                            v-on:click="updateAuthor()">Cập nhật</button>
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +181,7 @@ export default {
                     console.log(res.data);
                 });
         },
-        
+
         createAuthor() {
             axios
                 .post('http://127.0.0.1:8000/api/admin/author/create', this.create_tac_gia)

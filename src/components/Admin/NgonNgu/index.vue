@@ -20,13 +20,13 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;"> 
+                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
                                     STT
                                 </th>
-                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;"> 
+                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
                                     Ngôn Ngữ
                                 </th>
-                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;"> 
+                                <th class="text-center align-middle" style="background-color: #AB826B; color:white;">
                                     Action
                                 </th>
                             </tr>
@@ -41,10 +41,11 @@
                                         {{ v.name }}
                                     </td>
                                     <td class="text-center text-nowrap align-middle">
-                                        <i data-bs-toggle="modal" v-on:click="update_ngon_ngu = v" data-bs-target="#SuaTacGia"
+                                        <i data-bs-toggle="modal" v-on:click="update_ngon_ngu = v"
+                                            data-bs-target="#SuaTacGia"
                                             class=" me-2 fa-2x text-info fa-solid fa-pen-to-square"></i>
-                                        <i data-bs-toggle="modal" v-on:click="delete_ngon_ngu = v" data-bs-target="#XoaTacGia"
-                                            class="fa-2x text-danger fa-solid fa-trash"></i>
+                                        <i data-bs-toggle="modal" v-on:click="delete_ngon_ngu = v"
+                                            data-bs-target="#XoaTacGia" class="fa-2x text-danger fa-solid fa-trash"></i>
                                     </td>
                                 </tr>
                             </template>
@@ -68,7 +69,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button v-on:click="deleteNgonNgu()" type="button" class="btn btn-warning">Xóa</button>
+                                        <button v-on:click="deleteNgonNgu()" type="button"
+                                            class="btn btn-warning">Xóa</button>
                                     </div>
                                 </div>
                             </div>
@@ -85,12 +87,14 @@
                                     </div>
                                     <div class="modal-body">
                                         <label>Tên Ngôn Ngữ</label>
-                                        <input v-model="update_ngon_ngu.name" class="form-control" type="text" placeholder="Nhập Vào Ngôn Ngữ">
+                                        <input v-model="update_ngon_ngu.name" class="form-control" type="text"
+                                            placeholder="Nhập Vào Ngôn Ngữ">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button v-on:click="updatedNgonNgu()" type="button" class="btn btn-primary">Chấp Nhận</button>
+                                        <button v-on:click="updatedNgonNgu()" type="button" class="btn btn-primary">Chấp
+                                            Nhận</button>
                                     </div>
                                 </div>
                             </div>
@@ -107,12 +111,14 @@
                                     </div>
                                     <div class="modal-body">
                                         <label>Tên Ngôn Ngữ</label>
-                                        <input v-model="create_ngon_ngu.name" class="form-control" type="text" placeholder="Nhập Vào Ngôn Ngữ">
+                                        <input v-model="create_ngon_ngu.name" class="form-control" type="text"
+                                            placeholder="Nhập Vào Ngôn Ngữ">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button v-on:click="createNgonNgu()" type="button" data-bs-dismiss="modal" class="btn btn-primary">Xác Nhận</button>
+                                        <button v-on:click="createNgonNgu()" type="button" data-bs-dismiss="modal"
+                                            class="btn btn-primary">Xác Nhận</button>
                                     </div>
                                 </div>
                                 <!-- m,m -->
@@ -131,7 +137,7 @@ const toaster = createToaster({ position: "top-right" });
 export default {
     data() {
         return {
-            list_ngon_ngu:   [],
+            list_ngon_ngu: [],
             create_ngon_ngu: {},
             delete_ngon_ngu: {},
             update_ngon_ngu: {},
@@ -154,7 +160,7 @@ export default {
 
         loadDataNgonNgu() {
             axios
-                .get('http://127.0.0.1:8000/api/admin/language/get-data')
+                .post('http://127.0.0.1:8000/api/admin/language/get-data')
                 .then((res) => {
                     this.list_ngon_ngu = res.data.data;
                 });
@@ -162,33 +168,33 @@ export default {
 
         deleteNgonNgu() {
             axios
-            .post('http://127.0.0.1:8000/api/admin/language/delete', this.delete_ngon_ngu)
-            .then((res)=> {
-                if (res.data.status == true ) {
-                    alert(res.data.message);
-                    this.loadDataNgonNgu();
-                }
-                else {
-                    alert(res.data.message);
-                }
-            });
+                .post('http://127.0.0.1:8000/api/admin/language/delete', this.delete_ngon_ngu)
+                .then((res) => {
+                    if (res.data.status == true) {
+                        alert(res.data.message);
+                        this.loadDataNgonNgu();
+                    }
+                    else {
+                        alert(res.data.message);
+                    }
+                });
         },
 
         updatedNgonNgu() {
             axios
-            .post('http://127.0.0.1:8000/api/admin/language/update', this.update_ngon_ngu)
-            .then((res) =>  {
-                if(res.data.status == true) {
-                    alert(res.data.message);
-                    this.loadDataNgonNgu();
-                }
-                else{
-                    alert(res.data.message);
-                }
-            });
+                .post('http://127.0.0.1:8000/api/admin/language/update', this.update_ngon_ngu)
+                .then((res) => {
+                    if (res.data.status == true) {
+                        alert(res.data.message);
+                        this.loadDataNgonNgu();
+                    }
+                    else {
+                        alert(res.data.message);
+                    }
+                });
         },
 
-        
+
 
     },
 }

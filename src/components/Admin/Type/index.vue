@@ -3,7 +3,7 @@
         <div class="col-md-4">
             <div class="card border-top border-0 border-4 border-primary">
                 <div class="card-header" style="background-color: #AB826B; color:white;">
-                    <h3 class="text-light text-start fw-bold" >Thêm Mới Thể Loại</h3>
+                    <h3 class="text-light text-start fw-bold">Thêm Mới Thể Loại</h3>
                 </div>
                 <div class="card-body">
                     <label class="form-label text-dark">Tên Thể Loại</label>
@@ -82,7 +82,7 @@
                                         </div>
                                         <div class="col-12">
                                             <label class="form-label text-dark mt-3">Mô Tả</label>
-                                            <input type="text" class="form-control" v-model="update_type.description" >
+                                            <input type="text" class="form-control" v-model="update_type.description">
                                         </div>
                                     </div>
                                 </div>
