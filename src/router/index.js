@@ -2,7 +2,6 @@ import {
   createRouter,
   createWebHistory
 } from "vue-router";
-import checkLoginAdmin from "./checkLoginAdmin";
 const routes = [
   // client
   {
@@ -45,7 +44,7 @@ const routes = [
     // beforeEnter: checkLoginAdmin,
   },
   {
-    path: "/admin/phim",
+    path: "/admin/movie",
     component: () => import("../components/Admin/Movies/index.vue"),
     meta: {
       layout: "default",
@@ -54,7 +53,7 @@ const routes = [
   },
 
   {
-    path: "/admin/quyen",
+    path: "/admin/permission",
     component: () => import("../components/Admin/Quyen/index.vue"),
     meta: {
       layout: "default",
@@ -62,15 +61,7 @@ const routes = [
     // beforeEnter: checkLoginAdmin,
   },
   {
-    path: "/admin/nhan-vien",
-    component: () => import("../components/Admin/NhanVien/index.vue"),
-    meta: {
-      layout: "default",
-    },
-    // beforeEnter: checkLoginAdmin,
-  },
-  {
-    path: "/admin/dien-vien",
+    path: "/admin/actor",
     component: () => import("../components/Admin/DienVien/index.vue"),
     meta: {
       layout: "default",
@@ -78,7 +69,7 @@ const routes = [
     // beforeEnter: checkLoginAdmin,
   },
   {
-    path: "/admin/quoc-gia",
+    path: "/admin/country",
     component: () => import("../components/Admin/QuocGia/index.vue"),
     meta: {
       layout: "default",
@@ -86,7 +77,7 @@ const routes = [
     // beforeEnter: checkLoginAdmin,
   },
   {
-    path: "/admin/nhan-vien",
+    path: "/admin/employee",
     component: () => import("../components/Admin/NhanVien/index.vue"),
     meta: {
       layout: "default",
@@ -94,7 +85,7 @@ const routes = [
     // beforeEnter: checkLoginAdmin,
   },
   {
-    path: "/admin/ngon-ngu",
+    path: "/admin/language",
     component: () => import("../components/Admin/NgonNgu/index.vue"),
     meta: {
       layout: "default",
@@ -102,7 +93,7 @@ const routes = [
     // beforeEnter: checkLoginAdmin,
   },
   {
-    path: "/admin/tac-gia",
+    path: "/admin/author",
     component: () => import("../components/Admin/TacGia/index.vue"),
     meta: {
       layout: "default",
@@ -110,7 +101,7 @@ const routes = [
     // beforeEnter: checkLoginAdmin,
   },
   {
-    path: "/admin/nguoi-dung",
+    path: "/admin/client",
     component: () => import("../components/Admin/NguoiDung/index.vue"),
     meta: {
       layout: "default",
@@ -118,15 +109,7 @@ const routes = [
     // beforeEnter: checkLoginAdmin,
   },
   {
-    path: "/admin/tap",
-    component: () => import("../components/Admin/Tap/index.vue"),
-    meta: {
-      layout: "default",
-    },
-    // beforeEnter: checkLoginAdmin,
-  },
-  {
-    path: "/admin/the-loai",
+    path: "/admin/type",
     component: () => import("../components/Admin/Type/index.vue"),
     meta: {
       layout: "default",

@@ -9,13 +9,13 @@
                                 <h3 class="text-start">
                                     <div class="">
                                         <b class="text-start text-secondary">
-                                            Quản Lý Tác Giả
+                                            Quản Lý Đạo Diễn
                                         </b>
 
                                     </div>
                                 </h3>
                             </div> <button type="button text-end" data-bs-toggle="modal" data-bs-target="#addModal"
-                                class="btn btn-outline-primary">Thêm Tác Giả</button>
+                                class="btn btn-outline-primary">Thêm Đạo Diễn</button>
                         </div>
                     </div>
                 </div>
@@ -29,11 +29,11 @@
                                 </th>
                                 <th class="text-center align-middle text-nowrap"
                                     style="background-color: #AB826B; color:white;">
-                                    Ảnh Tác Giả
+                                    Ảnh Đạo Diễn
                                 </th>
                                 <th class="text-center align-middle text-nowrap"
                                     style="background-color: #AB826B; color:white;">
-                                    Tên Tác Giả
+                                    Tên Đạo Diễn
                                 </th>
                                 <th class="text-center align-middle text-nowrap"
                                     style="background-color: #AB826B; color:white;">
@@ -76,13 +76,13 @@
                             <div class="modal-dialog bg-white">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">Xóa Tác Giả</h1>
+                                        <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">Xóa Đạo Diễn</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show">
-                                            <div class="text-white">Bạn Có Muốn Xóa Tác Giả
+                                            <div class="text-white">Bạn Có Muốn Xóa Đạo Diễn
                                                 <b class="text-capitalize"> {{ delete_tac_gia.name }} </b>
                                                 Này Không!!!!
                                             </div>
@@ -102,17 +102,17 @@
                             <div class="modal-dialog bg-white">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">Thêm Tác Giả</h1>
+                                        <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">Thêm Đạo Diễn
+                                        </h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <label>Tên Tác Giả</label>
-                                        <input class="form-control" type="text" placeholder="Nhập Vào Tên Tác Giả"
+                                        <label>Tên Đạo Diễn</label>
+                                        <input class="form-control" type="text" placeholder="Nhập Vào Tên Đạo Diễn"
                                             v-model="create_tac_gia.name">
-                                        <label>Ảnh tác giả</label>
-                                        <input class="form-control" type="text" placeholder="Nhập Vào Ảnh tác giả"
-                                            v-model="create_tac_gia.url">
+                                        <label>Ảnh Đạo Diễn</label>
+                                        <input class="form-control" ref="image" type="file">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
@@ -128,17 +128,17 @@
                             <div class="modal-dialog bg-white">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">Cập Nhật Tác Giả
+                                        <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">Cập Nhật Đạo Diễn
                                         </h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <label>Tên Tác Giả</label>
-                                        <input class="form-control" type="text" placeholder="Nhập Vào Tên Tác Giả"
+                                        <label>Tên Đạo Diễn</label>
+                                        <input class="form-control" type="text" placeholder="Nhập Vào Tên Đạo Diễn"
                                             v-model="update_tac_gia.name">
-                                        <label>Ảnh Tác Giả</label>
-                                        <input class="form-control" type="text" placeholder="Nhập Vào Ảnh Tác Giả"
+                                        <label>Ảnh Đạo Diễn</label>
+                                        <input class="form-control" type="text" placeholder="Nhập Vào Ảnh Đạo Diễn"
                                             v-model="update_tac_gia.url">
                                     </div>
                                     <div class="modal-footer">
@@ -159,6 +159,7 @@
 <script>
 import axios from 'axios';
 import { createToaster } from "@meforma/vue-toaster";
+import MasterRocker from "../../../layout/wrapper/MasterRocker.vue";
 const toaster = createToaster({ position: "top-right" });
 export default {
     data() {
@@ -178,19 +179,42 @@ export default {
                 .post('http://127.0.0.1:8000/api/admin/author/get-data')
                 .then((res) => {
                     this.list_tac_gia = res.data.data;
-                    console.log(res.data);
                 });
         },
 
-        createAuthor() {
+        async createAuthor() {
+            await this.upFile(this.create_tac_gia, this.create_tac_gia.name);
             axios
                 .post('http://127.0.0.1:8000/api/admin/author/create', this.create_tac_gia)
                 .then((res) => {
                     if (res.data.status == true) {
                         toaster.success('Thông báo<br>' + res.data.message);
+                        this.loadDataAuthor();
+                        MasterRocker.methods.hideModal('addModal');
                     }
                 });
         },
+
+        async upFile(value, name) {
+            if (value.file) {
+                var formData = new FormData();
+                if (value.id_movie) formData.append("id_movie", value.id_movie);
+                formData.append("name", name);
+                formData.append("file", value.file);
+                await axios({
+                    method: "post",
+                    url: "http://127.0.0.1:8000/api/admin/up-file",
+                    data: formData,
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }).then((res) => {
+                    if (res.data.status) value.filename = res.data.filename;
+                    else toaster.error('ERROR<br>' + res.data.message);
+                });
+            }
+        },
+
         deleteAuthor() {
             axios
                 .post('http://127.0.0.1:8000/api/admin/author/delete', this.delete_tac_gia)
@@ -198,6 +222,7 @@ export default {
                     if (res.data.status == true) {
                         toaster.success('Thông báo<br>' + res.data.message);
                         this.loadDataAuthor();
+                        MasterRocker.methods.hideModal('XoaTacGia');
                     }
                     else {
                         toaster.error('Thông báo<br>' + res.data.message);
@@ -212,10 +237,15 @@ export default {
                     if (res.data.status == true) {
                         toaster.success('Thông báo<br>' + res.data.message);
                         this.loadDataAuthor();
+                        MasterRocker.methods.hideModal('SuaTacGia');
                     } else {
                         toaster.error('Thông báo<br>' + res.data.message);
                     }
                 });
+        },
+
+        handleFileUploaded() {
+            this.create_tac_gia.file = this.$refs.image.files[0];
         },
     },
 }

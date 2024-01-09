@@ -22,8 +22,7 @@
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPU1eOuKBgw8RSlGOUw3mViNNlt8nkqe3Z1J0Pe7lJdksyfg0oZabCj_TLfg4xttVkOwo&usqp=CAU"
                             class="user-img" alt="user avatar">
                         <div class="user-info ps-3">
-                            <!-- <p class="user-name mb-0"><b class="text-capitalize">{{ username}}</b></p> -->
-                            <p class="user-name mb-0"><b class="text-capitalize">Name</b></p>
+                            <p class="user-name mb-0"><b class="text-capitalize">{{ username }}</b></p>
                             <p class="designattion mb-0"></p>
                         </div>
                     </a>
