@@ -54,7 +54,6 @@
     </header>
 </template>
 <script>
-import checkLoginAdmin from '../../router/checkLoginAdmin';
 export default {
     data() {
         return {
@@ -63,7 +62,7 @@ export default {
         }
     },
     mounted() {
-        checkLoginAdmin()
+
     },
     methods: {
         logOut() {
