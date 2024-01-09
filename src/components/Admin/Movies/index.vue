@@ -5,7 +5,7 @@
                 <div class="col-6">
                     <h2 class="text-start text-secondary">
                         <div class="m">
-                            <b>QUẢN Ý PHIM</b>
+                            <b>QUẢN LÝ PHIM</b>
                         </div>
                     </h2>
                 </div>
@@ -541,7 +541,6 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body text-start text-dark ">
-
                                 <textarea disabled name="" id="" cols="100" rows="5">Mô tả: "Trapped in a dystopian future, a lone hero must navigate a world plagued by
                                     corruption and chaos. Faced with moral dilemmas and unexpected allies, they embark on a
                                     thrilling journey to uncover the truth and bring about change. Packed with suspense and
@@ -559,10 +558,7 @@
                                             <p> <i class="fa-solid fa-language"></i> Ngôn Ngữ Gốc: </p>
                                         </b>
                                         <hr>
-                                        <b>
-                                            <p> <i class="fa-solid fa-circle-half-stroke"></i> Tình trạng </p>
-                                        </b>
-                                        <hr>
+                                        
                                     </div>
                                     <div class="col-6">
                                         <b>
@@ -575,15 +571,7 @@
                                             <!-- <p> {{v.ngon_ngu_goc}} </p> -->
                                         </b>
                                         <hr>
-                                        <b>
-                                            <div class="col-6 mb-2">
-                                                <template v-for="(v, k) in list_tai_len">
-                                                    <button v-on:click="doiTrangThai(v)" v-if="v.tinh_trang == 1" class="btn btn-success">Hoạt Động</button>
-                                                    <button v-on:click="doiTrangThai(v)" v-else class="btn btn-warning">Tạm Dừng</button>
-                                                </template>
-                                            </div>
-                                        </b>
-                                        <hr>
+                                        
                                     </div>
                                 </div>
 
