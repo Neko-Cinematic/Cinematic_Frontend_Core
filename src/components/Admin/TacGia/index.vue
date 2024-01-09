@@ -58,7 +58,7 @@
                                         {{ v.name }}
                                     </td>
                                     <td class="text-center align-middle">
-                                        {{ v.original_name }}
+                                        {{ v.movies }}
                                     </td>
                                     <td class="text-center text-nowrap align-middle">
                                         <i data-bs-toggle="modal" data-bs-target="#SuaTacGia"
@@ -91,7 +91,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Đóng</button>
-                                        <button data-bs-dismiss="modal" type="button" class="btn btn-danger"
+                                        <button type="button" class="btn btn-danger"
                                             v-on:click="deleteAuthor()">Xóa</button>
                                     </div>
                                 </div>
@@ -112,13 +112,14 @@
                                         <input class="form-control" type="text" placeholder="Nhập Vào Tên Đạo Diễn"
                                             v-model="create_tac_gia.name">
                                         <label>Ảnh Đạo Diễn</label>
-                                        <input class="form-control" ref="image" type="file">
+                                        <input @change="handleFileUploaded('image')" class="form-control" ref="image"
+                                            type="file">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary"
-                                            v-on:click="createAuthor()">Thêm mới</button>
+                                        <button type="button" class="btn btn-primary" v-on:click="createAuthor()">Thêm
+                                            mới</button>
                                     </div>
                                 </div>
                             </div>
@@ -137,9 +138,9 @@
                                         <label>Tên Đạo Diễn</label>
                                         <input class="form-control" type="text" placeholder="Nhập Vào Tên Đạo Diễn"
                                             v-model="update_tac_gia.name">
-                                        <label>Ảnh Đạo Diễn</label>
-                                        <input class="form-control" type="text" placeholder="Nhập Vào Ảnh Đạo Diễn"
-                                            v-model="update_tac_gia.url">
+                                        <label>Hình Ảnh</label>
+                                        <input @change="handleFileUploaded('image_update')" class="form-control" type="file"
+                                            ref="image_u" placeholder="Nhập Vào Ảnh Đạo Diễn">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
@@ -183,36 +184,19 @@ export default {
         },
 
         async createAuthor() {
-            await this.upFile(this.create_tac_gia, this.create_tac_gia.name);
-            axios
-                .post('http://127.0.0.1:8000/api/admin/author/create', this.create_tac_gia)
-                .then((res) => {
-                    if (res.data.status == true) {
-                        toaster.success('Thông báo<br>' + res.data.message);
-                        this.loadDataAuthor();
-                        MasterRocker.methods.hideModal('addModal');
-                    }
-                });
-        },
-
-        async upFile(value, name) {
-            if (value.file) {
-                var formData = new FormData();
-                if (value.id_movie) formData.append("id_movie", value.id_movie);
-                formData.append("name", name);
-                formData.append("file", value.file);
-                await axios({
-                    method: "post",
-                    url: "http://127.0.0.1:8000/api/admin/up-file",
-                    data: formData,
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                }).then((res) => {
-                    if (res.data.status) value.filename = res.data.filename;
-                    else toaster.error('ERROR<br>' + res.data.message);
-                });
-            }
+            if (this.create_tac_gia.file) {
+                await this.upFile(this.create_tac_gia, this.create_tac_gia.name);
+                console.log(1);
+                axios
+                    .post('http://127.0.0.1:8000/api/admin/author/create', this.create_tac_gia)
+                    .then((res) => {
+                        if (res.data.status == true) {
+                            toaster.success('SUCCESS<br>' + res.data.message);
+                            this.loadDataAuthor();
+                            MasterRocker.methods.hideModal('addModal');
+                        } else toaster.error('ERROR<br>' + res.data.message);
+                    });
+            } else toaster.error('ERROR<br>' + 'File chưa được nhập');
         },
 
         deleteAuthor() {
@@ -223,29 +207,43 @@ export default {
                         toaster.success('Thông báo<br>' + res.data.message);
                         this.loadDataAuthor();
                         MasterRocker.methods.hideModal('XoaTacGia');
-                    }
-                    else {
-                        toaster.error('Thông báo<br>' + res.data.message);
-                    }
+                    } else toaster.error('ERROR<br>' + res.data.message);
                 });
         },
 
-        updateAuthor() {
-            axios
+        async updateAuthor() {
+            await axios
                 .post('http://127.0.0.1:8000/api/admin/author/update', this.update_tac_gia)
                 .then((res) => {
                     if (res.data.status == true) {
                         toaster.success('Thông báo<br>' + res.data.message);
                         this.loadDataAuthor();
                         MasterRocker.methods.hideModal('SuaTacGia');
-                    } else {
-                        toaster.error('Thông báo<br>' + res.data.message);
-                    }
+                    } else toaster.error('ERROR<br>' + res.data.message);
                 });
+            if (this.update_tac_gia.file) await this.upFile(this.create_tac_gia, this.create_tac_gia.name);
         },
 
-        handleFileUploaded() {
-            this.create_tac_gia.file = this.$refs.image.files[0];
+        async upFile(value, name) {
+            var formData = new FormData();
+            formData.append("name", name);
+            formData.append("file", value.file);
+            await axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/admin/up-file",
+                data: formData,
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            }).then((res) => {
+                if (res.data.status) value.filename = res.data.filename;
+                else toaster.error('ERROR<br>' + res.data.message);
+            });
+        },
+
+        handleFileUploaded(type) {
+            if (type === 'image') this.create_tac_gia.file = this.$refs.image.files[0];
+            else this.update_tac_gia.file = this.$refs.image.files[0];
         },
     },
 }

@@ -17,13 +17,10 @@
                                 v-model="create_dien_vien.name">
                         </div>
                         <div class="col-md-12 mt-3">
-                            <label class="text-secondary">Ảnh Diễn Viên</label>
-                            <input type="text" placeholder="Nhập Vào Ảnh Diễn Viên" class="form-control"
-                                v-model="create_dien_vien.url">
+                            <label class="text-secondary">Hình Ảnh</label>
+                            <input @change="handleFileUploaded('image')" type="file" ref="image" class="form-control">
                         </div>
                     </div>
-
-
                 </div>
                 <div class="card-footer text-end">
                     <button class="btn btn-primary" v-on:click="createActor()">
@@ -109,14 +106,12 @@
                             <label class="text-secondary">Tên Diễn Viên</label>
                             <input type="text" placeholder="Nhập Vào Tên Diễn Viên" class="form-control"
                                 v-model="update_dien_vien.name">
-                            <label class="text-secondary">Ảnh Diễn Viên</label>
-                            <input type="text" placeholder="Nhập Vào Ảnh Diễn Viên" class="form-control"
-                                v-model="update_dien_vien.url">
+                            <label class="text-secondary">Hình Ảnh</label>
+                            <input @change="handleFileUploaded('image_u')" ref="image_u" type="file" class="form-control">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                v-on:click="updateActor()">Xác Nhận</button>
+                            <button type="button" class="btn btn-primary" v-on:click="updateActor()">Xác Nhận</button>
                         </div>
                     </div>
                 </div>
@@ -136,8 +131,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                                v-on:click="deleteActor()">Xóa</button>
+                            <button type="button" class="btn btn-danger" v-on:click="deleteActor()">Xóa</button>
                         </div>
                     </div>
                 </div>
@@ -148,6 +142,7 @@
 <script>
 import axios from 'axios';
 import { createToaster } from "@meforma/vue-toaster";
+import MasterRocker from "../../../layout/wrapper/MasterRocker.vue";
 const toaster = createToaster({ position: "top-right" });
 export default {
     data() {
@@ -168,21 +163,24 @@ export default {
                 .post('http://127.0.0.1:8000/api/admin/actor/get-data')
                 .then((res) => {
                     this.list_dien_vien = res.data;
-                    console.log(res);
                 });
         },
 
-        createActor() {
-            axios
-                .post('http://127.0.0.1:8000/api/admin/actor/create', this.create_dien_vien)
-                .then((res) => {
-                    if (res.data.status === true) {
-                        toaster.success('Thông báo<br>' + res.data.message);
-                        this.loadDataActor();
-                    } else {
-                        toaster.error('Thông báo<br>' + res.data.message);
-                    }
-                });
+        async createActor() {
+            if (this.create_dien_vien.file) {
+                await this.upFile(this.create_dien_vien, this.create_dien_vien.name);
+                axios
+                    .post('http://127.0.0.1:8000/api/admin/actor/create', this.create_dien_vien)
+                    .then((res) => {
+                        if (res.data.status === true) {
+                            toaster.success('Thông báo<br>' + res.data.message);
+                            this.loadDataActor();
+                        } else {
+                            toaster.error('Thông báo<br>' + res.data.message);
+                        }
+                    });
+            } else toaster.error('Thông báo<br>' + 'File chưa được nhập');
+
         },
 
 
@@ -193,28 +191,50 @@ export default {
                     if (res.data.status == true) {
                         toaster.success('Thông báo<br>' + res.data.message);
                         this.loadDataActor();
+                        MasterRocker.methods.hideModal('XoaPhim')
                     }
                     else {
-                        // console.log(this.delete_khach_hang.id);
                         toaster.error('Thông báo<br>' + res.data.message);
                     }
                 });
         },
 
-        updateActor() {
-            // console.log(this.update_dien_vien);
-            axios
+        async updateActor() {
+            await axios
                 .post('http://127.0.0.1:8000/api/admin/actor/update', this.update_dien_vien)
                 .then((res) => {
                     if (res.data.status == true) {
                         toaster.success('Thông báo<br>' + res.data.message);
                         this.loadDataActor();
+                        MasterRocker.methods.hideModal('SuaPhim');
                     } else {
                         toaster.error('Thông báo<br>' + res.data.message);
                     }
                 });
+            if (this.update_dien_vien.file) await this.upFile(this.update_dien_vien, this.update_dien_vien.name)
         },
 
+        async upFile(value, name) {
+            var formData = new FormData();
+            formData.append("name", name);
+            formData.append("file", value.file);
+            await axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/admin/up-file",
+                data: formData,
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            }).then((res) => {
+                if (res.data.status) value.filename = res.data.filename;
+                else toaster.error('ERROR<br>' + res.data.message);
+            });
+        },
+
+        handleFileUploaded(type) {
+            if (type === 'image') this.create_dien_vien.file = this.$refs.image.files[0];
+            else this.update_dien_vien.file = this.$refs.image_u.files[0];
+        },
     },
 }
 </script>

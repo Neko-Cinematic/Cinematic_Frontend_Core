@@ -593,17 +593,20 @@ export default {
     },
 
     async createActor() {
-      await this.upFile(this.create_actor, this.create_actor.name);
-      axios
-        .post('http://127.0.0.1:8000/api/admin/actor/create', this.create_actor)
-        .then((res) => {
-          if (res.data.status) {
-            toaster.success('SUCCESS<br>' + res.data.message);
-            this.create_actor = {};
-            this.search('actor');
-          }
-          else toaster.error('ERROR<br>' + res.data.message);
-        })
+      if (this.create_actor.file) {
+        await this.upFile(this.create_actor, this.create_actor.name);
+        axios
+          .post('http://127.0.0.1:8000/api/admin/actor/create', this.create_actor)
+          .then((res) => {
+            if (res.data.status) {
+              toaster.success('SUCCESS<br>' + res.data.message);
+              this.create_actor = {};
+              this.search('actor');
+            }
+            else toaster.error('ERROR<br>' + res.data.message);
+          })
+      } else toaster.error('ERROR<br>' + 'File chưa được nhập');
+
     },
 
     createActorRels() {
@@ -639,23 +642,27 @@ export default {
     },
 
     async createEpisode() {
-      await this.upFile(this.create_episode, 'Tập ' + this.create_episode.num_eps);
-      if (this.create_episode.filename) {
-        axios
-          .post('http://127.0.0.1:8000/api/admin/episode/create', this.create_episode)
-          .then((res) => {
-            if (res.data.status) {
-              toaster.success('SUCCESS<br>' + res.data.message);
-              this.loadEpisode();
-              MasterRocker.methods.hideModal('episodeModal');
-            }
-            else toaster.error('ERROR<br>' + res.data.message);
-          });
-      }
+      if (this.create_episode.file) {
+        await this.upFile(this.create_episode, 'Tập ' + this.create_episode.num_eps);
+        if (this.create_episode.filename) {
+          axios
+            .post('http://127.0.0.1:8000/api/admin/episode/create', this.create_episode)
+            .then((res) => {
+              if (res.data.status) {
+                toaster.success('SUCCESS<br>' + res.data.message);
+                this.loadEpisode(this.create_episode.id_movie);
+              }
+              else toaster.error('ERROR<br>' + res.data.message);
+            });
+        }
+      } else toaster.error('ERROR<br>' + 'File chưa được nhập');
+
     },
 
     async createMovie() {
-      await this.upFile(this.create_information, this.create_information.original_name);
+      if (this.create_information.file) {
+        await this.upFile(this.create_information, this.create_information.original_name);
+      } else toaster.error('ERROR<br>' + 'File chưa được nhập');
       if (this.create_information.filename) {
         await axios
           .post('http://127.0.0.1:8000/api/admin/movie/create', this.create_information)
@@ -672,23 +679,20 @@ export default {
     },
 
     async upFile(value, name) {
-      if (value.file) {
-        var formData = new FormData();
-        if (value.id_movie) formData.append("id_movie", value.id_movie);
-        formData.append("name", name);
-        formData.append("file", value.file);
-        await axios({
-          method: "post",
-          url: "http://127.0.0.1:8000/api/admin/up-file",
-          data: formData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }).then((res) => {
-          if (res.data.status) value.filename = res.data.filename;
-          else toaster.error('ERROR<br>' + res.data.message);
-        });
-      }
+      var formData = new FormData();
+      formData.append("name", name);
+      formData.append("file", value.file);
+      await axios({
+        method: "post",
+        url: "http://127.0.0.1:8000/api/admin/up-file",
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }).then((res) => {
+        if (res.data.status) value.filename = res.data.filename;
+        else toaster.error('ERROR<br>' + res.data.message);
+      });
     },
 
     loadType() {

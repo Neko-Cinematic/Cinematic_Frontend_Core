@@ -14,15 +14,18 @@
                         </div>
                         <div class="modal-body text-start">
                             <label class="text-secondary">Tên Nhân Viên</label>
-                            <input v-model="create_nhan_vien.name" class="form-control" type="text" placeholder="Nhập Vào Tên Nhân Viên">
+                            <input v-model="create_nhan_vien.name" class="form-control" type="text"
+                                placeholder="Nhập Vào Tên Nhân Viên">
                             <label class="text-secondary">Email</label>
-                            <input v-model="create_nhan_vien.email" class="form-control" type="mail" placeholder="Nhập Email">
+                            <input v-model="create_nhan_vien.email" class="form-control" type="mail"
+                                placeholder="Nhập Email">
                             <label class="text-secondary">Mật Khẩu</label>
-                            <input v-model="create_nhan_vien.password" class="form-control" type="password" placeholder="Nhập Vào Mật Khẩu">
+                            <input v-model="create_nhan_vien.password" class="form-control" type="password"
+                                placeholder="Nhập Vào Mật Khẩu">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <button type="button" v-on:click="createNhanVien()" class="btn btn-primary" data-bs-dismiss="modal">Xác Nhận</button>
+                            <button type="button" v-on:click="createNhanVien()" class="btn btn-primary">Xác Nhận</button>
                         </div>
                     </div>
                 </div>
@@ -39,8 +42,8 @@
                                     </b>
 
                                 </div>
-                            </h2><button type="button text-end" v-on:click="" data-bs-toggle="modal" data-bs-target="#addModal"
-                                class="btn btn-outline-primary">Thêm Mới Nhân Viên</button>
+                            </h2><button type="button text-end" v-on:click="" data-bs-toggle="modal"
+                                data-bs-target="#addModal" class="btn btn-outline-primary">Thêm Mới Nhân Viên</button>
                         </div>
                     </div>
                 </div>
@@ -56,12 +59,6 @@
                                 </th>
                                 <th class="text-center align-middle">
                                     Email
-                                </th>
-                                <th class="text-center align-middle">
-                                    Mật Khẩu
-                                </th>
-                                <th class="text-center align-middle">
-                                    Tình Trạng
                                 </th>
                                 <th class="text-center align-middle">
                                     Action
@@ -80,17 +77,12 @@
                                     <td class="text-center align-middle">
                                         {{ v.email }}
                                     </td>
-                                    <td class="text-center align-middle">
-                                        {{ v.password }}
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        {{ v.tinh_trang }}
-                                    </td>
                                     <td class="text-center text-nowrap align-middle">
-                                        <i data-bs-toggle="modal" v-on:click="update_nhan_vien = v" data-bs-target="#SuaNhanVien"
+                                        <i data-bs-toggle="modal" v-on:click="update_nhan_vien = v"
+                                            data-bs-target="#SuaNhanVien"
                                             class=" me-2 fa-2x text-info fa-solid fa-pen-to-square"></i>
-                                        <i data-bs-toggle="modal" v-on:click="delete_nhan_vien = v" data-bs-target="#XoaNhanVien"
-                                            class="fa-2x text-danger fa-solid fa-trash"></i>
+                                        <i data-bs-toggle="modal" v-on:click="delete_nhan_vien = v"
+                                            data-bs-target="#XoaNhanVien" class="fa-2x text-danger fa-solid fa-trash"></i>
                                     </td>
                                 </tr>
                             </template>
@@ -107,16 +99,20 @@
                                     </div>
                                     <div class="modal-body">
                                         <label class="text-secondary">Tên Nhân Viên</label>
-                                        <input v-model="update_nhan_vien.name" class="form-control" type="text" placeholder="Nhập Vào Tên Nhân Viên">
+                                        <input v-model="update_nhan_vien.name" class="form-control" type="text"
+                                            placeholder="Nhập Vào Tên Nhân Viên">
                                         <label class="text-secondary">Email</label>
-                                        <input v-model="update_nhan_vien.email" class="form-control" type="mail" placeholder="Nhập Email">
+                                        <input v-model="update_nhan_vien.email" class="form-control" type="mail"
+                                            placeholder="Nhập Email">
                                         <label class="text-secondary">Mật Khẩu</label>
-                                        <input v-model="update_nhan_vien.password" class="form-control" type="password" placeholder="Nhập Vào Mật Khẩu">
+                                        <input v-model="update_nhan_vien.password" class="form-control" type="password"
+                                            placeholder="Nhập Vào Mật Khẩu">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button v-on:click="updatedNhanVien()" type="button" class="btn btn-primary">Thay Đổi</button>
+                                        <button v-on:click="updatedNhanVien()" type="button" class="btn btn-primary">Cập
+                                            Nhật</button>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +131,7 @@
                                         <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show">
                                             <div class="text-white">Bạn có muốn xóa
                                                 <b>
-                                                {{ delete_nhan_vien.name }}
+                                                    {{ delete_nhan_vien.name }}
                                                 </b>
                                                 Này Không!!
                                             </div>
@@ -144,7 +140,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button v-on:click="deleteNhanVien()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Xóa</button>
+                                        <button v-on:click="deleteNhanVien()" type="button"
+                                            class="btn btn-danger">Xóa</button>
                                     </div>
                                 </div>
                             </div>
@@ -158,6 +155,7 @@
 <script>
 import axios from 'axios';
 import { createToaster } from "@meforma/vue-toaster";
+import MasterRocker from "../../../layout/wrapper/MasterRocker.vue";
 const toaster = createToaster({ position: "top-right" });
 export default {
     data() {
@@ -177,9 +175,10 @@ export default {
                 .post('http://127.0.0.1:8000/api/admin/employee/create', this.create_nhan_vien)
                 .then((res) => {
                     if (res.data.status == true) {
-                        alert(res.data.message);
+                        toaster.success('Thông báo<br>' + res.data.message);
                         this.loadDataNhanVien();
-                    }
+                        MasterRocker.methods.hideModal('addModal');
+                    } else toaster.error('ERROR<br>' + res.data.message);
                 });
         },
 
@@ -193,33 +192,29 @@ export default {
 
         deleteNhanVien() {
             axios
-            .post('http://127.0.0.1:8000/api/admin/employee/delete', this.delete_nhan_vien)
-            .then((res)=> {
-                if (res.data.status == true ) {
-                    alert(res.data.message);
-                    this.loadDataNhanVien();
-                }
-                else {
-                    alert(res.data.message);
-                }
-            });
+                .post('http://127.0.0.1:8000/api/admin/employee/delete', this.delete_nhan_vien)
+                .then((res) => {
+                    if (res.data.status == true) {
+                        toaster.success('Thông báo<br>' + res.data.message);
+                        this.loadDataNhanVien();
+                        MasterRocker.methods.hideModal('XoaNhanVien');
+                    } else toaster.error('ERROR<br>' + res.data.message);
+                });
         },
 
         updatedNhanVien() {
             axios
-                    .post('http://127.0.0.1:8000/api/admin/employee/update', this.update_nhan_vien)
-                    .then((res) =>  {
-                        if(res.data.status == true) {
-                            alert(res.data.message);
-                            this.loadDataNhanVien();
-                        }
-                        else{
-                            alert(res.data.message);
-                        }
-                    });
+                .post('http://127.0.0.1:8000/api/admin/employee/update', this.update_nhan_vien)
+                .then((res) => {
+                    if (res.data.status == true) {
+                        toaster.success('Thông báo<br>' + res.data.message);
+                        this.loadDataNhanVien();
+                        MasterRocker.methods.hideModal('SuaNhanVien');
+                    } else toaster.error('ERROR<br>' + res.data.message);
+                });
         },
 
-        
+
 
     },
 }

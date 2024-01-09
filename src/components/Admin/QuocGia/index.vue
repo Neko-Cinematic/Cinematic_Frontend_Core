@@ -9,7 +9,8 @@
                 </div>
                 <div class="card-body">
                     <label class="text-secondary">Tên Quốc Gia</label>
-                    <input v-model="create_quoc_gia.name" type="text" placeholder="Nhập Vào Tên Quốc Gia" class="form-control">
+                    <input v-model="create_quoc_gia.name" type="text" placeholder="Nhập Vào Tên Quốc Gia"
+                        class="form-control">
                 </div>
                 <div class="card-footer text-end">
                     <button v-on:click="createQuocGia()" class="btn btn-primary">
@@ -27,9 +28,6 @@
                         </th>
                         <th class="text-center align-middle text-nowrap">
                             Tên Quốc Gia
-                        </th>
-                        <th class="text-center align-middle text-nowrap">
-                            Tình Trạng
                         </th>
                         <th class="text-center align-middle text-nowrap">
                             Action
@@ -64,11 +62,12 @@
                         </div>
                         <div class="modal-body">
                             <label class="text-secondary">Tên Quốc Gia</label>
-                            <input v-model="update_quoc_gia.name" type="text" placeholder="Nhập Vào Tên Quốc Gia Cần Sửa" class="form-control">
+                            <input v-model="update_quoc_gia.name" type="text" placeholder="Nhập Vào Tên Quốc Gia Cần Sửa"
+                                class="form-control">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <button type="button" v-on:click="updatedQuocGia()" class="btn btn-primary" data-bs-dismiss="modal">Thay Đổi</button>
+                            <button type="button" v-on:click="updatedQuocGia()" class="btn btn-primary">Cập Nhật</button>
                         </div>
                     </div>
                 </div>
@@ -87,7 +86,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button v-on:click="deleteQuocGia()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Xác Nhận</button>
+                            <button v-on:click="deleteQuocGia()" type="button" class="btn btn-danger">Xác Nhận</button>
                         </div>
                     </div>
                 </div>
@@ -97,11 +96,15 @@
 </template>
 <script>
 import axios from 'axios';
+import MasterRocker from "../../../layout/wrapper/MasterRocker.vue";
+import { createToaster } from "@meforma/vue-toaster";
+const toaster = createToaster({ position: "top-right" });
+
 
 export default {
     data() {
         return {
-            list_quoc_gia:   [],
+            list_quoc_gia: [],
             create_quoc_gia: {},
             delete_quoc_gia: {},
             update_quoc_gia: {},
@@ -116,9 +119,9 @@ export default {
                 .post('http://127.0.0.1:8000/api/admin/country/create', this.create_quoc_gia)
                 .then((res) => {
                     if (res.data.status == true) {
-                        alert(res.data.message);
+                        toaster.success('Thông báo<br>' + res.data.message);
                         this.loadDataQuocGia();
-                    }
+                    } else toaster.error('ERROR<br>' + res.data.message);
                 });
         },
 
@@ -132,33 +135,29 @@ export default {
 
         deleteQuocGia() {
             axios
-            .post('http://127.0.0.1:8000/api/admin/country/delete', this.delete_quoc_gia)
-            .then((res)=> {
-                if (res.data.status == true ) {
-                    alert(res.data.message);
-                    this.loadDataQuocGia();
-                }
-                else {
-                    alert(res.data.message);
-                }
-            });
+                .post('http://127.0.0.1:8000/api/admin/country/delete', this.delete_quoc_gia)
+                .then((res) => {
+                    if (res.data.status == true) {
+                        toaster.success('Thông báo<br>' + res.data.message);
+                        this.loadDataQuocGia();
+                        MasterRocker.methods.hideModal('Xoa');
+                    } else toaster.error('ERROR<br>' + res.data.message);
+                });
         },
 
         updatedQuocGia() {
             axios
-            .post('http://127.0.0.1:8000/api/admin/country/update', this.update_quoc_gia)
-            .then((res) =>  {
-                if(res.data.status == true) {
-                    alert(res.data.message);
-                    this.loadDataQuocGia();
-                }
-                else{
-                    alert(res.data.message);
-                }
-            });
+                .post('http://127.0.0.1:8000/api/admin/country/update', this.update_quoc_gia)
+                .then((res) => {
+                    if (res.data.status == true) {
+                        toaster.success('Thông báo<br>' + res.data.message);
+                        this.loadDataQuocGia();
+                        MasterRocker.methods.hideModal('capnhat');
+                    } else toaster.error('ERROR<br>' + res.data.message);
+                });
         },
 
-        
+
 
     },
 
