@@ -45,9 +45,6 @@
                             <td class="text-center align-middle text-nowrap">
                                 {{ v.name }}
                             </td>
-                            <td class="text-center align-middle text-nowrap">
-                                {{ v.tinh_trang }}
-                            </td>
                             <td class="text-center text-nowrap align-middle">
                                 <i data-bs-toggle="modal" v-on:click="update_quoc_gia = v" data-bs-target="#capnhat"
                                     class=" me-2 fa-2x text-info fa-solid fa-pen-to-square"></i>
@@ -130,7 +127,6 @@ export default {
                 .post('http://127.0.0.1:8000/api/admin/country/get-data')
                 .then((res) => {
                     this.list_quoc_gia = res.data.data;
-                    console.log(res);
                 });
         },
 
