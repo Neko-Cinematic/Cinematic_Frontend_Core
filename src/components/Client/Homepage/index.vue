@@ -79,439 +79,50 @@
             <div class="row mt-2 p-3">
                 <swiper-container class="mySwiper" watch-slides-progress="true" slides-per-view="5" space-between="5"
                     style="z-index: 0">
-                    <swiper-slide class="m" style="z-index: -1">
-                        <router-link to="/detail">
-                            <div class="">
-                                <div class="product-item">
-                                    <div class="product-inner">
-                                        <div class="image">
-                                            <img style="width: 200px; height: 250px"
-                                                src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                                alt="">
-                                            <div class="image-overlay">
-                                                <div class="action-buttons">
+                    <template v-for="(v, k) in movies">
+                        <swiper-slide class="me-3" style="z-index: -1">
+                            <router-link :to="`/detail/${v.id}`">
+                                <div class="">
+                                    <div class="product-item">
+                                        <div class="product-inner">
+                                            <div class="image">
+                                                <img style="width: 200px; height: 250px" :src="v.url" alt="">
+                                                <div class="image-overlay">
+                                                    <div class="action-buttons">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="content" style="height: 180px">
-                                            <div class="content-inner d-flex flex-column w-100">
-                                                <h4
-                                                    class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                                    <div href="single-product.html" style="transform: translateY(-10px);"
-                                                        class="text-center m-auto">Doona!
+                                            <div class="content" style="height: 180px">
+                                                <div class="content-inner d-flex flex-column w-100">
+                                                    <h4
+                                                        class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
+                                                        <div href="single-product.html"
+                                                            style="transform: translateY(-10px);"
+                                                            class="text-center m-auto">{{ v.original_name }}
+                                                        </div>
+                                                    </h4>
+                                                    <div class="ratting ms-1 fs-6 text-center mt-2"
+                                                        style="transform: translateY(-15px);">
+                                                        <i class="fa fa-star text-danger"></i>
+                                                        <i class="fa fa-star text-danger"></i>
+                                                        <i class="fa fa-star text-danger"></i>
+                                                        <i class="fa fa-star-o text-danger"></i>
+                                                        <i class="fa fa-star-o text-danger"></i>
                                                     </div>
-                                                </h4>
-                                                <div class="ratting ms-1 fs-6 text-center mt-2"
-                                                    style="transform: translateY(-15px);">
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star-half-o text-danger"></i>
-                                                    <i class="fa fa-star-o text-danger"></i>
-                                                </div>
-                                                <h5 class="size mt-3">Năm sản xuất: 2023
-                                                </h5>
-                                                <h5 class="color">
-                                                    Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                                </h5>
+                                                    <h5 class="size mt-3">Quốc Gia: {{ v.country_name }}
+                                                    </h5>
+                                                    <h5 class="color">
+                                                        Thể loại: <b class="ms-1"> {{ v.list_type }}</b>
+                                                    </h5>
 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </router-link>
-                    </swiper-slide>
-
-                    <swiper-slide class="ms-2" style="z-index: -1">
-                        <router-link to="/detail">
-                            <div class="">
-                                <div class="product-item">
-                                    <div class="product-inner">
-                                        <div class="image">
-                                            <img style="width: 200px; height: 250px"
-                                                src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                                alt="">
-                                            <div class="image-overlay">
-                                                <div class="action-buttons">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="content" style="height: 180px">
-                                            <div class="content-inner d-flex flex-column w-100">
-                                                <h4
-                                                    class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                                    <div href="single-product.html" style="transform: translateY(-10px);"
-                                                        class="text-center m-auto">Doona!
-                                                    </div>
-                                                </h4>
-                                                <div class="ratting ms-1 fs-6 text-center mt-2"
-                                                    style="transform: translateY(-15px);">
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star-half-o text-danger"></i>
-                                                    <i class="fa fa-star-o text-danger"></i>
-                                                </div>
-                                                <h5 class="size mt-3">Năm sản xuất: 2023
-                                                </h5>
-                                                <h5 class="color">
-                                                    Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                                </h5>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </router-link>
-                    </swiper-slide>
-                    <swiper-slide class="ms-2" style="z-index: -1">
-                        <router-link to="/detail">
-                            <div class="">
-                                <div class="product-item">
-                                    <div class="product-inner">
-                                        <div class="image">
-                                            <img style="width: 200px; height: 250px"
-                                                src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                                alt="">
-                                            <div class="image-overlay">
-                                                <div class="action-buttons">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="content" style="height: 180px">
-                                            <div class="content-inner d-flex flex-column w-100">
-                                                <h4
-                                                    class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                                    <div href="single-product.html" style="transform: translateY(-10px);"
-                                                        class="text-center m-auto">Doona!
-                                                    </div>
-                                                </h4>
-                                                <div class="ratting ms-1 fs-6 text-center mt-2"
-                                                    style="transform: translateY(-15px);">
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star-half-o text-danger"></i>
-                                                    <i class="fa fa-star-o text-danger"></i>
-                                                </div>
-                                                <h5 class="size mt-3">Năm sản xuất: 2023
-                                                </h5>
-                                                <h5 class="color">
-                                                    Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                                </h5>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </router-link>
-                    </swiper-slide>
-                    <swiper-slide class="ms-2" style="z-index: -1">
-                        <router-link to="/detail">
-                            <div class="">
-                                <div class="product-item">
-                                    <div class="product-inner">
-                                        <div class="image">
-                                            <img style="width: 200px; height: 250px"
-                                                src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                                alt="">
-                                            <div class="image-overlay">
-                                                <div class="action-buttons">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="content" style="height: 180px">
-                                            <div class="content-inner d-flex flex-column w-100">
-                                                <h4
-                                                    class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                                    <div href="single-product.html" style="transform: translateY(-10px);"
-                                                        class="text-center m-auto">Doona!
-                                                    </div>
-                                                </h4>
-                                                <div class="ratting ms-1 fs-6 text-center mt-2"
-                                                    style="transform: translateY(-15px);">
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star-half-o text-danger"></i>
-                                                    <i class="fa fa-star-o text-danger"></i>
-                                                </div>
-                                                <h5 class="size mt-3">Năm sản xuất: 2023
-                                                </h5>
-                                                <h5 class="color">
-                                                    Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                                </h5>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </router-link>
-                    </swiper-slide>
-                    <swiper-slide class="ms-2" style="z-index: -1">
-                        <router-link to="/detail">
-                            <div class="">
-                                <div class="product-item">
-                                    <div class="product-inner">
-                                        <div class="image">
-                                            <img style="width: 200px; height: 250px"
-                                                src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                                alt="">
-                                            <div class="image-overlay">
-                                                <div class="action-buttons">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="content" style="height: 180px">
-                                            <div class="content-inner d-flex flex-column w-100">
-                                                <h4
-                                                    class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                                    <div href="single-product.html" style="transform: translateY(-10px);"
-                                                        class="text-center m-auto">Doona!
-                                                    </div>
-                                                </h4>
-                                                <div class="ratting ms-1 fs-6 text-center mt-2"
-                                                    style="transform: translateY(-15px);">
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star-half-o text-danger"></i>
-                                                    <i class="fa fa-star-o text-danger"></i>
-                                                </div>
-                                                <h5 class="size mt-3">Năm sản xuất: 2023
-                                                </h5>
-                                                <h5 class="color">
-                                                    Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                                </h5>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </router-link>
-                    </swiper-slide>
-                    <swiper-slide class="ms-2" style="z-index: -1">
-                        <router-link to="/detail">
-                            <div class="">
-                                <div class="product-item">
-                                    <div class="product-inner">
-                                        <div class="image">
-                                            <img style="width: 200px; height: 250px"
-                                                src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                                alt="">
-                                            <div class="image-overlay">
-                                                <div class="action-buttons">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="content" style="height: 180px">
-                                            <div class="content-inner d-flex flex-column w-100">
-                                                <h4
-                                                    class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                                    <div href="single-product.html" style="transform: translateY(-10px);"
-                                                        class="text-center m-auto">Doona!
-                                                    </div>
-                                                </h4>
-                                                <div class="ratting ms-1 fs-6 text-center mt-2"
-                                                    style="transform: translateY(-15px);">
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star-half-o text-danger"></i>
-                                                    <i class="fa fa-star-o text-danger"></i>
-                                                </div>
-                                                <h5 class="size mt-3">Năm sản xuất: 2023
-                                                </h5>
-                                                <h5 class="color">
-                                                    Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                                </h5>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </router-link>
-                    </swiper-slide>
-                    <swiper-slide class="ms-2" style="z-index: -1">
-                        <router-link to="/detail">
-                            <div class="">
-                                <div class="product-item">
-                                    <div class="product-inner">
-                                        <div class="image">
-                                            <img style="width: 200px; height: 250px"
-                                                src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                                alt="">
-                                            <div class="image-overlay">
-                                                <div class="action-buttons">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="content" style="height: 180px">
-                                            <div class="content-inner d-flex flex-column w-100">
-                                                <h4
-                                                    class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                                    <div href="single-product.html" style="transform: translateY(-10px);"
-                                                        class="text-center m-auto">Doona!
-                                                    </div>
-                                                </h4>
-                                                <div class="ratting ms-1 fs-6 text-center mt-2"
-                                                    style="transform: translateY(-15px);">
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star-half-o text-danger"></i>
-                                                    <i class="fa fa-star-o text-danger"></i>
-                                                </div>
-                                                <h5 class="size mt-3">Năm sản xuất: 2023
-                                                </h5>
-                                                <h5 class="color">
-                                                    Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                                </h5>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </router-link>
-                    </swiper-slide>
-                    <swiper-slide class="ms-2" style="z-index: -1">
-                        <router-link to="/detail">
-                            <div class="">
-                                <div class="product-item">
-                                    <div class="product-inner">
-                                        <div class="image">
-                                            <img style="width: 200px; height: 250px"
-                                                src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                                alt="">
-                                            <div class="image-overlay">
-                                                <div class="action-buttons">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="content" style="height: 180px">
-                                            <div class="content-inner d-flex flex-column w-100">
-                                                <h4
-                                                    class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                                    <div href="single-product.html" style="transform: translateY(-10px);"
-                                                        class="text-center m-auto">Doona!
-                                                    </div>
-                                                </h4>
-                                                <div class="ratting ms-1 fs-6 text-center mt-2"
-                                                    style="transform: translateY(-15px);">
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star-half-o text-danger"></i>
-                                                    <i class="fa fa-star-o text-danger"></i>
-                                                </div>
-                                                <h5 class="size mt-3">Năm sản xuất: 2023
-                                                </h5>
-                                                <h5 class="color">
-                                                    Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                                </h5>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </router-link>
-                    </swiper-slide>
-                    <swiper-slide class="ms-2" style="z-index: -1">
-                        <router-link to="/detail">
-                            <div class="">
-                                <div class="product-item">
-                                    <div class="product-inner">
-                                        <div class="image">
-                                            <img style="width: 200px; height: 250px"
-                                                src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                                alt="">
-                                            <div class="image-overlay">
-                                                <div class="action-buttons">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="content" style="height: 180px">
-                                            <div class="content-inner d-flex flex-column w-100">
-                                                <h4
-                                                    class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                                    <div href="single-product.html" style="transform: translateY(-10px);"
-                                                        class="text-center m-auto">Doona!
-                                                    </div>
-                                                </h4>
-                                                <div class="ratting ms-1 fs-6 text-center mt-2"
-                                                    style="transform: translateY(-15px);">
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star-half-o text-danger"></i>
-                                                    <i class="fa fa-star-o text-danger"></i>
-                                                </div>
-                                                <h5 class="size mt-3">Năm sản xuất: 2023
-                                                </h5>
-                                                <h5 class="color">
-                                                    Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                                </h5>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </router-link>
-                    </swiper-slide>
-                    <swiper-slide class="ms-2" style="z-index: -1">
-                        <router-link to="/detail">
-                            <div class="">
-                                <div class="product-item">
-                                    <div class="product-inner">
-                                        <div class="image">
-                                            <img style="width: 200px; height: 250px"
-                                                src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                                alt="">
-                                            <div class="image-overlay">
-                                                <div class="action-buttons">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="content" style="height: 180px">
-                                            <div class="content-inner d-flex flex-column w-100">
-                                                <h4
-                                                    class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                                    <div href="single-product.html" style="transform: translateY(-10px);"
-                                                        class="text-center m-auto">Doona!
-                                                    </div>
-                                                </h4>
-                                                <div class="ratting ms-1 fs-6 text-center mt-2"
-                                                    style="transform: translateY(-15px);">
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star text-danger"></i>
-                                                    <i class="fa fa-star-half-o text-danger"></i>
-                                                    <i class="fa fa-star-o text-danger"></i>
-                                                </div>
-                                                <h5 class="size mt-3">Năm sản xuất: 2023
-                                                </h5>
-                                                <h5 class="color">
-                                                    Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                                </h5>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </router-link>
-                    </swiper-slide>
-
-
+                            </router-link>
+                        </swiper-slide>
+                    </template>
                 </swiper-container>
             </div>
             <div class="row p-3">
@@ -559,8 +170,8 @@
                                         style="width: 300px; transform: translate(-5px, -10px)" alt="">
                                     <div class="welcome">
                                         <p class="text-center"
-                                            style="text-transform: uppercase; font-size: 15px; font-weight: bold;">Anime mới
-                                            cập nhật</p>
+                                            style="text-transform: uppercase; font-size: 15px; font-weight: bold;">Phim Mới
+                                            Cập Nhật</p>
                                     </div>
                                     <div class="row mt-2 mb-3">
                                         <div class="col-md-12">
@@ -568,132 +179,20 @@
                                         </div>
                                     </div>
                                     <p class="mt-1">
-                                        <a href="" class=" hover-title-film py-1">
-                                            <div class="row">
-                                                <div class="col-md-10" style="margin-left: 0px;">
-                                                    <span class="hidden-one-text title-film"
-                                                        style="font-size: 12px; color:#D992A0">Hypnosis Mic:
-                                                        Division
-                                                        Rap Battle - Rhyme Anima +</span>
+                                        <template v-for="(v, k) in movies">
+                                            <a href="" class=" hover-title-film py-1">
+                                                <div class="row">
+                                                    <div class="col-md-10 w-100" style="margin-left: 0px;">
+                                                        <span class="hidden-one-text title-film "
+                                                            style="font-size: 12px; color:#D992A0">{{ v.original_name
+                                                            }}</span>
+                                                    </div>
+                                                    <div class="col-md-2 text-end "
+                                                        style="font-size: 12px; font-style: italic; color:rgb(159, 138, 138)">
+                                                        Full</div>
                                                 </div>
-                                                <div class="col-md-2 text-end "
-                                                    style="font-size: 12px; font-style: italic; color:rgb(159, 138, 138)">
-                                                    Full</div>
-                                            </div>
-                                        </a>
-                                        <a href="" class=" hover-title-film py-1">
-                                            <div class="row">
-                                                <div class="col-md-10" style="margin-left: 0px;">
-                                                    <span class="hidden-one-text title-film"
-                                                        style="font-size: 12px; color:#D992A0">Hypnosis Mic:
-                                                        Division
-                                                        Rap Battle - Rhyme Anima +</span>
-                                                </div>
-                                                <div class="col-md-2 text-end "
-                                                    style="font-size: 12px; font-style: italic; color:rgb(159, 138, 138)">
-                                                    Full</div>
-                                            </div>
-                                        </a>
-                                        <a href="" class=" hover-title-film py-1">
-                                            <div class="row">
-                                                <div class="col-md-10" style="margin-left: 0px;">
-                                                    <span class="hidden-one-text title-film"
-                                                        style="font-size: 12px; color:#D992A0">Hypnosis Mic:
-                                                        Division
-                                                        Rap Battle - Rhyme Anima +</span>
-                                                </div>
-                                                <div class="col-md-2 text-end "
-                                                    style="font-size: 12px; font-style: italic; color:rgb(159, 138, 138)">
-                                                    Full</div>
-                                            </div>
-                                        </a>
-                                        <a href="" class=" hover-title-film py-1">
-                                            <div class="row">
-                                                <div class="col-md-10" style="margin-left: 0px;">
-                                                    <span class="hidden-one-text title-film"
-                                                        style="font-size: 12px; color:#D992A0">Hypnosis Mic:
-                                                        Division
-                                                        Rap Battle - Rhyme Anima +</span>
-                                                </div>
-                                                <div class="col-md-2 text-end "
-                                                    style="font-size: 12px; font-style: italic; color:rgb(159, 138, 138)">
-                                                    Full</div>
-                                            </div>
-                                        </a>
-                                        <a href="" class=" hover-title-film py-1">
-                                            <div class="row">
-                                                <div class="col-md-10" style="margin-left: 0px;">
-                                                    <span class="hidden-one-text title-film"
-                                                        style="font-size: 12px; color:#D992A0">Hypnosis Mic:
-                                                        Division
-                                                        Rap Battle - Rhyme Anima +</span>
-                                                </div>
-                                                <div class="col-md-2 text-end "
-                                                    style="font-size: 12px; font-style: italic; color:rgb(159, 138, 138)">
-                                                    Full</div>
-                                            </div>
-                                        </a>
-                                        <a href="" class=" hover-title-film py-1">
-                                            <div class="row">
-                                                <div class="col-md-10" style="margin-left: 0px;">
-                                                    <span class="hidden-one-text title-film"
-                                                        style="font-size: 12px; color:#D992A0">Hypnosis Mic:
-                                                        Division
-                                                        Rap Battle - Rhyme Anima +</span>
-                                                </div>
-                                                <div class="col-md-2 text-end "
-                                                    style="font-size: 12px; font-style: italic; color:rgb(159, 138, 138)">
-                                                    Full</div>
-                                            </div>
-                                        </a>
-                                        <a href="" class=" hover-title-film py-1">
-                                            <div class="row">
-                                                <div class="col-md-10" style="margin-left: 0px;">
-                                                    <span class="hidden-one-text title-film"
-                                                        style="font-size: 12px; color:#D992A0">Hypnosis Mic:
-                                                        Division
-                                                        Rap Battle - Rhyme Anima +</span>
-                                                </div>
-                                                <div class="col-md-2 text-end "
-                                                    style="font-size: 12px; font-style: italic; color:rgb(159, 138, 138)">
-                                                    Full</div>
-                                            </div>
-                                        </a>
-                                        <a href="" class=" hover-title-film py-1">
-                                            <div class="row">
-                                                <div class="col-md-10" style="margin-left: 0px;">
-                                                    <span class="hidden-one-text title-film"
-                                                        style="font-size: 12px; color:#D992A0">Hypnosis Mic:
-                                                        Division
-                                                        Rap Battle - Rhyme Anima +</span>
-                                                </div>
-                                                <div class="col-md-2 text-end "
-                                                    style="font-size: 12px; font-style: italic; color:rgb(159, 138, 138)">
-                                                    Full</div>
-                                            </div>
-                                        </a>
-                                        <a href="" class=" hover-title-film py-1">
-                                            <div class="row">
-                                                <div class="col-md-10" style="margin-left: 0px;">
-                                                    <span class="hidden-one-text title-film"
-                                                        style="font-size: 12px; color:#D992A0">Hypnosis Mic:
-                                                        Division
-                                                        Rap Battle - Rhyme Anima +</span>
-                                                </div>
-                                                <div class="col-md-2 text-end "
-                                                    style="font-size: 12px; font-style: italic; color:rgb(159, 138, 138)">
-                                                    Full</div>
-                                            </div>
-                                        </a>
-                                        <a href="" class=" hover-title-film">
-                                            <div class="row">
-                                                <div class="col-md-12" style="margin-left: 0px;">
-                                                    <span class="hidden-one-text title-film"
-                                                        style="font-size: 13px; color:white">Xem thêm..</span>
-                                                </div>
-                                            </div>
-                                        </a>
-
+                                            </a>
+                                        </template>
                                     </p>
                                 </div>
                             </div>
@@ -871,341 +370,55 @@
         <div class="container">
 
             <div class="row">
-                <div class="section-title text-center col mb-30 text-light">
-                    <h1 class="text-light">Popular Products</h1>
-                    <p>All popular product find here</p>
+                <div class="section-title text-center col mb-30 text-light mt-25">
+                    <h1 class="text-light">Phim Được Ưa Thích Nhất</h1>
+                    <p>Phim Hot Mùa Đông Năm 2023</p>
                 </div>
             </div>
 
             <div class="row mbn-40">
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-40">
-                    <div class="">
-                        <div class="product-item">
-                            <div class="product-inner">
-                                <div class="image">
-                                    <img style="width: 270px; height: 320px"
-                                        src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                        alt="">
-                                    <div class="image-overlay">
-                                        <div class="action-buttons">
+                <template v-for="(v, k) in movies">
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-40">
+                        <div class="">
+                            <div class="product-item">
+                                <div class="product-inner">
+                                    <div class="image">
+                                        <img style="width: 270px; height: 320px" :src="v.url" alt="">
+                                        <div class="image-overlay">
+                                            <div class="action-buttons">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="content" style="height: 180px">
-                                    <div class="content-inner d-flex flex-column w-100">
-                                        <h4
-                                            class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                            <div href="single-product.html" style="transform: translateY(-10px);"
-                                                class="text-center m-auto">Doona!
+                                    <div class="content" style="height: 180px">
+                                        <div class="content-inner d-flex flex-column w-100">
+                                            <h4
+                                                class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
+                                                <div href="single-product.html" style="transform: translateY(-10px);"
+                                                    class="text-center m-auto">{{ v.original_name }}
+                                                </div>
+                                            </h4>
+                                            <div class="ratting ms-1 fs-6 text-center mt-2 "
+                                                style="transform: translateY(-15px);">
+                                                <i class="fa fa-star text-danger"></i>
+                                                <i class="fa fa-star text-danger"></i>
+                                                <i class="fa fa-star text-danger"></i>
+                                                <i class="fa fa-star text-danger"></i>
+                                                <i class="fa fa-star-o text-danger"></i>
                                             </div>
-                                        </h4>
-                                        <div class="ratting ms-1 fs-6 text-center mt-2 "
-                                            style="transform: translateY(-15px);">
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star-half-o text-danger"></i>
-                                            <i class="fa fa-star-o text-danger"></i>
-                                        </div>
-                                        <h5 class="size mt-3">Năm sản xuất: 2023
-                                        </h5>
-                                        <h5 class="color">
-                                            Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                        </h5>
+                                            <h5 class="size mt-3">Quốc Gia: {{ v.country_name }}
+                                            </h5>
+                                            <h5 class="color">
+                                                Thể loại: <b class="ms-1"> {{ v.list_type }}</b>
+                                            </h5>
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-40">
-                    <div class="">
-                        <div class="product-item">
-                            <div class="product-inner">
-                                <div class="image">
-                                    <img style="width: 270px; height: 320px"
-                                        src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                        alt="">
-                                    <div class="image-overlay">
-                                        <div class="action-buttons">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="content" style="height: 180px">
-                                    <div class="content-inner d-flex flex-column w-100">
-                                        <h4
-                                            class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                            <div href="single-product.html" style="transform: translateY(-10px);"
-                                                class="text-center m-auto">Doona!
-                                            </div>
-                                        </h4>
-                                        <div class="ratting ms-1 fs-6 text-center mt-2 "
-                                            style="transform: translateY(-15px);">
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star-half-o text-danger"></i>
-                                            <i class="fa fa-star-o text-danger"></i>
-                                        </div>
-                                        <h5 class="size mt-3">Năm sản xuất: 2023
-                                        </h5>
-                                        <h5 class="color">
-                                            Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                        </h5>
+                </template>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-40">
-                    <div class="">
-                        <div class="product-item">
-                            <div class="product-inner">
-                                <div class="image">
-                                    <img style="width: 270px; height: 320px"
-                                        src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                        alt="">
-                                    <div class="image-overlay">
-                                        <div class="action-buttons">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="content" style="height: 180px">
-                                    <div class="content-inner d-flex flex-column w-100">
-                                        <h4
-                                            class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                            <div href="single-product.html" style="transform: translateY(-10px);"
-                                                class="text-center m-auto">Doona!
-                                            </div>
-                                        </h4>
-                                        <div class="ratting ms-1 fs-6 text-center mt-2 "
-                                            style="transform: translateY(-15px);">
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star-half-o text-danger"></i>
-                                            <i class="fa fa-star-o text-danger"></i>
-                                        </div>
-                                        <h5 class="size mt-3">Năm sản xuất: 2023
-                                        </h5>
-                                        <h5 class="color">
-                                            Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                        </h5>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-40">
-                    <div class="">
-                        <div class="product-item">
-                            <div class="product-inner">
-                                <div class="image">
-                                    <img style="width: 270px; height: 320px"
-                                        src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                        alt="">
-                                    <div class="image-overlay">
-                                        <div class="action-buttons">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="content" style="height: 180px">
-                                    <div class="content-inner d-flex flex-column w-100">
-                                        <h4
-                                            class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                            <div href="single-product.html" style="transform: translateY(-10px);"
-                                                class="text-center m-auto">Doona!
-                                            </div>
-                                        </h4>
-                                        <div class="ratting ms-1 fs-6 text-center mt-2 "
-                                            style="transform: translateY(-15px);">
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star-half-o text-danger"></i>
-                                            <i class="fa fa-star-o text-danger"></i>
-                                        </div>
-                                        <h5 class="size mt-3">Năm sản xuất: 2023
-                                        </h5>
-                                        <h5 class="color">
-                                            Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                        </h5>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-40">
-                    <div class="">
-                        <div class="product-item">
-                            <div class="product-inner">
-                                <div class="image">
-                                    <img style="width: 270px; height: 320px"
-                                        src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                        alt="">
-                                    <div class="image-overlay">
-                                        <div class="action-buttons">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="content" style="height: 180px">
-                                    <div class="content-inner d-flex flex-column w-100">
-                                        <h4
-                                            class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                            <div href="single-product.html" style="transform: translateY(-10px);"
-                                                class="text-center m-auto">Doona!
-                                            </div>
-                                        </h4>
-                                        <div class="ratting ms-1 fs-6 text-center mt-2 "
-                                            style="transform: translateY(-15px);">
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star-half-o text-danger"></i>
-                                            <i class="fa fa-star-o text-danger"></i>
-                                        </div>
-                                        <h5 class="size mt-3">Năm sản xuất: 2023
-                                        </h5>
-                                        <h5 class="color">
-                                            Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                        </h5>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-40">
-                    <div class="">
-                        <div class="product-item">
-                            <div class="product-inner">
-                                <div class="image">
-                                    <img style="width: 270px; height: 320px"
-                                        src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                        alt="">
-                                    <div class="image-overlay">
-                                        <div class="action-buttons">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="content" style="height: 180px">
-                                    <div class="content-inner d-flex flex-column w-100">
-                                        <h4
-                                            class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                            <div href="single-product.html" style="transform: translateY(-10px);"
-                                                class="text-center m-auto">Doona!
-                                            </div>
-                                        </h4>
-                                        <div class="ratting ms-1 fs-6 text-center mt-2 "
-                                            style="transform: translateY(-15px);">
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star-half-o text-danger"></i>
-                                            <i class="fa fa-star-o text-danger"></i>
-                                        </div>
-                                        <h5 class="size mt-3">Năm sản xuất: 2023
-                                        </h5>
-                                        <h5 class="color">
-                                            Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                        </h5>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-40">
-                    <div class="">
-                        <div class="product-item">
-                            <div class="product-inner">
-                                <div class="image">
-                                    <img style="width: 270px; height: 320px"
-                                        src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                        alt="">
-                                    <div class="image-overlay">
-                                        <div class="action-buttons">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="content" style="height: 180px">
-                                    <div class="content-inner d-flex flex-column w-100">
-                                        <h4
-                                            class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                            <div href="single-product.html" style="transform: translateY(-10px);"
-                                                class="text-center m-auto">Doona!
-                                            </div>
-                                        </h4>
-                                        <div class="ratting ms-1 fs-6 text-center mt-2 "
-                                            style="transform: translateY(-15px);">
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star-half-o text-danger"></i>
-                                            <i class="fa fa-star-o text-danger"></i>
-                                        </div>
-                                        <h5 class="size mt-3">Năm sản xuất: 2023
-                                        </h5>
-                                        <h5 class="color">
-                                            Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                        </h5>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-40">
-                    <div class="">
-                        <div class="product-item">
-                            <div class="product-inner">
-                                <div class="image">
-                                    <img style="width: 270px; height: 320px"
-                                        src="https://upload.wikimedia.org/wikipedia/vi/b/b0/%C3%81p_ph%C3%ADch_qu%E1%BA%A3ng_c%C3%A1o_phim_Doona%21.jpg"
-                                        alt="">
-                                    <div class="image-overlay">
-                                        <div class="action-buttons">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="content" style="height: 180px">
-                                    <div class="content-inner d-flex flex-column w-100">
-                                        <h4
-                                            class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                            <div href="single-product.html" style="transform: translateY(-10px);"
-                                                class="text-center m-auto">Doona!
-                                            </div>
-                                        </h4>
-                                        <div class="ratting ms-1 fs-6 text-center mt-2 "
-                                            style="transform: translateY(-15px);">
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star text-danger"></i>
-                                            <i class="fa fa-star-half-o text-danger"></i>
-                                            <i class="fa fa-star-o text-danger"></i>
-                                        </div>
-                                        <h5 class="size mt-3">Năm sản xuất: 2023
-                                        </h5>
-                                        <h5 class="color">
-                                            Thể loại: <b class="ms-1"> Tình Cảm</b>
-                                        </h5>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
 
@@ -1213,18 +426,24 @@
     </div>
 </template>
 <script>
-
+import axios from 'axios';
 export default {
     data() {
         return {
-
+            movies: []
         }
     },
-    mounted() {
-
+    async mounted() {
+        await this.getMovie();
     },
     methods: {
-
+        async getMovie() {
+            await axios
+                .post('http://127.0.0.1:8000/api/admin/movie/get-data')
+                .then((res) => {
+                    this.movies = res.data.data;
+                })
+        }
     }
 }
 </script>

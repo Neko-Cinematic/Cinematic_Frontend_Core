@@ -20,20 +20,26 @@ const routes = [
     },
   },
   {
-    path: "/detail",
+    path: "/detail/:id",
     component: () => import("../components/Client/Detail/index.vue"),
     meta: {
       layout: "client",
     },
   },
   {
-    path: "/all-movie",
+    path: "/detail/:id/:id_ep",
+    component: () => import("../components/Client/Watch/index.vue"),
+    meta: {
+      layout: "client",
+    },
+  },
+  {
+    path: "/movie/:id",
     component: () => import("../components/Client/AllMovie/index.vue"),
     meta: {
       layout: "client",
     },
   },
-
   // admin
   {
     path: "/dashboard",

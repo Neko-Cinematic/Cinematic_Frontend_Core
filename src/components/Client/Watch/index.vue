@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-8" style="height: 435px; padding-right: 5px !important;">
                 <div class="video" style=" height: 100%;">
-                    <Artplayer @get-instance="getInstance" :option="option" :style="style" />
+                    <Artplayer :key="componentKey" @get-instance="getInstance" :option="option" :style="style" />
                 </div>
                 <div class="mt-3 text-center">
                     <a href="" class="btn btn-danger ">
@@ -18,22 +18,14 @@
                     <div class="items-episodes mt-2">
                         <div class="row">
                             <div class="col">
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">01</div>
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">02</div>
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">03</div>
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">04</div>
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">05</div>
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">06</div>
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">07</div>
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">08</div>
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">09</div>
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">10</div>
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">11</div>
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">12</div>
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">13</div>
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">14</div>
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">15</div>
-                                <div class="btn btn-secondary me-2 mt-2" style="font-weight: bold;">16</div>
+                                <template v-for="(v, k) in episodes">
+                                    <router-link :to="`/detail/${id_movies}/${v.id}`">
+                                        <div class=" btn btn-secondary me-2 mt-2" style="font-weight: bold;"
+                                            @click="pickEpisode(v)">{{ v.num_eps }}
+                                        </div>
+                                    </router-link>
+
+                                </template>
                             </div>
                         </div>
                     </div>
@@ -212,22 +204,30 @@
 </template>
 <script>
 import Artplayer from "../VideoPlayer/index.vue";
-
+import axios from "axios";
 export default {
     data() {
         return {
+            componentKey: 0,
             option: {
-                url: "https://artplayer.org/assets/sample/video.mp4",
+                url: "",
             },
             style: {
                 width: "753px",
                 height: "435px",
 
             },
+            episodes: [],
+            id_movies: this.$route.params.id,
+            ep: {}
         };
     },
     components: {
         Artplayer,
+    },
+    mounted() {
+        this.getEpisodes();
+        this.getVideo()
     },
     methods: {
         getInstance(art) {
@@ -235,6 +235,50 @@ export default {
         },
         onReady(art) {
             this.play()
+        },
+        getEpisodes() {
+            const id = this.$route.params.id;
+            const payload = {
+                id_movies: id
+            }
+            axios
+                .post('http://127.0.0.1:8000/api/admin/episode/get-data', payload)
+                .then((res) => {
+                    this.episodes = res.data.data;
+                    console.log(this.episodes)
+                })
+                .catch((res) => {
+                    $.each(res.response.data.errors, function (k, v) {
+                        toastr.error(v[0], 'Error');
+                    });
+                });
+        },
+        pickEpisode(value) {
+            this.componentKey += 1;
+            this.option.url = value.url_movie
+        },
+        nextEp() {
+            this.componentKey += 1;
+            this.option.url = this.ep[0].url_movie
+        },
+        getVideo() {
+            const payload = {
+                id_movies: this.$route.params.id,
+                id_num: this.$route.params.id_ep
+            }
+            axios
+                .post('http://127.0.0.1:8000/api/admin/episode/get-ep', payload)
+                .then((res) => {
+                    this.ep = res.data.data;
+                    this.option.url = this.ep[0].url_movie
+                    this.componentKey += 1;
+                    console.log(this.ep[0].url_movie)
+                })
+                .catch((res) => {
+                    $.each(res.response.data.errors, function (k, v) {
+                        toastr.error(v[0], 'Error');
+                    });
+                });
         },
     },
 };

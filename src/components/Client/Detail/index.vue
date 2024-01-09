@@ -27,68 +27,39 @@
                                         <div class="head">
                                             <div class="head-left">
 
-                                                <h2 class="title namephim">My Demon</h2>
-                                                <h4 class="title namephim">Chàng quỷ của tôi</h4>
+                                                <h1 class="title namephim">{{ detail.original_name }}</h1>
+                                                <h4 class="title namephim">{{ detail.vietnamese_name }}</h4>
 
                                                 <div class="ratting">
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half-o"></i>
+                                                    <i class="fa fa-star"></i>
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
-
                                             </div>
-
-
                                         </div>
-
                                         <div class="description">
-                                            <P>Một ác quỷ bỗng mất hết sức mạnh sau khi vướng vào một nữ thừa kế lạnh lùng.
-                                                Nhưng có thể cô nắm giữ chìa khóa giúp anh tìm lại năng lực đã mất... và mở
-                                                cửa
-                                                trái tim anh.</P>
+                                            <P>{{ detail.description }}</P>
                                         </div>
-
                                         <span class="availability"><i class="fa-brands fa-2xl fa-imdb"></i>
                                             <span><b>8.2</b></span></span>
 
                                         <div class="actions">
                                             <button class="box me-2" data-tooltip="Wishlist"><i
                                                     class="ti-heart"></i></button>
-                                            <router-link to="/watch">
+                                            <router-link :to="`/detail/${id_movies}/${1}`">
                                                 <button><i class="fa-solid fa-play" style="color: #ff3c2e;"></i><span> XEM
                                                         PHIM</span></button>
                                             </router-link>
-
                                         </div>
                                         <div class="episode actions">
-                                            <router-link to="/watch">
-                                                <button><b>01</b></button>
-                                            </router-link>
-                                            <router-link to="/watch">
-                                                <button class="ms-2"><b>02</b></button>
-                                            </router-link>
-                                            <router-link to="/watch">
-                                                <button class="ms-2"><b>02</b></button>
-                                            </router-link>
-                                            <router-link to="/watch">
-                                                <button class="ms-2"><b>03</b></button>
-                                            </router-link>
-                                            <router-link to="/watch">
-                                                <button class="ms-2"><b>04</b></button>
-                                            </router-link>
-                                            <router-link to="/watch">
-                                                <button class="ms-2"><b>05</b></button>
-                                            </router-link>
-                                            <router-link to="/watch">
-                                                <button class="ms-2"><b>06</b></button>
-                                            </router-link>
-
+                                            <template v-for="(v, k) in episodes">
+                                                <router-link :to="`/detail/${id_movies}/${v.id}`">
+                                                    <button class="ms-2"><b>{{ v.num_eps }}</b></button>
+                                                </router-link>
+                                            </template>
                                         </div>
-
-
-
                                     </div>
                                 </div>
 
@@ -596,18 +567,59 @@
     </div>
 </template>
 <script>
-
+import axios from 'axios'
 export default {
     data() {
         return {
-
+            movies: [],
+            types: [],
+            id_types: '',
+            country: [],
+            actor: [],
+            detail: {},
+            episodes: [],
+            id_movies: this.$route.params.id
         }
     },
     mounted() {
-
+        this.getDetail()
+        this.getEpisodes()
     },
     methods: {
-
+        getDetail() {
+            const id = this.$route.params.id;
+            const payload = {
+                id_movie: id
+            }
+            axios
+                .post('http://127.0.0.1:8000/api/admin/movie/get-detail', payload)
+                .then((res) => {
+                    this.detail = res.data.data[0];
+                    console.log(this.detail)
+                })
+                .catch((res) => {
+                    $.each(res.response.data.errors, function (k, v) {
+                        toastr.error(v[0], 'Error');
+                    });
+                });
+        },
+        getEpisodes() {
+            const id = this.$route.params.id;
+            const payload = {
+                id_movies: id
+            }
+            axios
+                .post('http://127.0.0.1:8000/api/admin/episode/get-data', payload)
+                .then((res) => {
+                    this.episodes = res.data.data;
+                    console.log(this.episodes)
+                })
+                .catch((res) => {
+                    $.each(res.response.data.errors, function (k, v) {
+                        toastr.error(v[0], 'Error');
+                    });
+                });
+        }
     }
 }
 </script>
