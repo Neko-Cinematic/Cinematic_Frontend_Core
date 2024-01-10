@@ -9,58 +9,44 @@
                             aria-label="Username" aria-describedby="basic-addon1" v-model="text_search" v-on:input="search">
                     </div>
                 </div>
-                <!-- <div class="col-2 align-middle">
-                    <div class="product-short ">
-                        <select class="nice-select">
-                            <option>
-                                <p> Name Ascending</p>
-                            </option>
-                            <option>Name Descending</option>
-                            <option>Date Ascending</option>
-                            <option>Date Descending</option>
-                            <option>Price Ascending</option>
-                            <option>Price Descending</option>
-                        </select>
-                    </div>
-                </div> -->
                 <div class="col-5">
                     <button style="width: 100%; background-color: #ff708a;" class="search-toggle btnsearch btn align-end"><i
                             class="fa-solid fa-magnifying-glass ms-1"></i><b>Tìm Kiếm</b></button>
                 </div>
-
-
             </div>
             <div class="row mbn-40">
                 <template v-for="(v, k) in movies">
                     <div class="col-xl-3 col-lg-3 col-md-6 col-12 mb-40">
-                        <div class="">
-                            <div class="product-item">
-                                <div class="product-inner">
-                                    <div class="image"><img style="width:270px;height:320px;" :src="v.url" alt="">
-                                        <div class="image-overlay">
-                                            <div class="action-buttons"></div>
+                        <router-link :to="`/detail/${v.id}`">
+                            <div class="">
+                                <div class="product-item">
+                                    <div class="product-inner">
+                                        <div class="image"><img style="width:270px;height:320px;" :src="v.url" alt="">
+                                            <div class="image-overlay">
+                                                <div class="action-buttons"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="content" style="height:180px;">
-                                        <div class="content-inner d-flex flex-column w-100">
-                                            <h4
-                                                class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                                <div href="single-product.html" style="transform:translateY(-10px);"
-                                                    class="text-center m-auto">{{ v.original_name }} </div>
-                                            </h4>
-                                            <div class="ratting ms-1 fs-6" style="transform:translateY(-15px);"><i
-                                                    class="fa fa-star text-danger"></i><i
-                                                    class="fa fa-star text-danger"></i><i
-                                                    class="fa fa-star text-danger"></i><i
-                                                    class="fa fa-star-half-o text-danger"></i><i
-                                                    class="fa fa-star-o text-danger"></i></div>
-                                            <h5 class="size mt-3">Quốc Gia: {{ v.country_name }} </h5>
-                                            <h5 class="color"> Thể loại: <b class="ms-1"> {{ v.list_type }}</b></h5>
+                                        <div class="content" style="height:180px;">
+                                            <div class="content-inner d-flex flex-column w-100">
+                                                <h4
+                                                    class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
+                                                    <div href="single-product.html" style="transform:translateY(-10px);"
+                                                        class="text-center m-auto">{{ v.original_name }} </div>
+                                                </h4>
+                                                <div class="ratting ms-1 fs-6" style="transform:translateY(-15px);"><i
+                                                        class="fa fa-star text-danger"></i><i
+                                                        class="fa fa-star text-danger"></i><i
+                                                        class="fa fa-star text-danger"></i><i
+                                                        class="fa fa-star-half-o text-danger"></i><i
+                                                        class="fa fa-star-o text-danger"></i></div>
+                                                <h5 class="size mt-3">Quốc Gia: {{ v.country_name }} </h5>
+                                                <h5 class="color"> Thể loại: <b class="ms-1"> {{ v.list_type }}</b></h5>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </router-link>
                     </div>
                 </template>
 

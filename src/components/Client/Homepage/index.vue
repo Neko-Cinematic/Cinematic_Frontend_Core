@@ -20,13 +20,12 @@
                             </div>
                             <div class="col-8">
                                 <div class="tab-content" id="myaccountContent">
-                                    <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
                                         <div class="myaccount-content" style="height: 195px;">
                                             <img src="../../../assets/assets_client/images/neko_logo.png"
                                                 style="width: 350px; transform: translate(-5px, -10px)" alt="">
                                             <div class="welcome">
-                                                <p>Xin chào bạn, <strong>Alex Tuntuni</strong>
+                                                <p>Xin chào bạn !
                                                 </p>
                                             </div>
                                             <p class="mb-0">
@@ -180,18 +179,20 @@
                                     </div>
                                     <p class="mt-1">
                                         <template v-for="(v, k) in movies">
-                                            <a href="" class=" hover-title-film py-1">
-                                                <div class="row">
-                                                    <div class="col-md-10 w-100" style="margin-left: 0px;">
-                                                        <span class="hidden-one-text title-film "
-                                                            style="font-size: 12px; color:#D992A0">{{ v.original_name
-                                                            }}</span>
+                                            <router-link :to="`/detail/${v.id}`">
+                                                <div class=" hover-title-film py-1">
+                                                    <div class="row">
+                                                        <div class="col-md-10 w-100" style="margin-left: 0px;">
+                                                            <span class="hidden-one-text title-film "
+                                                                style="font-size: 12px; color:#D992A0">{{ v.original_name
+                                                                }}</span>
+                                                        </div>
+                                                        <div class="col-md-2 text-end "
+                                                            style="font-size: 12px; font-style: italic; color:rgb(159, 138, 138)">
+                                                            Full</div>
                                                     </div>
-                                                    <div class="col-md-2 text-end "
-                                                        style="font-size: 12px; font-style: italic; color:rgb(159, 138, 138)">
-                                                        Full</div>
                                                 </div>
-                                            </a>
+                                            </router-link>
                                         </template>
                                     </p>
                                 </div>
@@ -379,43 +380,45 @@
             <div class="row mbn-40">
                 <template v-for="(v, k) in movies">
                     <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-40">
-                        <div class="">
-                            <div class="product-item">
-                                <div class="product-inner">
-                                    <div class="image">
-                                        <img style="width: 270px; height: 320px" :src="v.url" alt="">
-                                        <div class="image-overlay">
-                                            <div class="action-buttons">
+                        <router-link :to="`/detail/${v.id}`">
+                            <div class="">
+                                <div class="product-item">
+                                    <div class="product-inner">
+                                        <div class="image">
+                                            <img style="width: 270px; height: 320px" :src="v.url" alt="">
+                                            <div class="image-overlay">
+                                                <div class="action-buttons">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="content" style="height: 180px">
-                                        <div class="content-inner d-flex flex-column w-100">
-                                            <h4
-                                                class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
-                                                <div href="single-product.html" style="transform: translateY(-10px);"
-                                                    class="text-center m-auto">{{ v.original_name }}
+                                        <div class="content" style="height: 180px">
+                                            <div class="content-inner d-flex flex-column w-100">
+                                                <h4
+                                                    class="title text-center align-items-center d-flex flex-column text-center justify-content-center">
+                                                    <div href="single-product.html" style="transform: translateY(-10px);"
+                                                        class="text-center m-auto">{{ v.original_name }}
+                                                    </div>
+                                                </h4>
+                                                <div class="ratting ms-1 fs-6 text-center mt-2 "
+                                                    style="transform: translateY(-15px);">
+                                                    <i class="fa fa-star text-danger"></i>
+                                                    <i class="fa fa-star text-danger"></i>
+                                                    <i class="fa fa-star text-danger"></i>
+                                                    <i class="fa fa-star text-danger"></i>
+                                                    <i class="fa fa-star-o text-danger"></i>
                                                 </div>
-                                            </h4>
-                                            <div class="ratting ms-1 fs-6 text-center mt-2 "
-                                                style="transform: translateY(-15px);">
-                                                <i class="fa fa-star text-danger"></i>
-                                                <i class="fa fa-star text-danger"></i>
-                                                <i class="fa fa-star text-danger"></i>
-                                                <i class="fa fa-star text-danger"></i>
-                                                <i class="fa fa-star-o text-danger"></i>
-                                            </div>
-                                            <h5 class="size mt-3">Quốc Gia: {{ v.country_name }}
-                                            </h5>
-                                            <h5 class="color">
-                                                Thể loại: <b class="ms-1"> {{ v.list_type }}</b>
-                                            </h5>
+                                                <h5 class="size mt-3">Quốc Gia: {{ v.country_name }}
+                                                </h5>
+                                                <h5 class="color">
+                                                    Thể loại: <b class="ms-1"> {{ v.list_type }}</b>
+                                                </h5>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </router-link>
                     </div>
                 </template>
 

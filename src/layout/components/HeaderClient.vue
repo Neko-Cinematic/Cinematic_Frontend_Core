@@ -35,14 +35,12 @@
                                 <button class="btn border-0 dropdown-toggle text-light fs-4  d-flex align-items-center down"
                                     style="outline: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/JPEG_example_flower.jpg/300px-JPEG_example_flower.jpg"
+                                    <img src="https://cdn.alongwalk.info/info/wp-content/uploads/2022/11/16190620/image-99-hinh-avatar-cute-ngau-ca-tinh-de-thuong-nhat-cho-nam-nu-178699bcb1cf6d58f3f17d3a1ee26472.jpg"
                                         alt="" width="35" class="rounded-circle">
-                                    <span class=" ms-1 fs-6 text-capitalize down"><b>{{ username }}</b></span>
+                                    <span class=" ms-2 fs-6 text-capitalize down"><b>{{ username }}</b></span>
                                 </button>
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item text-capitalize" href="#">Thông tin cá nhân</a></li>
-                                    <li><a class="dropdown-item text-capitalize" href="#">Nạp tiền</a></li>
                                     <li><a class="dropdown-item text-capitalize" href="#" v-on:click="logOut()">Đăng
                                             xuất</a></li>
                                 </ul>
