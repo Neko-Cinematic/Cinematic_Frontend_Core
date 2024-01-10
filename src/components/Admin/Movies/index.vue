@@ -55,7 +55,7 @@
                   {{ v.user_name }}
                 </td>
                 <td class="text-center align-middle">
-                  <i data-bs-toggle="modal" data-bs-target="#actorsModal"
+                  <i @click="getDataActor(v)" data-bs-toggle="modal" data-bs-target="#actorsModal"
                     class="fa-sharp fa-solid fa-person fa-2x text-info"></i>
                 </td>
                 <td class="text-center align-middle">
@@ -66,9 +66,10 @@
                   <i @click="create_episode.id_movie = v.id; loadEpisode(v.id)"
                     class="me-2 text-secondary fa-2x fa-solid fa-video" data-bs-toggle="modal"
                     data-bs-target="#episodeModal"></i>
-                  <i @click="update_information = v" data-bs-toggle="modal" data-bs-target="#updateModal"
+                  <i @click="Object.assign(update_information, v); update_information.date = formatDate(update_information.date); loadLanguage(); loadAuthor(); loadCountry(); loadEmployee()"
+                    data-bs-toggle="modal" data-bs-target="#updateModal"
                     class="me-2 fa-2x text-info fa-solid fa-pen-to-square"></i>
-                  <i @click="delete_information = v" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                  <i @click="Object.assign(delete_information, v)" data-bs-toggle="modal" data-bs-target="#deleteModal"
                     class="fa-2x text-danger fa-solid fa-trash"></i>
                 </td>
               </tr>
@@ -86,28 +87,275 @@
               </div>
               <div class="modal-body">
                 <div class="row text-start">
-                  <div class="col-3 text-secondary">
-                    <b> Võ Quốc Triệu </b>
-                    <p>Hwang Min Chu</p>
-                  </div>
-                  <div class="col-3 text-secondary">
-                    <b> Nguyễn Trần Duy Khánh </b>
-                    <p>Hwang Min Son</p>
-                  </div>
-                  <div class="col-3 text-secondary">
-                    <b> Đoàn Võ Văn trọng </b>
-                    <p>Hwang Min Su</p>
-                  </div>
-                  <div class="col-3 text-secondary">
-                    <b> Nguyễn Văn Tuấn </b>
-                    <p>Kim Cho In</p>
-                  </div>
+                  <template v-for="(v, k) in list_actor_movie">
+                    <div class="col-3 text-secondary">
+                      <b>{{ v }}</b>
+                      <p>{{ list_role[k] }}</p>
+                    </div>
+                  </template>
                 </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                   Close
                 </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-xl" style="background-color: white">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  <h4 class="text-secondary">Cập Nhật Phim</h4>
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body text-start">
+                <template v-if="status_u == 1">
+                  <div class="row mb-2">
+                    <div class="col-4">
+                      <label class="form-label text-secondary">Tên Phim</label>
+                      <input v-model="update_information.original_name" type="text" placeholder="Nhập Vào Tên phim"
+                        class="form-control" />
+                    </div>
+                    <div class="col-4">
+                      <label class="form-label text-secondary">Ngày công chiếu</label>
+                      <input v-model="update_information.date" class="form-control" type="date" />
+                    </div>
+                    <div class="col-4">
+                      <label class="form-label text-secondary">Đạo Diễn</label>
+                      <select v-model="update_information.id_author" class="form-control">
+                        <option value="0">Vui lòng chọn đạo diễn...</option>
+                        <template v-for="( v, k ) in  list_author ">
+                          <option v-bind:value="v.id">
+                            {{ v.name }}
+                          </option>
+                        </template>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mb-2">
+                    <div class="col-4">
+                      <label class="form-label text-secondary">Ngôn Ngữ</label>
+                      <select v-model="update_information.id_language_original" class="form-control">
+                        <option value="0">Vui lòng chọn ngôn ngữ...</option>
+                        <template v-for="( v, k ) in  list_language ">
+                          <option v-bind:value="v.id">
+                            {{ v.name }}
+                          </option>
+                        </template>
+                      </select>
+                    </div>
+                    <div class="col-4">
+                      <label class="form-label text-secondary">Quốc Gia</label>
+                      <select v-model="update_information.id_contries" class="form-control">
+                        <option value="0">Vui lòng chọn quốc gia...</option>
+                        <template v-for="( v, k ) in  list_country ">
+                          <option v-bind:value="v.id">
+                            {{ v.name }}
+                          </option>
+                        </template>
+                      </select>
+                    </div>
+                    <div class="col-4">
+                      <label class="form-label text-secondary">Nhân viên đang tạo</label>
+                      <select v-model="update_information.id_user_upload" class="form-control">
+                        <option value="0">Vui lòng chọn người tải...</option>
+                        <template v-for="( v, k ) in  list_employee ">
+                          <option v-bind:value="v.id">
+                            {{ v.name }}
+                          </option>
+                        </template>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <label class="form-label text-secondary">Hình Ảnh</label>
+                      <input type="file" @change="handleFileUploaded('image')" ref="image" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="mb-1">
+                    <label class="form-label text-secondary">Mô Tả</label>
+                    <textarea v-model="update_information.description" class="form-control" placeholder="Mô tả phim..."
+                      cols="30" rows="7"></textarea>
+                  </div>
+                </template>
+                <template v-if="status_u == 2">
+                  <div class="row">
+                    <div class="col-7">
+                      <div class="table-responsive">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th class="text-center align-middle text-nowrap"
+                                style="background-color: #AB826B; color:white;">
+                                Vai Diễn
+                              </th>
+                              <th class="text-center align-middle text-nowrap"
+                                style="background-color: #AB826B; color:white;">Diễn Viên
+                              </th>
+                              <th class="text-center align-middle text-nowrap"
+                                style="background-color: #AB826B; color:white;">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <template v-for="( v, k ) in  list_actor_choosed ">
+                              <tr>
+                                <th class="text-center align-middle text-nowrap">{{ v.role }}</th>
+                                <td class="align-middle text-nowrap text-center">{{ v.name }}</td>
+                                <td class="text-center align-middle text-nowrap text-center">
+                                  <button @click="deleteActorRels(v)" class="btn btn-danger ms-1">Xoá</button>
+                                </td>
+                              </tr>
+                            </template>
+                            <tr>
+                              <td colspan="100%">
+                                <div class="input-group">
+                                  <input v-model="key_search" type="text" class="form-control" placeholder="Search..." />
+                                  <button @click="search('actor')" class="input-group-text btn btn-secondary">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th class="text-center align-middle text-nowrap"><input v-model="create_actor_rels.role"
+                                  type="text" class="form-control" placeholder="Vai diễn..."></th>
+                              <td class="align-middle text-nowrap text-center">
+                                <select v-model="create_actor_rels.id_actor" class="form-control">
+                                  <option value="0">Vui lòng chọn diễn viên...</option>
+                                  <template v-for="( v, k ) in  list_actor ">
+                                    <option v-bind:value="v.id">{{ v.name }}</option>
+                                  </template>
+                                </select>
+                              </td>
+                              <td class="text-center align-middle text-nowrap text-center">
+                                <button @click="createActorRels()" class="btn btn-success ms-1">Thêm Mới</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="col-5">
+                      <div class="card border-0">
+                        <div class="card-header" style="background-color: #AB826B; color:white;">
+                          <h4 class="text-start text-secondary">
+                            <div class="mb-0">
+                              <b style="color:white">Thêm Diễn Viên </b>
+                            </div>
+                          </h4>
+                        </div>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <label class="text-secondary">Tên Diễn Viên</label>
+                              <input type="text" placeholder="Tên diễn viên..." class="form-control"
+                                v-model="create_actor.name">
+                            </div>
+                            <div class="col-md-12 mt-3">
+                              <label class="text-secondary">Hình ảnh</label>
+                              <input type="file" ref="image_actor" @change="handleFileUploaded('image_actor')"
+                                class="form-control">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-footer text-end">
+                          <button class="btn btn-primary" v-on:click="createActor()">
+                            Thêm Mới
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                <template v-if="status_u == 3">
+                  <div class="row">
+                    <div class="col-5">
+                      <div class="table-responsive">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th class="text-center align-middle text-nowrap"
+                                style="background-color: #AB826B; color:white;">
+                                Thể loại
+                              </th>
+                              <th class="text-center align-middle text-nowrap"
+                                style="background-color: #AB826B; color:white;">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <template v-for="( v, k ) in  list_type_choosed ">
+                              <tr>
+                                <td class="align-middle text-nowrap text-center">{{ v.name }}</td>
+                                <td class="text-center align-middle text-nowrap text-center">
+                                  <button @click="deleteTypeRels(v)" class="btn btn-danger ms-1">Xoá</button>
+                                </td>
+                              </tr>
+                            </template>
+                            <tr>
+                              <td colspan="100%">
+                                <div class="input-group">
+                                  <input v-model="key_search" type="text" class="form-control" placeholder="Search..." />
+                                  <button @click="search('type')" class="input-group-text btn btn-secondary">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle text-nowrap text-center">
+                                <select v-model="create_type_rels.id_type" class="form-control">
+                                  <option value="0">Vui lòng chọn thể loại...</option>
+                                  <template v-for="( v, k ) in  list_type ">
+                                    <option v-bind:value="v.id">{{ v.name }}</option>
+                                  </template>
+                                </select>
+                              </td>
+                              <td class="text-center align-middle text-nowrap text-center">
+                                <button @click="createTypeRels()" class="btn btn-success ms-1">Thêm Mới</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="col-7">
+                      <div class="card border-top border-0 border-4 border-primary">
+                        <div class="card-header" style="background-color: #AB826B; color:white;">
+                          <h3 class="text-light text-start fw-bold">Thêm Mới Thể Loại</h3>
+                        </div>
+                        <div class="card-body">
+                          <label class="form-label text-dark">Tên Thể Loại</label>
+                          <input type="text" class="form-control" placeholder="Tên thể loại..."
+                            v-model="create_type.name">
+                          <label class="form-label text-dark mt-3">Mô Tả</label>
+                          <textarea type="text" class="form-control" placeholder="Mô tả..."
+                            v-model="create_type.description"></textarea>
+                        </div>
+                        <div class="card-footer text-end">
+                          <button class="btn btn-primary" @click="createType()">Thêm mới</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+              <div class="modal-footer">
+                <button @click="status_u--; checkUpdate(update_information.id)" class="btn btn-secondary"
+                  :disabled="status_u == 1 ? true : false">
+                  <i class="fa-solid fa-2x fa-arrow-left"></i>
+                </button>
+                <button @click="status_u++; checkUpdate(update_information.id)" class="btn btn-secondary"
+                  :disabled="status_u == 3 ? true : false">
+                  <i class="fa-solid fa-2x fa-arrow-right"></i>
+                </button>
+                <button @click="createMovie()" class="btn btn-secondary"
+                  :disabled="list_actor_choosed.length > 0 && list_type_choosed.length > 0 ? false : true">Cập
+                  Nhật</button>
               </div>
             </div>
           </div>
@@ -137,7 +385,7 @@
                       <label class="form-label text-secondary">Đạo Diễn</label>
                       <select v-model="create_information.id_author" class="form-control">
                         <option value="0">Vui lòng chọn đạo diễn...</option>
-                        <template v-for="(v, k) in list_author">
+                        <template v-for="( v, k ) in  list_author ">
                           <option v-bind:value="v.id">
                             {{ v.name }}
                           </option>
@@ -150,7 +398,7 @@
                       <label class="form-label text-secondary">Ngôn Ngữ</label>
                       <select v-model="create_information.id_language_original" class="form-control">
                         <option value="0">Vui lòng chọn ngôn ngữ...</option>
-                        <template v-for="(v, k) in list_language">
+                        <template v-for="( v, k ) in  list_language ">
                           <option v-bind:value="v.id">
                             {{ v.name }}
                           </option>
@@ -161,7 +409,7 @@
                       <label class="form-label text-secondary">Quốc Gia</label>
                       <select v-model="create_information.id_contries" class="form-control">
                         <option value="0">Vui lòng chọn quốc gia...</option>
-                        <template v-for="(v, k) in list_country">
+                        <template v-for="( v, k ) in  list_country ">
                           <option v-bind:value="v.id">
                             {{ v.name }}
                           </option>
@@ -172,7 +420,7 @@
                       <label class="form-label text-secondary">Nhân viên đang tạo</label>
                       <select v-model="create_information.id_user_upload" class="form-control">
                         <option value="0">Vui lòng chọn người tải...</option>
-                        <template v-for="(v, k) in list_employee">
+                        <template v-for="( v, k ) in  list_employee ">
                           <option v-bind:value="v.id">
                             {{ v.name }}
                           </option>
@@ -211,7 +459,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <template v-for="(v, k) in list_actor_choosed">
+                            <template v-for="( v, k ) in  list_actor_choosed ">
                               <tr>
                                 <th class="text-center align-middle text-nowrap">{{ v.role }}</th>
                                 <td class="align-middle text-nowrap text-center">{{ v.name }}</td>
@@ -236,7 +484,7 @@
                               <td class="align-middle text-nowrap text-center">
                                 <select v-model="create_actor_rels.id_actor" class="form-control">
                                   <option value="0">Vui lòng chọn diễn viên...</option>
-                                  <template v-for="(v, k) in list_actor">
+                                  <template v-for="( v, k ) in  list_actor ">
                                     <option v-bind:value="v.id">{{ v.name }}</option>
                                   </template>
                                 </select>
@@ -297,7 +545,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <template v-for="(v, k) in list_type_choosed">
+                            <template v-for="( v, k ) in  list_type_choosed ">
                               <tr>
                                 <td class="align-middle text-nowrap text-center">{{ v.name }}</td>
                                 <td class="text-center align-middle text-nowrap text-center">
@@ -319,7 +567,7 @@
                               <td class="align-middle text-nowrap text-center">
                                 <select v-model="create_type_rels.id_type" class="form-control">
                                   <option value="0">Vui lòng chọn thể loại...</option>
-                                  <template v-for="(v, k) in list_type">
+                                  <template v-for="( v, k ) in  list_type ">
                                     <option v-bind:value="v.id">{{ v.name }}</option>
                                   </template>
                                 </select>
@@ -447,12 +695,12 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <template v-for="(v, k) in list_episode">
+                              <template v-for="( v, k ) in  list_episode ">
                                 <tr>
                                   <th class="text-center align-middle text-nowrap">{{ k + 1 }}</th>
                                   <td class="align-middle text-nowrap text-center">{{ v.url }}</td>
                                   <td class="text-center align-middle text-nowrap text-center">
-                                    <button class="btn btn-danger">Cập Nhật</button>
+                                    <button @click="updateMovie(v)" class="btn btn-danger">Cập Nhật</button>
                                     <button class="btn btn-success ms-1" data-bs-toggle="modal">Xoá</button>
                                   </td>
                                 </tr>
@@ -510,6 +758,8 @@ export default {
       list_episode: [],
       list_type: [],
       list_type_choosed: [],
+      list_actor_movie: [],
+      list_role: [],
       create_information: {
         'id_contries': 0,
         'id_author': 0,
@@ -524,8 +774,38 @@ export default {
   },
   mounted() {
     this.loadMovie();
+    this.loadType();
+    this.loadActor();
   },
   methods: {
+    async updateMovie(v) {
+      await axios
+        .post('http://127.0.0.1:8000/api/admin/movie/update', this.update_information)
+        .then((res) => {
+          if (res.data.status) {
+            toaster.success('SUCCESS<br>' + res.data.message);
+            this.loadOneMovie(v);
+          }
+          else toaster.error('ERROR<br>' + res.data.message);
+        });
+    },
+
+    loadOneMovie(v) {
+      var send_data = { 'id_movie': v.id };
+      axios
+        .post('http://127.0.0.1:8000/api/admin/movie/get-one-movie', send_data)
+        .then((res) => {
+          if (res.data.status) {
+            v = res.data.data;
+          }
+        });
+    },
+
+    getDataActor(v) {
+      this.list_actor_movie = v.actors.split(',');
+      this.list_role = v.roles.split(',');
+    },
+
     deleteMovie() {
       axios
         .post('http://127.0.0.1:8000/api/admin/movie/delete', this.delete_information)
@@ -557,7 +837,7 @@ export default {
         .then((res) => {
           if (res.data.status) {
             toaster.success('SUCCESS<br>' + res.data.message);
-            this.loadTypeChoosed();
+            this.loadTypeChoosed(0);
           }
           else toaster.error('ERROR<br>' + res.data.message);
         })
@@ -569,7 +849,7 @@ export default {
         .then((res) => {
           if (res.data.status) {
             toaster.success('SUCCESS<br>' + res.data.message);
-            this.loadTypeChoosed();
+            this.loadTypeChoosed(0);
           }
           else toaster.error('ERROR<br>' + res.data.message);
         })
@@ -581,15 +861,26 @@ export default {
         .then((res) => {
           if (res.data.status) {
             toaster.success('SUCCESS<br>' + res.data.message);
-            this.loadActorChoosed();
+            this.loadActorChoosed(0);
           }
           else toaster.error('ERROR<br>' + res.data.message);
         })
     },
 
     checkCreate() {
-      if (this.status_c === 2) this.loadActorChoosed();
-      else if (this.status_c === 3) this.loadTypeChoosed();
+      if (this.status_c === 2) {
+        this.loadActorChoosed(0);
+      } else if (this.status_c === 3) {
+        this.loadTypeChoosed(0);
+      }
+    },
+
+    checkUpdate(id) {
+      if (this.status_u === 2) {
+        this.loadActorChoosed(id);
+      } else if (this.status_u === 3) {
+        this.loadTypeChoosed(id);
+      }
     },
 
     async createActor() {
@@ -615,7 +906,7 @@ export default {
         .then((res) => {
           if (res.data.status) {
             toaster.success('SUCCESS<br>' + res.data.message);
-            this.loadActorChoosed();
+            this.loadActorChoosed(0);
             this.create_actor_rels = {};
           }
           else toaster.error('ERROR<br>' + res.data.message);
@@ -696,6 +987,14 @@ export default {
       });
     },
 
+    loadActor() {
+      axios
+        .post('http://127.0.0.1:8000/api/admin/actor/get-data')
+        .then((res) => {
+          this.list_actor = res.data.data;
+        })
+    },
+
     loadType() {
       axios
         .post('http://127.0.0.1:8000/api/admin/type/get-data')
@@ -704,9 +1003,10 @@ export default {
         })
     },
 
-    loadTypeChoosed() {
+    loadTypeChoosed(id) {
+      var send_data = { 'id_movie': id }
       axios
-        .post('http://127.0.0.1:8000/api/admin/type-rel/get-data-choosed')
+        .post('http://127.0.0.1:8000/api/admin/type-rel/get-data-choosed', send_data)
         .then((res) => {
           this.list_type_choosed = res.data.data;
         })
@@ -745,9 +1045,10 @@ export default {
         })
     },
 
-    loadActorChoosed() {
+    loadActorChoosed(id) {
+      var send_data = { 'id_movie': id }
       axios
-        .post('http://127.0.0.1:8000/api/admin/actor-rel/get-data-choosed')
+        .post('http://127.0.0.1:8000/api/admin/actor-rel/get-data-choosed', send_data)
         .then((res) => {
           this.list_actor_choosed = res.data.data;
         })
@@ -767,6 +1068,12 @@ export default {
         .then((res) => {
           this.list_movie = res.data.data;
         })
+    },
+
+    formatDate(inputDate) {
+      var parts = inputDate.split('/');
+      var formattedDate = parts[2] + '-' + parts[1] + '-' + parts[0];
+      return formattedDate;
     },
 
     handleFileUploaded(type) {

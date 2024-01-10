@@ -67,7 +67,6 @@ export default {
             this.checkLogin();
           } else {
             toaster.error('Thông báo<br>' + res.data.message);
-            console.log("123");
           }
         });
     },
@@ -84,7 +83,7 @@ export default {
             localStorage.setItem("username", res.data.name)
             console.log(localStorage.getItem("username"));
             console.log(res.data.email);
-            this.$router.push('/admin/phim');
+            this.$router.push('/admin/movie');
           } else {
             // console.log(res.data.err);
             // console.log(res);

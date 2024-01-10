@@ -12,9 +12,7 @@
 
                                     <div class="pro-large-img mb-10 ">
                                         <a href="assets/images/product/product-zoom-1.jpg">
-                                            <img style="ima"
-                                                src="https://0.soompi.io/wp-content/uploads/2023/10/30224259/my-demon-1-.jpeg"
-                                                alt="" />
+                                            <img v-bind:src="detail.url" alt="" />
                                         </a>
                                     </div>
                                     <!-- Single Product Thumbnail Slider -->
@@ -582,14 +580,14 @@ export default {
         }
     },
     mounted() {
-        this.getDetail()
-        this.getEpisodes()
+        this.getDetail();
+        this.getEpisodes();
     },
     methods: {
         getDetail() {
             const id = this.$route.params.id;
             const payload = {
-                id_movie: id
+                'id_movie': id
             }
             axios
                 .post('http://127.0.0.1:8000/api/admin/movie/get-detail', payload)
@@ -606,13 +604,14 @@ export default {
         getEpisodes() {
             const id = this.$route.params.id;
             const payload = {
-                id_movies: id
+                id_movie: id
             }
+            console.log(payload);
             axios
                 .post('http://127.0.0.1:8000/api/admin/episode/get-data', payload)
                 .then((res) => {
                     this.episodes = res.data.data;
-                    console.log(this.episodes)
+                    console.log(this.episodes);
                 })
                 .catch((res) => {
                     $.each(res.response.data.errors, function (k, v) {

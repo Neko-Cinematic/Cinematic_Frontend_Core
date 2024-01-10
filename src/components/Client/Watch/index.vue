@@ -239,7 +239,7 @@ export default {
         getEpisodes() {
             const id = this.$route.params.id;
             const payload = {
-                id_movies: id
+                id_movie: id
             }
             axios
                 .post('http://127.0.0.1:8000/api/admin/episode/get-data', payload)
@@ -270,9 +270,9 @@ export default {
                 .post('http://127.0.0.1:8000/api/admin/episode/get-ep', payload)
                 .then((res) => {
                     this.ep = res.data.data;
-                    this.option.url = this.ep[0].url_movie
+                    this.option.url = this.ep[0].url_movie;
+                    console.log('opp', this.option.url);
                     this.componentKey += 1;
-                    console.log(this.ep[0].url_movie)
                 })
                 .catch((res) => {
                     $.each(res.response.data.errors, function (k, v) {
